@@ -25,7 +25,7 @@ function Coments() {
                 comunidade de mentes inovadoras na construção verde. Juntos,
                 estamos transformando o setor!
               </p>
-              <a className="inline-flex items-center">
+              <p className="inline-flex items-center">
                 <img
                   alt="testimonial"
                   src="https://revistause.com.br/wp-content/uploads/2020/07/side-view-woman-working-laptop-from-home-desk_23-2148557196.jpg"
@@ -39,7 +39,7 @@ function Coments() {
                     Arquiteta e Designer Sustentável
                   </span>
                 </span>
-              </a>
+              </p>
             </div>
           </div>
           <div className="p-4 md:w-1/2 w-full">
@@ -60,22 +60,21 @@ function Coments() {
                 profissionais comprometidos com a sustentabilidade. Juntos,
                 estamos construindo um futuro mais verde e consciente
               </p>
-              <a className="inline-flex items-center">
+              <p className="inline-flex items-center">
                 <img
                   alt="testimonial"
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWKkxc22yUZHGr0dhjNXzLZzfHh8qlHN9YjQ&usqp=CAU  "
                   className="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center"
                 />
                 <span className="flex-grow flex flex-col pl-4">
-                  <span className="title-font font-medium text-gray-900">
+                  <span className="title-font no-underline font-medium text-gray-900">
                     Itami
                   </span>
-                  <span className="text-gray-500 text-sm">
-                    {" "}
+                  <span className="text-gray-500 no-underline text-sm">
                     Engenheiro Civil e Gerente de Projeto
                   </span>
                 </span>
-              </a>
+              </p>
             </div>
           </div>
         </div>

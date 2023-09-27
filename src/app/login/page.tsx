@@ -63,7 +63,7 @@ export default function Login() {
                 type="submit"
                 className="w-full px-4 py-3 font-bold text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700"
               >
-                Sign Un
+                Sign Up
               </button>
             </div>
           </form>

@@ -4,7 +4,15 @@ export default function Login() {
   return (
     <div className="grid grid-cols-1  md:grid-cols-2 h-screen">
       <div className=" hidden md:grid bg-violet-700">
-        <Image src="/LogoLow.svg" alt="Login Image" width={400} height={400} />
+        <Image
+          src="/images/image.png"
+          width={1000}
+          height={1000}
+          alt="Logo"
+          sizes="100vw"
+          style={{ width: "100%", height: "100%" }}
+          className="  "
+        />{" "}
       </div>
       <div className=" px-10 m-auto py-10">
         <div className="w-full  space-y-8 ">

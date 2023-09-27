@@ -14,25 +14,35 @@ const Navbar: React.FC = () => {
   return (
     <nav className="bg-gray-800 p-4">
       <div className="container mx-auto">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between m-auto items-center">
           <Link href="/">
             <Image src="./LogoLow.svg" alt={"Logo"} width={50} height={50} />
           </Link>
-          <div className="hidden md:flex space-x-4">
-            <Link href="/about">
-              <p className="text-white">About</p>
+          <div className="hidden md:flex  space-x-4">
+            <Link href="/about" className="m-auto px-3">
+              <p className="text-white m-auto ">About</p>
             </Link>
-            <Link href="/contact">
-              <p className="text-white">Contact</p>
+            <Link href="/contact" className="m-auto  px-3">
+              <p className="text-white m-auto ">Contact</p>
             </Link>
-            <Link href="/contact">
-              <p className="block text-white">Contact</p>
+            <Link href="/contact" className="m-auto px-3">
+              <p className="m-auto  text-white">Contact</p>
             </Link>
-            <Link href="/register">
-              <p className="block text-white">Register</p>
+            <Link href="/register" className="">
+              <button
+                type="submit"
+                className="w-full px-4 py-2 font-bold text-white  rounded-md border-2 hover:bg-indigo-600 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700"
+              >
+                Register
+              </button>
             </Link>
             <Link href="/login">
-             Login
+              <button
+                type="submit"
+                className="w-full px-4 py-2 font-bold text-slate-800 bg-[#63FF8D]  rounded-md border-2  border-[#63FF8D]	 hover:bg-[#4aff7b] focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700"
+              >
+                Login
+              </button>
             </Link>
           </div>
           <div className="md:hidden">

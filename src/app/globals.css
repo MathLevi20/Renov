@@ -17,3 +17,13 @@
   left: auto;
   padding: 5px;
 }
+a:-webkit-any-link {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+span:-webkit-any-link {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}

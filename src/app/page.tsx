@@ -18,7 +18,7 @@ function LandingPage() {
       <Navbar />
 
       <Hero />
-      <Carousel1 />
+     { /*<Carousel1 /> */}
       <Features />
       <Coments />
       <Contact />

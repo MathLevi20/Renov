@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Link from "next/link";
 
 function Hero() {
   return (
@@ -20,9 +21,11 @@ function Hero() {
               comunidade comprometida com um futuro mais verde!
             </p>
             <div className="flex justify-center items-center m-auto text-gray-300">
-              <button className="bg-gray-800 inline-flex py-3 px-5 rounded-lg items-center hover:bg-gray-700 hover:text-white focus:outline-none">
-                Comece agora
-              </button>
+              <Link href={"/register"}>
+                <button className="bg-gray-800 inline-flex py-3 px-5 rounded-lg items-center hover:bg-gray-700 hover:text-white focus:outline-none">
+                  Comece agora
+                </button>
+              </Link>
             </div>
           </div>
           <div className=" flex justify-end items-end w-full mb-10 lg:mb-0 overflow-hidden">
