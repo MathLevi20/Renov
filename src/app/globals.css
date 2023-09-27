@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+#features {
+  background-color: #f9f9f9;
+  padding: 100px 0;
+}
+
+#contact {
+  padding: 100px 0;
+}
+.carousel-caption {
+  right: 5%;
+  text-align: right;
+  background-color: black;
+  max-width: 300px;
+  left: auto;
+  padding: 5px;
+}
