@@ -15,7 +15,7 @@ const Header: React.FC = () => {
             <Link href="/#features">
               <p className="text-white mr-4">Recursos</p>
             </Link>
-            <Link href="/#contact">
+            <Link href="/contact">
               <p className="text-white">Contato</p>
             </Link>
           </div>

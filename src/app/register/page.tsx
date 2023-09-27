@@ -2,12 +2,12 @@ import Image from "next/image";
 
 export default function Login() {
   return (
-    <div className="flex flex-col items-center md:flex-row md:h-screen">
-      <div className="flex items-center justify-center w-full h-20 md:w-1/2 md:h-full collapse md:visible bg-violet-700">
+    <div className="grid grid-cols-1  md:grid-cols-2 h-screen">
+      <div className=" hidden md:grid bg-violet-700">
         <Image src="/LogoLow.svg" alt="Login Image" width={400} height={400} />
       </div>
-      <div className="flex flex-col items-center justify-center w-full md:w-2/4  px-10 py-10">
-        <div className="w-full max-w-md space-y-8">
+      <div className=" px-10 m-auto py-10">
+        <div className="w-full  space-y-8 ">
           <div>
             <h1 className="text-2xl font-bold">Welcome back!</h1>
             <p className="mt-2 text-gray-600">

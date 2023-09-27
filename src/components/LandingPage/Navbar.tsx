@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
               <p className="block text-white">Register</p>
             </Link>
             <Link href="/login">
-              <p className="block text-white">Login</p>
+             Login
             </Link>
           </div>
           <div className="md:hidden">
