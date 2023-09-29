@@ -1,8 +1,15 @@
 // components/Navbar.tsx
 "use client";
+import {
+  AddIcon,
+  ArrowDownIcon,
+  ArrowUpIcon,
+  InfoOutlineIcon,
+  SettingsIcon,
+} from "@chakra-ui/icons";
 import Link from "next/link";
 import { useState } from "react";
-
+import Image from "next/image";
 const Navbar: React.FC = () => {
   const [showMenu, setShowMenu] = useState(false);
 
@@ -14,15 +21,30 @@ const Navbar: React.FC = () => {
     <nav className="bg-gray-800 p-4">
       <div className="container mx-auto">
         <div className="flex justify-between items-center">
-          <Link href="/">
-            <p className="text-white text-2xl font-bold">Logo</p>
+          <Link href="/" className="flex">
+            <Image src="./LogoLow.svg" alt={"Logo"} width={50} height={50} />
+            <p className="text-white text-2xl m-auto px-5 font-bold">Renov</p>
           </Link>
           <div className="hidden md:flex space-x-4">
-            <Link href="/about">
-              <p className="text-white">About</p>
+            <Link className="flex" href="/about">
+              <AddIcon className="m-auto" />{" "}
+              <p className=" m-auto px-2 text-gray-100">Adicionar resíduo</p>
             </Link>
-            <Link href="/contact">
-              <p className="text-white">Contact</p>
+            <Link className="flex" href="/contact">
+              <ArrowUpIcon className="m-auto" />{" "}
+              <p className="m-auto px-2 text-gray-100">Enviados</p>
+            </Link>
+            <Link className="flex" href="/contact">
+              <ArrowDownIcon className="m-auto" />
+              <p className="block m-auto px-2 text-gray-100">Recebidos</p>
+            </Link>
+            <Link className="flex" href="/contact">
+              <InfoOutlineIcon className="m-auto" />{" "}
+              <p className="block m-auto px-2 text-gray-100">Meus resíduos</p>
+            </Link>
+            <Link className="flex" href="/contact">
+              <SettingsIcon className="m-auto" />{" "}
+              <p className="block m-auto px-2 text-gray-100">Profile</p>
             </Link>
           </div>
           <div className="md:hidden">
@@ -43,12 +65,26 @@ const Navbar: React.FC = () => {
               </svg>
             </button>
             {showMenu && (
-              <div className="absolute top-12 right-0 bg-white p-4 shadow rounded-md">
+              <div className="absolute top-12 right-0 bg-white px-5 py-2 shadow rounded-md">
                 <Link href="/about">
-                  <p className="block text-gray-800 mb-2">About</p>
+                  <AddIcon />{" "}
+                  <p className="block text-gray-800 ">Adicionar resíduo</p>
                 </Link>
                 <Link href="/contact">
-                  <p className="block text-gray-800">Contact</p>
+                  <ArrowUpIcon />{" "}
+                  <p className="block text-gray-800">Enviados</p>
+                </Link>
+                <Link href="/contact">
+                  <ArrowDownIcon />
+                  <p className="block text-gray-800">Recebidos</p>
+                </Link>
+                <Link href="/contact">
+                  <InfoOutlineIcon />{" "}
+                  <p className="block text-gray-800">Meus resíduos</p>
+                </Link>
+                <Link href="/contact">
+                  <SettingsIcon />{" "}
+                  <p className="block text-gray-800">Profile</p>
                 </Link>
               </div>
             )}
