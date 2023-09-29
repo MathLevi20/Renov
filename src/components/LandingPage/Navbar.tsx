@@ -19,13 +19,13 @@ const Navbar: React.FC = () => {
             <Image src="./LogoLow.svg" alt={"Logo"} width={50} height={50} />
           </Link>
           <div className="hidden md:flex  space-x-4">
-            <Link href="/about" className="m-auto px-3">
-              <p className="text-white m-auto ">About</p>
+            <Link href="#feature" className="m-auto px-3">
+              <p className="text-white m-auto ">Feature</p>
             </Link>
-            <Link href="/contact" className="m-auto  px-3">
-              <p className="text-white m-auto ">Contact</p>
+            <Link href="#coments" className="m-auto  px-3">
+              <p className="text-white m-auto ">Coments</p>
             </Link>
-            <Link href="/contact" className="m-auto px-3">
+            <Link href="#contacts" className="m-auto px-3">
               <p className="m-auto  text-white">Contact</p>
             </Link>
             <Link href="/register" className="">
@@ -63,18 +63,36 @@ const Navbar: React.FC = () => {
               </svg>
             </button>
             {showMenu && (
-              <div className="absolute top-12 right-0 bg-white p-4 shadow rounded-md">
-                <Link href="/about">
-                  <p className="block text-gray-800 mb-2">About</p>
+              <div className="absolute top-15 right-0 bg-white p-4 shadow rounded-md">
+                <Link href="#feature">
+                  <p className=" px-4  justify-center block text-gray-800 mb-2">
+                    Feature
+                  </p>
                 </Link>
-                <Link href="/contact">
-                  <p className="block text-gray-800">Contact</p>
+                <Link href="#coments">
+                  <p className=" px-4  justify-center block text-gray-800 mb-2">
+                    Coments
+                  </p>
                 </Link>
-                <Link href="/contact">
-                  <p className="block text-gray-800">Contact</p>
+                <Link href="#contacts">
+                  <p className="px-4  text-gray-800">Contact</p>
                 </Link>
-                <Link href="/contact">
-                  <p className="block text-gray-800">Contact</p>
+
+                <Link href="/register" className="">
+                  <button
+                    type="submit"
+                    className="block text-gray-800  rounded-md border-2  border-[#63FF8D] px-4 py-2 font-bold	"
+                  >
+                    Register
+                  </button>
+                </Link>
+                <Link href="/login">
+                  <button
+                    type="submit"
+                    className="w-full px-4 py-2 mt-2 font-bold text-slate-800 bg-[#63FF8D]  rounded-md border-2  border-[#63FF8D]	 hover:bg-[#4aff7b] focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700"
+                  >
+                    Login
+                  </button>
                 </Link>
               </div>
             )}

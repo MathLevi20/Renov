@@ -2,6 +2,7 @@
 "use client";
 import AnounceCard from "@/components/AnounceCard";
 import WithSubnavigation from "@/components/Navbar";
+import TagsComponents from "@/components/Tags";
 import { SearchIcon } from "@chakra-ui/icons";
 import {
   Container,
@@ -77,6 +78,7 @@ const AnouncePage: React.FC = () => {
           <SearchIcon m={5} />
         </div>
       </div>{" "}
+      <TagsComponents />
       <Container maxW="container.xl" py={8} px={10}>
         <h2 className="text-xl text p-2 font-semibold">Anounce</h2>
 

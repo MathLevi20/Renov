@@ -2,7 +2,7 @@ import React from "react";
 
 function Coments() {
   return (
-    <section className="text-gray-600 body-font px-20">
+    <section id="coments" className="text-gray-600 body-font px-20">
       <div className="container px-2 py-24 mx-auto">
         <h1 className="text-3xl font-medium title-font text-gray-900 mb-12 text-center">
           O que nosso usuarios dizem?

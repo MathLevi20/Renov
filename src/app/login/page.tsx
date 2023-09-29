@@ -14,9 +14,10 @@ export default function Login() {
           sizes="100vw"
           style={{ width: "100%", height: "100%" }}
           className="  "
+          priority={true}
         />
       </div>
-      <div className=" px-10 m-auto py-10">
+      <div className="px-0 md:px-20 sm:px-10  mx-20 sm:mx-10 md:mx-20 my-auto">
         <div className="w-full  space-y-8 ">
           <div>
             <h1 className="text-2xl font-bold">Welcome back!</h1>

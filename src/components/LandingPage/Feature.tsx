@@ -7,7 +7,7 @@ const Features: React.FC = () => {
   return (
     <div className="">
       {" "}
-      <section className="pt-16 ">
+      <section id="feature" className="pt-16 ">
         <section className=" text-black body-font  p-20   ">
           <div className="container grid grid-cols-1 md:grid-cols-2 mx-auto  flex-wrap">
             <div className=" md:pr-16 lg:pr-0 pr-0 text-left self-center py-10 px-10">
