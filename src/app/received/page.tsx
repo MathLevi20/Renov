@@ -4,7 +4,6 @@ import AnounceCard from "@/components/AnounceCard";
 import WithSubnavigation from "@/components/Navbar";
 import { SearchIcon } from "@chakra-ui/icons";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
 import {
   Container,
@@ -90,7 +89,7 @@ const Received: React.FC = () => {
             borderRadius="lg"
             overflow="hidden"
           >
-            <ProposalCard
+            {/*<ProposalCard
               id={data.description}
               description={data.description}
               status={String(data.status)}
@@ -99,7 +98,7 @@ const Received: React.FC = () => {
               acepted={String(data.acepted)}
     
               
-            />
+        />*/}
           </Box>
         ))}
       </Container>
