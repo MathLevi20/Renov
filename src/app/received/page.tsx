@@ -13,7 +13,6 @@ import {
   Input,
   InputLeftAddon,
 } from "@chakra-ui/react";
-import ProposalCard from "@/components/ProposalCard";
 
 interface ProposalData {
   id: string;
