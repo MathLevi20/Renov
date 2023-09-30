@@ -12,36 +12,39 @@ function Profile() {
         className=" h-full inset-0 items-start grid grid-cols-1 justify-center pt-10
       bg-gradient-to-tr from-sky-300 to-sky-500 "
       >
-        <Image
-          className="mx-auto rounded-2xl  m-5"
-          src="/images/image.png"
-          alt="Sunset in the mountains"
-          width={300}
-          height={300}
-        />
-
         <div className=" bg-white shadow-lg p-10 m-10 mx-20 rounded-md ">
-          <div className="px-6 py-4 text-left">
-            <p className="text-gray-700 text-base">Nome: {"Matheus Levi"}</p>
-            <p className="text-gray-700 text-base">Empresa:{"Meta"}</p>
-            <p className="text-gray-700 text-base">
-              CNPJ: {"34.651.751/0001-90"}
-            </p>
-            <p className="text-gray-700 text-base">
-              Local:{"Praça do Fripisa"}
-            </p>
-            <p className="text-gray-700 text-base">Telefone:{"4002-8922"}</p>
+          <div className="px-6 py-4 text-left flex">
+            <Image
+              className=" rounded-full  mr-5"
+              src="/images/image.png"
+              alt="Sunset in the mountains"
+              width={200}
+              height={200}
+            />
+            <div className="my-auto">
+              <p className="text-gray-700 text-base">Nome: {"Matheus Levi"}</p>
+              <p className="text-gray-700 text-base">Empresa:{"Meta"}</p>
+              <p className="text-gray-700 text-base">
+                CNPJ: {"34.651.751/0001-90"}
+              </p>
+              <p className="text-gray-700 text-base">
+                Local:{"Praça do Fripisa"}
+              </p>
+              <p className="text-gray-700 text-base">Telefone:{"4002-8922"}</p>
+              <div className="pr-6 pt-4 pb-2 ">
+                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                  #Tecido
+                </span>
+                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                  Concreto
+                </span>
+                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                  Madeira
+                </span>
+              </div>
+            </div>
           </div>
           <div className="px-6 pt-4 pb-2 m-auto">
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-              #Tecido
-            </span>
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-              #Concreto
-            </span>
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-              #Madeira
-            </span>
             <div>
               <div className="flex justify-between mb-3">
                 <span className="text-base font-medium text-blue-700 ">

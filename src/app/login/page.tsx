@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Login() {
   return (
@@ -54,12 +55,15 @@ export default function Login() {
               />
             </div>
             <div className="grid grid-cols-2 gap-2">
-              <button
-                type="submit"
-                className="w-full px-4 py-3 font-bold text-slate-800 bg-indigo-100  rounded-md border-2  border-indigo-400	 hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700"
-              >
-                Sign In
-              </button>
+              <Link href={"/anounce"}>
+                {" "}
+                <button
+                  type="submit"
+                  className="w-full px-4 py-3 font-bold text-slate-800 bg-indigo-100  rounded-md border-2  border-indigo-400	 hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700"
+                >
+                  Sign In
+                </button>
+              </Link>
               <button
                 type="submit"
                 className="w-full px-4 py-3 font-bold text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700"
