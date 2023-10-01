@@ -26,7 +26,7 @@ const Navbar: React.FC = () => {
             <p className="text-white text-2xl m-auto px-5 font-bold">Renov</p>
           </Link>
           <div className="hidden md:flex space-x-4">
-            <Link className="flex" href="/about">
+            <Link className="flex" href="/createanounce">
               <AddIcon className="m-auto" />{" "}
               <p className=" m-auto px-2 text-gray-100">Adicionar resíduo</p>
             </Link>
@@ -38,11 +38,11 @@ const Navbar: React.FC = () => {
               <ArrowDownIcon className="m-auto" />
               <p className="block m-auto px-2 text-gray-100">Recebidos</p>
             </Link>
-            <Link className="flex" href="/contact">
+            <Link className="flex" href="/myanounces">
               <InfoOutlineIcon className="m-auto" />{" "}
               <p className="block m-auto px-2 text-gray-100">Meus resíduos</p>
             </Link>
-            <Link className="flex" href="/contact">
+            <Link className="flex" href="/profile">
               <SettingsIcon className="m-auto" />{" "}
               <p className="block m-auto px-2 text-gray-100">Profile</p>
             </Link>

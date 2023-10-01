@@ -4,6 +4,7 @@ import AnounceCard from "@/components/AnounceCard";
 import WithSubnavigation from "@/components/Navbar";
 import TagBox from "@/components/Tag";
 import TagsComponents from "@/components/Tags";
+import { BASE_URL } from "@/utils/API";
 import { SearchIcon } from "@chakra-ui/icons";
 import {
   Container,
@@ -14,8 +15,9 @@ import {
   InputLeftAddon,
   Tag,
 } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
-interface ResidueData {
+interface AnounceData {
   id: string;
   title: string;
   description: string;
@@ -27,7 +29,29 @@ interface ResidueData {
   created_at: string;
 }
 
-const residueData: ResidueData[] = [
+async function getData(endpoint: string, params: Record<string, any>) {
+  const url = `${BASE_URL}/${endpoint}`;
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(params),
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch data");
+    }
+
+    return res.json();
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+const residueData: AnounceData[] = [
   {
     id: "906f1324-3019-4563-a066-8cb3cc31ca9e",
     title: "tecido de lona",
@@ -67,6 +91,23 @@ const residueData: ResidueData[] = [
 ];
 
 const AnouncePage: React.FC = () => {
+  const [data, setData] = useState<any[]>([]);
+  const queryParams = {
+    skip: 3,
+    take: 3,
+  };
+  const fetchData = async () => {
+    try {
+      const responseData = await getData("anounce/list", queryParams);
+      setData(responseData);
+    } catch (error) {
+      console.error(error);
+      setData(residueData);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <>
       <WithSubnavigation />
@@ -89,24 +130,25 @@ const AnouncePage: React.FC = () => {
 
           <TagBox text="Madeira" />
         </div>
-        {residueData.map((data) => (
-          <Box
-            key={data.id}
-            p={10}
-            m={4}
-            borderWidth="1px"
-            borderRadius="lg"
-            overflow="hidden"
-          >
-            <AnounceCard
-              title={data.title}
-              description={data.description}
-              unit={data.unit}
-              quantity={data.quantity}
-              total={data.total}
-            />
-          </Box>
-        ))}
+        {data &&
+          data.map((item: any) => (
+            <Box
+              key={item.id}
+              p={10}
+              m={4}
+              borderWidth="1px"
+              borderRadius="lg"
+              overflow="hidden"
+            >
+              <AnounceCard
+                title={item.title}
+                description={item.description}
+                unit={item.unit}
+                quantity={item.quantity}
+                total={item.total}
+              />
+            </Box>
+          ))}
       </Container>
     </>
   );
