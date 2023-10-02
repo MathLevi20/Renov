@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-undef */
 // components/Navbar.tsx
 "use client";
 import {
@@ -10,6 +11,8 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
+import { BsJournalText } from "react-icons/bs";
+
 const Navbar: React.FC = () => {
   const [showMenu, setShowMenu] = useState(false);
 
@@ -18,14 +21,18 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="bg-gray-800 p-4">
+    <nav className="bg-gray-800 py-4">
       <div className="container mx-auto">
         <div className="flex justify-between items-center">
           <Link href="/" className="flex">
             <Image src="./LogoLow.svg" alt={"Logo"} width={50} height={50} />
-            <p className="text-white text-2xl m-auto px-5 font-bold">Renov</p>
+            <p className="text-white text-2xl m-auto px-2 font-bold">Renov</p>
           </Link>
-          <div className="hidden md:flex space-x-4">
+          <div className="hidden lg:flex space-x-4">
+            <Link className="flex" href="/anounce">
+              <BsJournalText className="m-auto" />{" "}
+              <p className="block m-auto px-2 text-gray-100">Anuncios</p>
+            </Link>
             <Link className="flex" href="/createanounce">
               <AddIcon className="m-auto" />{" "}
               <p className=" m-auto px-2 text-gray-100">Adicionar resíduo</p>
@@ -47,7 +54,7 @@ const Navbar: React.FC = () => {
               <p className="block m-auto px-2 text-gray-100">Profile</p>
             </Link>
           </div>
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button className="text-white" onClick={toggleMenu}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

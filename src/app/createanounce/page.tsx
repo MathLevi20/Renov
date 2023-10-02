@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import WithSubnavigation from "@/components/Navbar";
+import { BASE_URL } from "@/utils/API";
 
 function Formulario() {
   const [formData, setFormData] = useState({
@@ -20,10 +21,35 @@ function Formulario() {
     });
   };
 
-  const handleSubmit = (e: any) => {
+  async function getData(endpoint: string, params: Record<string, any>) {
+    const url = `${BASE_URL}/${endpoint}`;
+
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(params),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to fetch data");
+      }
+
+      return res.json();
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    // Aqui você pode fazer algo com os dados, como enviá-los para um servidor
-    console.log(formData);
+    try {
+      await getData("anounce/list", formData);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
