@@ -1,5 +1,5 @@
-export const API_URL = 'https://ersapi-i8ah.onrender.com';
-export const BASE_URL = 'https://ersapi-i8ah.onrender.com';
+export const API_URL = 'https://ersbackend-alfa.onrender.com';
+export const BASE_URL = 'https://ersbackend-alfa.onrender.com';
 
 interface ApiResponse<T> {
     data: T;

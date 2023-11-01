@@ -30,15 +30,14 @@ interface AnounceData {
 }
 
 async function getData(endpoint: string, params: Record<string, any>) {
-  const url = `${BASE_URL}/${endpoint}`;
-
+  const url = `${BASE_URL}/${endpoint}/?skip=${params.skip}&take=${params.take}`;
   try {
     const res = await fetch(url, {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(params),
+      //body: JSON.stringify(params),
     });
 
     if (!res.ok) {
@@ -94,7 +93,7 @@ const AnouncePage: React.FC = () => {
   const [data, setData] = useState<any[]>([]);
   const queryParams = {
     skip: 3,
-    take: 3,
+    take: 5,
   };
   const fetchData = async () => {
     try {
@@ -105,9 +104,11 @@ const AnouncePage: React.FC = () => {
       setData(residueData);
     }
   };
+
   useEffect(() => {
     fetchData();
   }, []);
+
   return (
     <>
       <WithSubnavigation />

@@ -37,11 +37,11 @@ const Navbar: React.FC = () => {
               <AddIcon className="m-auto" />{" "}
               <p className=" m-auto px-2 text-gray-100">Adicionar resíduo</p>
             </Link>
-            <Link className="flex" href="/contact">
+            <Link className="flex" href="/sent">
               <ArrowUpIcon className="m-auto" />{" "}
               <p className="m-auto px-2 text-gray-100">Enviados</p>
             </Link>
-            <Link className="flex" href="/contact">
+            <Link className="flex" href="/received">
               <ArrowDownIcon className="m-auto" />
               <p className="block m-auto px-2 text-gray-100">Recebidos</p>
             </Link>
@@ -77,11 +77,11 @@ const Navbar: React.FC = () => {
                   <AddIcon />{" "}
                   <p className="block text-gray-800 ">Adicionar resíduo</p>
                 </Link>
-                <Link href="/contact">
+                <Link href="/sent">
                   <ArrowUpIcon />{" "}
                   <p className="block text-gray-800">Enviados</p>
                 </Link>
-                <Link href="/contact">
+                <Link href="/received">
                   <ArrowDownIcon />
                   <p className="block text-gray-800">Recebidos</p>
                 </Link>
