@@ -73,7 +73,7 @@ const Navbar: React.FC = () => {
             </button>
             {showMenu && (
               <div className="absolute top-12 right-0 bg-white px-5 py-2 shadow rounded-md">
-                <Link href="/about">
+                <Link href="/createanounce">
                   <AddIcon />{" "}
                   <p className="block text-gray-800 ">Adicionar resíduo</p>
                 </Link>

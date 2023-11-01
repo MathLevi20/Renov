@@ -70,7 +70,7 @@ const Received: React.FC = () => {
         <div className="mt-3 w-full flex justify-center pt-0">
           <input
             type="text"
-            placeholder="Procurar"
+            value="Procurar"
             className="px-4 py-1 mx-2 flex justify-center w-3/4 placeholder-slate-900 text-black  rounded text-lg border-2 outline-none text-left"
           />
           <SearchIcon m={5} />

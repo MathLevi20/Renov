@@ -2,15 +2,18 @@
 import React, { useState } from "react";
 import WithSubnavigation from "@/components/Navbar";
 import { BASE_URL } from "@/utils/API";
+import axios from "axios";
 
 function Formulario() {
+
+  const [message, setMessage] = useState("")
   const [formData, setFormData] = useState({
-    title: "Retalhos de tecido variado",
-    description:
-      "Olá, a distribuição é gratuita. Basta vir buscar em nossa sede na AV.Brito - 1009, setor 3 - Centro.",
-    unit: "kg",
-    quantity: "2800",
-    total: "2800",
+    title: '',
+    description: '',
+    unit: 'kg',
+    quantity: 0,
+    total: 0,
+    residue_fk: "fb05836f-cb9b-4b63-99aa-5849a6a4f67f",
   });
 
   const handleChange = (e: any) => {
@@ -21,34 +24,30 @@ function Formulario() {
     });
   };
 
-  async function getData(endpoint: string, params: Record<string, any>) {
-    const url = `${BASE_URL}/${endpoint}`;
-
-    try {
-      const res = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(params),
-      });
-
-      if (!res.ok) {
-        throw new Error("Failed to fetch data");
-      }
-
-      return res.json();
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  }
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
     try {
-      await getData("anounce/list", formData);
+      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU3NTAyNWU4LWNmMzktNDRkOC05ODJhLTA5ZGFjNTU4NWRkMyIsInVzZXJuYW1lIjoidmVybWVsaGExIiwidHlwZSI6ImRlZmF1bHQiLCJ0b2tlbiI6ImFjZXRva2VuIiwiaWF0IjoxNjk4ODcwMjEyLCJleHAiOjE2OTg5MTM0MTJ9.oH2OL5QIaB750lpuWQgjCusgS7a2g90HcpkhzfV4TlY'
+      const headers: { [key: string]: string } = {};
+      headers['authorization'] = `Bearer ${token}`;
+      // Fazer a solicitação POST com os dados do formulário
+      await axios.post(`${BASE_URL}/anounce/create`, formData, { headers});
+
+      // Redefinir o formulário após o envio bem-sucedido
+      setFormData({
+        title: '',
+        description: '',
+        unit: 'kg',
+        quantity: Number(''),
+        total: Number(''),
+        residue_fk: "fb05836f-cb9b-4b63-99aa-5849a6a4f67f"
+      });
+      setMessage("ENVIADO")
+      console.log('Dados enviados com sucesso!');
     } catch (error) {
-      console.error(error);
+      setMessage("ERRO AO ENVIAR")
+      console.error('Erro ao enviar os dados:', error);
     }
   };
 
@@ -60,7 +59,7 @@ function Formulario() {
       bg-gradient-to-tr from-sky-300 to-sky-500  "
       >
         <div className="bg-white shadow-lg p-10 m-10 mx-20 rounded-md">
-          <form onSubmit={handleSubmit}>
+          <form>
             <div className="mb-4">
               <label
                 htmlFor="title"
@@ -105,6 +104,7 @@ function Formulario() {
                 name="unit"
                 className="border border-gray-300 p-2 rounded w-full"
                 value={formData.unit}
+                aria-placeholder="kg ou unit"
                 onChange={handleChange}
               />
             </div>
@@ -120,7 +120,7 @@ function Formulario() {
                 id="quantity"
                 name="quantity"
                 className="border border-gray-300 p-2 rounded w-full"
-                value={formData.quantity}
+                value={formData.quantity.toString()}
                 onChange={handleChange}
               />
             </div>
@@ -136,17 +136,19 @@ function Formulario() {
                 id="total"
                 name="total"
                 className="border border-gray-300 p-2 rounded w-full"
-                value={formData.total}
+                value={formData.total.toString()}
                 onChange={handleChange}
               />
             </div>
             <button
               type="submit"
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={handleSubmit}
             >
               Enviar
             </button>
           </form>
+          <h3>{message}</h3>
         </div>
       </div>
     </>
