@@ -1,9 +1,14 @@
+import axios from "axios";
+
 export const API_URL = 'https://ersbackend-alfa.onrender.com';
 export const BASE_URL = 'https://ersbackend-alfa.onrender.com';
 
 interface ApiResponse<T> {
     data: T;
 }
+export const API = axios.create({
+    baseURL: BASE_URL
+})
 
 async function fetchData<T>(endpoint: string, method = 'GET', body?: any): Promise<T> {
     const url = `${BASE_URL}/${endpoint}`;
