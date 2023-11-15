@@ -10,9 +10,8 @@ import { useAuth } from "@/context/AuthContext";
 export default function Login() {
 const navigate = useRouter();
   const { signIn } = useAuth();
-  const [loading, setLoading] = useState(false);
 
-  const [username, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   
   const handleEmailInput = (event: ChangeEvent<HTMLInputElement>) => {
@@ -22,19 +21,23 @@ const navigate = useRouter();
   const handlePasswordInput = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
-
-  const handleSignIn = async () => {
-    setLoading(true);
-    try {
-      await signIn({ email: username, password });
-      console.log("finalizado");
-    } catch (err) {
-      console.log(err);
-      setLoading(false);
-    } finally {
-      setLoading(false);
+const handleSignIn = async () => {
+  try {
+    const signInResult = await signIn({ email: email, password });
+    console.log("finalizado");
+    if (signInResult && signInResult.success) {
+      // Se o login for bem-sucedido, redirecionar para '/anounce'
+      console.log('test')
+    } else {
+      // Lidar com falha no login
+      console.error("Erro no login:", signInResult.error);
+      // Ou você pode lançar um novo erro para que o bloco catch capture
     }
-  };
+  } catch (err) {
+    console.error(err);
+  } 
+};
+
   return (
     <div className="grid grid-cols-1  md:grid-cols-2 h-screen">
       <div className=" hidden md:grid bg-violet-700">
@@ -64,10 +67,9 @@ const navigate = useRouter();
               </label>
               <input
                 id="email"
-                type="email"
                 className="w-full px-4 py-3 mt-1 border-gray-300  border-2  rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200"
-                value={username}
-            onChange={handleEmailInput}
+                value={email}
+                onChange={handleEmailInput}
               />
             </div>
             <div>
@@ -79,11 +81,10 @@ const navigate = useRouter();
               </label>
               <input
                 id="password"
-                type="password"
                 className="w-full px-4 py-3 mt-1 border-gray-300  border-2  rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200"
                  value={password}
                 onChange={handlePasswordInput}
-                 placeholder="Digite seu usuario"
+             
                 
               />
             </div>

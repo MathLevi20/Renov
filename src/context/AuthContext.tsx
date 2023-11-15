@@ -1,4 +1,3 @@
-'use client'
 import { AxiosError } from 'axios'
 import { useRouter } from 'next/navigation'
 import {
@@ -27,7 +26,7 @@ interface IAuthParams {
   password: string
 }
 interface IAuthContext {
-  signIn: ({ email, password }: IAuthParams) => Promise<void>
+  signIn: ({ email, password }: IAuthParams) => Promise<any>
   signOut: () => void
   authData: IAuthData | null | undefined
 }
@@ -70,44 +69,48 @@ export const AuthContextProvider = ({ children }: IAuthContextProviderProps) => 
     try {
       console.log(email)
       console.log(password)
-      const response = await API.post('/auth/signin', { username: email, password })
+      const response = await API.post('/auth/signin', { "email": email, "password":password })
       console.log(response)
       const data = response.data
-
+      console.log(response)
       if (data.signin) {
         const token = data.acetoken
-
+        console.log(data)
+        console.log(token)
         const decodeData = _decodedToken(token) as IUser
 
         const authDataFormatter: IAuthData = {
           token: token,
           user: decodeData
         }
+        window.location.replace("http://localhost:3000/anounce");
 
-        _saveInStorage(authDataFormatter)
-        setAuthData(authDataFormatter)
+        navigate.push('/anounce')
+     
+        return { success: true, data: authDataFormatter };
 
       } else {
-        setAuthData(null)
+
+        return { success: false, error: 'Login não foi bem-sucedido.' };
+
       }
     } catch (err) {
-      setAuthData(null)
       console.log(err)
+      console.error('Erro de login:', err);
+    // Retornar um valor para indicar falha
+      return { success: false, error: 'Erro durante o login.' };
     }
   }, [])
 
 
 
   
-  const signOut = useCallback(() => {
+  const signOut =   useCallback(() => {
     setAuthData(null)
     _removeInStorage()
-    navigate.push('/')
-  }, [navigate])
+  }, [])
 
-  useEffect(() => {
-    _readInStorage()
-  }, [_readInStorage])
+
 
   const value = useMemo(() => ({ signIn, signOut, authData }), [signIn, signOut, authData])
 

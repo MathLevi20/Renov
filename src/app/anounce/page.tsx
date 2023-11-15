@@ -105,9 +105,7 @@ const AnouncePage: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  
 
   return (
     <>
