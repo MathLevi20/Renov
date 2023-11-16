@@ -5,12 +5,15 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import { Button, CircularProgress, Spinner } from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
 
 
 export default function Login() {
 const navigate = useRouter();
   const { signIn } = useAuth();
 
+  const [loading, setLoading] = useState(false);
   const [username, setEmail] = useState("");
   const [password, setPassword] = useState("");
   
@@ -23,10 +26,15 @@ const navigate = useRouter();
   };
 const handleSignIn = async () => {
   try {
+    setLoading(true)
     const signInResult = await signIn({ email: username, password });
     console.log("finalizado");
+        setLoading(false)
+
 
   } catch (err) {
+            setLoading(false)
+
     console.error(err);
   } 
 };
@@ -86,13 +94,29 @@ const handleSignIn = async () => {
                   </label>
             </div>
             <div className="grid grid-cols-2 gap-2">
-                <button
+              <div>
+                {loading ? (
+                  <div           className="flex px-4 py-3 font-bold text-slate-800 bg-indigo-100  rounded-md border-2  border-indigo-400 hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700"
+>
+  <Button
+    isLoading={loading}
+    loadingText="Loading..."
+    leftIcon={<AddIcon />}
+  >    Add Item
+  </Button>
+                  </div>
+      ) : (
+        <button
+          className="w-full px-4 py-3 font-bold text-slate-800 bg-indigo-100  rounded-md border-2  border-indigo-400 hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700"
+          onClick={handleSignIn}
+        >
+          Sign In
+        </button>
+      )}
 
-                              className="w-full px-4 py-3 font-bold text-slate-800 bg-indigo-100  rounded-md border-2  border-indigo-400	 hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700"
-                  onClick={handleSignIn}
-                >
-                  Sign In
-                </button>
+              </div>
+
+
               <button
 
                               className="w-full px-4 py-3 font-bold text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700"
