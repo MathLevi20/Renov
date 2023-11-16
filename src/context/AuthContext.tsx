@@ -1,122 +1,115 @@
-import { AxiosError } from 'axios'
-import { useRouter } from 'next/navigation'
-import {
-  createContext,
-  ReactNode,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState
-} from 'react'
-import { decodeToken } from 'react-jwt'
-import { API } from '../utils/API'
+  'use client'
+  import { AxiosError } from 'axios'
+  import { useRouter } from 'next/navigation'
+  import {
+    createContext,
+    ReactNode,
+    useCallback,
+    useContext,
+    useEffect,
+    useMemo,
+    useState
+  } from 'react'
+  import { decodeToken } from 'react-jwt'
+  import { API } from '@/utils/API'
 
-interface IUser {
-  id: string
-  username: string
-  type: boolean
-}
-interface IAuthData {
-  user: IUser
-  token: string
-}
-interface IAuthParams {
-  email: string
-  password: string
-}
-interface IAuthContext {
-  signIn: ({ email, password }: IAuthParams) => Promise<any>
-  signOut: () => void
-  authData: IAuthData | null | undefined
-}
-interface IAuthContextProviderProps {
-  children: ReactNode
-}
-
-const AuthContext = createContext<IAuthContext>({} as IAuthContext)
-
-export const AuthContextProvider = ({ children }: IAuthContextProviderProps) => {
-  const [authData, setAuthData] = useState<IAuthData | null | undefined>(undefined)
-  const navigate = useRouter()
-
-  const _saveInStorage = (data: IAuthData) => {
-    const authDataformattedInString = JSON.stringify(data)
-
-    localStorage.setItem('@user', authDataformattedInString)
+  interface IUser {
+    id: string
+    username: string
+    type: boolean
   }
-  const _removeInStorage = () => {
-    localStorage.removeItem('@user')
+  interface IAuthData {
+    user: IUser
+    token: string
   }
-  const _decodedToken = (token: string) => {
-    const decodedData = decodeToken(token)
-
-    return decodedData
+  interface IAuthParams {
+    email: string
+    password: string
   }
-  const _readInStorage = useCallback(() => {
-    const authData = localStorage.getItem('@user')
+  interface IAuthContext {
+    signIn: ({ email, password }: IAuthParams) => Promise<void>
+    signOut: () => void
+    authData: IAuthData | null | undefined
+  }
+  interface IAuthContextProviderProps {
+    children: ReactNode
+  }
 
-    if (authData) {
-      const authDataformattedInJson = JSON.parse(authData) as IAuthData
+  const AuthContext = createContext<IAuthContext>({} as IAuthContext)
 
-      setAuthData(authDataformattedInJson)
-    } else {
-      setAuthData(null)
+  export const AuthContextProvider = ({ children }: IAuthContextProviderProps) => {
+    const [authData, setAuthData] = useState<IAuthData | null | undefined>(undefined)
+    const navigate = useRouter()
+
+    const _saveInStorage = (data: IAuthData) => {
+      const authDataformattedInString = JSON.stringify(data)
+
+      localStorage.setItem('@user', authDataformattedInString)
     }
-  }, [])
-  
-  const signIn = useCallback(async ({ email, password }: IAuthParams) => {
-    try {
-      console.log(email)
-      console.log(password)
-      const response = await API.post('/auth/signin', { "email": email, "password":password })
-      console.log(response)
-      const data = response.data
-      console.log(response)
-      if (data.signin) {
-        const token = data.acetoken
-        console.log(data)
-        console.log(token)
-        const decodeData = _decodedToken(token) as IUser
+    const _removeInStorage = () => {
+      localStorage.removeItem('@user')
+    }
+    const _decodedToken = (token: string) => {
+      const decodedData = decodeToken(token)
 
-        const authDataFormatter: IAuthData = {
-          token: token,
-          user: decodeData
-        }
-        window.location.replace("http://localhost:3000/anounce");
+      return decodedData
+    }
+    const _readInStorage = useCallback(() => {
+      const authData = localStorage.getItem('@user')
 
-        navigate.push('/anounce')
-     
-        return { success: true, data: authDataFormatter };
+      if (authData) {
+        const authDataformattedInJson = JSON.parse(authData) as IAuthData
 
+        setAuthData(authDataformattedInJson)
       } else {
-
-        return { success: false, error: 'Login não foi bem-sucedido.' };
-
+        setAuthData(null)
       }
-    } catch (err) {
-      console.log(err)
-      console.error('Erro de login:', err);
-    // Retornar um valor para indicar falha
-      return { success: false, error: 'Erro durante o login.' };
-    }
-  }, [])
+    }, [])
+    const signIn = useCallback(async ({ email, password }: IAuthParams) => {
+      try {
+        const response = await API.post('/auth/signin', { email: email,password: password })
+        const data = response.data
+
+        if (data.signin) {
+          const token = data.acetoken
+
+          const decodeData = _decodedToken(token) as IUser
+
+          const authDataFormatter: IAuthData = {
+            token: token,
+            user: decodeData
+          }
+
+          _saveInStorage(authDataFormatter)
+          setAuthData(authDataFormatter)
+          navigate.push('/anounce')
+        } else {
+          setAuthData(null)
+        }
+      } catch (err) {
+        setAuthData(null)
+        console.log(err)
+      }
+    }, [])
 
 
 
-  
-  const signOut =   useCallback(() => {
-    setAuthData(null)
-    _removeInStorage()
-  }, [])
+    
+    const signOut = useCallback(() => {
+      setAuthData(null)
+      _removeInStorage()
+      navigate.push('/')
+    }, [navigate])
 
+    useEffect(() => {
+      _readInStorage()
+    }, [_readInStorage])
 
+    const value = useMemo(() => ({ signIn, signOut, authData }), [signIn, signOut, authData])
 
-  const value = useMemo(() => ({ signIn, signOut, authData }), [signIn, signOut, authData])
+    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+  }
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
-}
-
-export const useAuth = () => {
-  return useContext(AuthContext)
-}
+  export const useAuth = () => {
+    return useContext(AuthContext)
+  }

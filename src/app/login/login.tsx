@@ -11,28 +11,21 @@ export default function Login() {
 const navigate = useRouter();
   const { signIn } = useAuth();
 
-  const [email, setEmail] = useState("");
+  const [username, setEmail] = useState("");
   const [password, setPassword] = useState("");
   
   const handleEmailInput = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
 
-  const handlePasswordInput = (event: ChangeEvent<HTMLInputElement>) => {
+ const handlePasswordInput = (event:any) => {
     setPassword(event.target.value);
   };
 const handleSignIn = async () => {
   try {
-    const signInResult = await signIn({ email: email, password });
+    const signInResult = await signIn({ email: username, password });
     console.log("finalizado");
-    if (signInResult && signInResult.success) {
-      // Se o login for bem-sucedido, redirecionar para '/anounce'
-      console.log('test')
-    } else {
-      // Lidar com falha no login
-      console.error("Erro no login:", signInResult.error);
-      // Ou você pode lançar um novo erro para que o bloco catch capture
-    }
+
   } catch (err) {
     console.error(err);
   } 
@@ -60,17 +53,19 @@ const handleSignIn = async () => {
               Please sign in to your account.
             </p>
           </div>
-          <form className="mt-8 space-y-6">
+          <div className="mt-8 space-y-6">
             <div>
               <label htmlFor="email" className="block font-bold text-gray-700">
                 Email address
-              </label>
+             
               <input
                 id="email"
+                type="email"
                 className="w-full px-4 py-3 mt-1 border-gray-300  border-2  rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200"
-                value={email}
+                value={username}
                 onChange={handleEmailInput}
-              />
+                />
+                 </label>
             </div>
             <div>
               <label
@@ -78,15 +73,17 @@ const handleSignIn = async () => {
                 className="block font-bold text-gray-700"
               >
                 Password
-              </label>
+            
               <input
                 id="password"
+                type="password"
                 className="w-full px-4 py-3 mt-1 border-gray-300  border-2  rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200"
                  value={password}
                 onChange={handlePasswordInput}
              
                 
-              />
+                />
+                  </label>
             </div>
             <div className="grid grid-cols-2 gap-2">
                 <button
@@ -103,7 +100,7 @@ const handleSignIn = async () => {
                 Sign Up
               </button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
