@@ -4,7 +4,7 @@ import AnounceCard from "@/components/AnounceCard";
 import WithSubnavigation from "@/components/Navbar";
 import TagBox from "@/components/Tag";
 import TagsComponents from "@/components/Tags";
-import { BASE_URL } from "@/utils/API";
+import { API, BASE_URL } from "@/utils/API";
 import { SearchIcon } from "@chakra-ui/icons";
 import {
   Container,
@@ -15,6 +15,7 @@ import {
   InputLeftAddon,
   Tag,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 interface AnounceData {
@@ -95,18 +96,23 @@ const AnouncePage: React.FC = () => {
     skip: 3,
     take: 5,
   };
-  const fetchData = async () => {
+  const fetchAnnouncements = async () => {
     try {
-      const responseData = await getData("anounce/list", queryParams);
-      setData(responseData);
+      const response = await API.get('/anounce/list/?skip=3&take=2'); // Rota da sua API
+            console.log(response)
+
+      setData(response.data);
     } catch (error) {
-      console.error(error);
-      setData(residueData);
+      // Lidar com erros de requisição, se necessário
+      console.error('Erro ao buscar dados do usuário:', error);
     }
   };
 
-  
+    useEffect(() => {
 
+      fetchAnnouncements();
+      console.log(data)
+  }, []); 
   return (
     <>
       <WithSubnavigation />

@@ -1,20 +1,20 @@
 "use client";
 import React, { useState } from "react";
 import WithSubnavigation from "@/components/Navbar";
-import { BASE_URL } from "@/utils/API";
+import { API, BASE_URL, getTokenFromLocalStorage } from "@/utils/API";
 import axios from "axios";
 
 function Formulario() {
 
   const [message, setMessage] = useState("")
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    unit: 'kg',
-    quantity: 0,
-    total: 0,
-    residue_fk: "fb05836f-cb9b-4b63-99aa-5849a6a4f67f",
-  });
+		"title": "retalhos  algodão",
+		"description": "Os rtalhos são de cores variadas, a distribuição é gratuíta e estamos disponíveis para entregar dentro da região de nossa cidade",
+		"unit": "kg",
+		"quantity": 643.0,
+		"total": 643.7,
+		"residue_fk": "fb15836f-cb9b-4b63-99aa-5849a6a4f67f"
+	});
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -26,27 +26,25 @@ function Formulario() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-
+    const token = getTokenFromLocalStorage()
+    const jsonData = JSON.stringify(formData);
+    const jsonDaa = JSON.parse(jsonData);
     try {
-      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU3NTAyNWU4LWNmMzktNDRkOC05ODJhLTA5ZGFjNTU4NWRkMyIsInVzZXJuYW1lIjoidmVybWVsaGExIiwidHlwZSI6ImRlZmF1bHQiLCJ0b2tlbiI6ImFjZXRva2VuIiwiaWF0IjoxNjk4ODcwMjEyLCJleHAiOjE2OTg5MTM0MTJ9.oH2OL5QIaB750lpuWQgjCusgS7a2g90HcpkhzfV4TlY'
-      const headers: { [key: string]: string } = {};
-      headers['authorization'] = `Bearer ${token}`;
+
       // Fazer a solicitação POST com os dados do formulário
-      await axios.post(`${BASE_URL}/anounce/create`, formData, { headers});
+      await API.post('/anounce/create', jsonDaa , {
+        headers: {
+          Authorization: `Bearer ${token}` // Adiciona o token JWT ao cabeçalho Authorization
+        }
+      });
 
       // Redefinir o formulário após o envio bem-sucedido
-      setFormData({
-        title: '',
-        description: '',
-        unit: 'kg',
-        quantity: Number(''),
-        total: Number(''),
-        residue_fk: "fb05836f-cb9b-4b63-99aa-5849a6a4f67f"
-      });
       setMessage("ENVIADO")
       console.log('Dados enviados com sucesso!');
     } catch (error) {
       setMessage("ERRO AO ENVIAR")
+                console.log((jsonDaa))
+
       console.error('Erro ao enviar os dados:', error);
     }
   };
