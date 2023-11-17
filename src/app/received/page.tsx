@@ -12,7 +12,10 @@ import {
   InputGroup,
   Input,
   InputLeftAddon,
+  Skeleton,
 } from "@chakra-ui/react";
+import ResidueCard from "@/components/receivedPage/ReceivedCard";
+import { API, getTokenFromLocalStorage } from "@/utils/API";
 
 interface ProposalData {
   id: string;
@@ -62,7 +65,33 @@ const proposalData: ProposalData[] = [
   },
 ];
 
+
 const Received: React.FC = () => {
+    const [data, setData] = useState<any[]>(proposalData);
+    const [loading, setLoading] = useState(false);
+    const token = getTokenFromLocalStorage()
+    
+    const fetchAnnouncements = async () => {
+    try {
+      const response = await API.get('/proposal/proposalsforme/', {
+        headers: {
+          Authorization: `Bearer ${token}` // Adiciona o token JWT ao cabeçalho Authorization
+        }}); // Rota da sua API
+            console.log(response)
+
+      setData(response.data);
+      setLoading(true)
+    } catch (error) {
+      // Lidar com erros de requisição, se necessário
+      console.error('Erro ao buscar dados do usuário:', error);
+    }
+  };
+
+    useEffect(() => {
+
+      fetchAnnouncements();
+      console.log(data)
+  }, [data]); 
   return (
     <>
       <WithSubnavigation />
@@ -77,28 +106,24 @@ const Received: React.FC = () => {
         </div>
       </div>{" "}
       <Container maxW="container.xl" py={8} px={10}>
-        <h2 className="text-xl text p-2 font-semibold">Anounce</h2>
+        <h2 className="text-xl text p-2 font-semibold">Propostas Recebidas</h2>
 
-        {proposalData.map((data) => (
-          <Box
-            key={data.id}
-            p={10}
-            m={4}
-            borderWidth="1px"
-            borderRadius="lg"
-            overflow="hidden"
-          >
-            {/*<ProposalCard
-              id={data.description}
+        {data.map((data) => (
+
+              <ResidueCard            key={data.id}
+
+              isloading ={loading}
+              id={data.id}
               description={data.description}
               status={String(data.status)}
               proposer_fk={String(data.proposer_fk)}
               price={String(data.price)}
               acepted={String(data.acepted)}
     
-              
-        />*/}
-          </Box>
+              />
+                       
+
+
         ))}
       </Container>
     </>

@@ -4,15 +4,17 @@ import WithSubnavigation from "@/components/Navbar";
 import { BASE_URL } from "@/utils/API";
 import axios from "axios";
 
-function createproposal() {
+const createproposal: React.FC = () => {
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [message, setMessage] = useState("")
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [formData, setFormData] = useState({
-    description: '',
-    price: 0,
-    quantity: 0,
-    proposer_fk: "fb05836f-cb9b-4b63-99aa-5849a6a4f67f",
-    anounce_fk: "a16e5a12-bc81-40f2-88c3-f91998967c81",
+    "description": '',
+    "price": 0,
+    "quantity": 0,
+    "proposer_fk": "fb05836f-cb9b-4b63-99aa-5849a6a4f67f",
+    "anounce_fk": "a16e5a12-bc81-40f2-88c3-f91998967c81",
   });
 
   const handleChange = (e: any) => {

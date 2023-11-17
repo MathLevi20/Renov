@@ -112,7 +112,7 @@ const AnouncePage: React.FC = () => {
 
       fetchAnnouncements();
       console.log(data)
-  }, []); 
+  }, [data]); 
   return (
     <>
       <WithSubnavigation />

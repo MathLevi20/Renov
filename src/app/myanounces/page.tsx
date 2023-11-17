@@ -7,15 +7,43 @@ const FilteredItems = () => {
   const [selectedType, setSelectedType] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
 
-  const items = [
-    { id: 1, type: "Papel", status: "completo" },
-    { id: 2, type: "Plástico", status: "anunciado" },
-    { id: 3, type: "Vidro", status: "negociando" },
-    { id: 4, type: "Vidro", status: "negociando" },
-
-    { id: 5, type: "Vidro", status: "negociando" },
-
-    { id: 7, type: "Vidro", status: "negociando" },
+  const items = 
+[
+	{
+		"id": "59f3fea3-0e8e-4e65-97f8-bf18803c4867",
+		"name": "metal",
+		"description": "latas, sucatas metálicas",
+		"nature": "solid",
+		"created_at": "2023-09-23T10:12:00.818Z"
+	},
+	{
+		"id": "a2720909-f092-4c7d-8fa2-4db56660436a",
+		"name": "plástico",
+		"description": "recipientes plásticos, embalagens",
+		"nature": "solid",
+		"created_at": "2023-09-23T10:12:00.818Z"
+	},
+	{
+		"id": "a5213cd4-e2fe-453b-b4df-451415d86b5e",
+		"name": "vidro",
+		"description": "garrafas, vidro quebrado",
+		"nature": "solid",
+		"created_at": "2023-09-23T10:12:00.818Z"
+	},
+	{
+		"id": "cef1844e-1874-4ad6-a860-11106fb0f30d",
+		"name": "madeira",
+		"description": "palets, ripas, serragem e afins",
+		"nature": "solid",
+		"created_at": "2023-09-23T10:12:00.818Z"
+	},
+	{
+		"id": "fa8dcfa3-67f8-49dd-83ed-7f31565d2d2c",
+		"name": "papel",
+		"description": "papelão, papel de escritório",
+		"nature": "solid",
+		"created_at": "2023-09-23T10:12:00.818Z"
+	}
 
     // Outros itens
   ];
@@ -23,8 +51,8 @@ const FilteredItems = () => {
   // Filtrar os itens com base no tipo e status selecionados
   const filteredItems = items.filter((item) => {
     if (
-      (selectedType === "all" || item.type === selectedType) &&
-      (selectedStatus === "all" || item.status === selectedStatus)
+      (selectedType === "all" || item.name === selectedType) &&
+      (selectedStatus === "all" || item.nature === selectedStatus)
     ) {
       return true;
     }
@@ -105,8 +133,8 @@ const FilteredItems = () => {
                 key={item.id}
               >
                 <div>
-                  <p>Tipo: {item.type} </p>
-                  <p>Status:{item.status} </p>
+                  <p>Tipo: {item.name} </p>
+                  <p>Status:{item.nature} </p>
                 </div>
               </div>
             ))}

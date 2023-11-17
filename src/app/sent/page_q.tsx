@@ -1,14 +1,27 @@
+// pages/AnouncePage.tsx
 "use client";
+import AnounceCard from "@/components/AnounceCard";
+import WithSubnavigation from "@/components/Navbar";
+import { SearchIcon } from "@chakra-ui/icons";
+import React, { useState, useEffect } from "react";
 
-import { BASE_URL } from "@/utils/API";
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import {
+  Container,
+  Box,
+  InputRightAddon,
+  InputGroup,
+  Input,
+  InputLeftAddon,
+  Skeleton,
+} from "@chakra-ui/react";
+import ResidueCard from "@/components/receivedPage/ReceivedCard";
+import { API, getTokenFromLocalStorage } from "@/utils/API";
 
-interface Proposal {
+interface ProposalData {
   id: string;
   description: string;
   price: string;
-  acepted: boolean | null;
+  acepted: boolean |null;
   status: boolean | null;
   proposer_fk: string;
   anounce_fk: string;
@@ -16,50 +29,105 @@ interface Proposal {
   quantity: string;
 }
 
-const anounceId = "373d7fda-e2a1-4248-91e3-21ae173c67b7"
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU3NTAyNWU4LWNmMzktNDRkOC05ODJhLTA5ZGFjNTU4NWRkMyIsInVzZXJuYW1lIjoidmVybWVsaGExIiwidHlwZSI6ImRlZmF1bHQiLCJ0b2tlbiI6ImFjZXRva2VuIiwiaWF0IjoxNjk4OTQ2MDAxLCJleHAiOjE2OTg5ODkyMDF9.fwEz1AVdKcORIeX9yt6XB3zcy0Tsc9-F7xzg4dhaHyg"
+const proposalData: ProposalData[] = [
+  {
+    "id": "3f0369e6-fbbe-4dd8-953d-68460c48d03a",
+    "description": "olá usaremos tal resíduo na produção de móveis planejados",
+    "price": "50",
+    "acepted": null,
+    "status": null,
+    "proposer_fk": "07123108-2fa1-437a-8464-802dc85b77cc",
+    "anounce_fk": "373d7fda-e2a1-4248-91e3-21ae173c67b7",
+    "created_at": "2023-09-23T10:49:57.881Z",
+    "quantity": "25"
+  },
+  {
+    "id": "9aca435e-ff25-4127-9803-8ca76283376e",
+    "description": "olá, faremos a manutenção e realocação desse material",
+    "price": "30",
+    "acepted": null,
+    "status": null,
+    "proposer_fk": "88353cc6-6528-4499-948e-4c9ae6fd11d5",
+    "anounce_fk": "373d7fda-e2a1-4248-91e3-21ae173c67b7",
+    "created_at": "2023-09-23T10:49:57.881Z",
+    "quantity": "50"
+  },
+  {
+    "id": "4badb287-7dc4-41c7-9a72-0a2f3b7295e9",
+    "description": "usaremos na produção de sofás de baixo custo para torná-lo um móvel acessícvel",
+    "price": "80",
+    "acepted": null,
+    "status": null,
+    "proposer_fk": "d5f319a0-f87d-4497-ba2e-86c6a6e5a04b",
+    "anounce_fk": "373d7fda-e2a1-4248-91e3-21ae173c67b7",
+    "created_at": "2023-09-23T10:49:57.881Z",
+    "quantity": "100"
+  },
+];
 
-const DetailAnounce: React.FC = () => {
-  const [Proposal, setProposal] = useState<Proposal[]>([]);
 
-  useEffect(() => {
+const Received: React.FC = () => {
+    const [data, setData] = useState<any[]>(proposalData);
+    const [loading, setLoading] = useState(false);
+    const token = getTokenFromLocalStorage()
+    
+    const fetchAnnouncements = async () => {
+    try {
+      const response = await API.get('/proposal/proposalsforme/', {
+        headers: {
+          Authorization: `Bearer ${token}` // Adiciona o token JWT ao cabeçalho Authorization
+        }}); // Rota da sua API
+            console.log(response)
 
-    const headers: { [key: string]: string } = {};
-    headers['authorization'] = `Bearer ${token}`;
+      setData(response.data);
+      setLoading(true)
+    } catch (error) {
+      // Lidar com erros de requisição, se necessário
+      console.error('Erro ao buscar dados do usuário:', error);
+    }
+  };
 
+    useEffect(() => {
 
-    axios
-      .get<Proposal[]>(`${BASE_URL}/proposal/proposalsforme`, { headers })
-      .then((response) => {
-        setProposal(response.data);
-      })
-      .catch((error) => {
-        console.error('Erro ao buscar dados adicionais:', error);
-      });
-  }, []);
-
+      fetchAnnouncements();
+      console.log(data)
+  }, [data]); 
   return (
-    <div>
-      {Proposal.length > 0 ? (
-        <ul>
-          {Proposal.map((item) => (
-            
-              <li key={item.id}>
-                <p>Descrição: {item.description}</p>
-                <p>Preço: {item.price}</p>
-                <p>Quantidade: {item.quantity}</p>
-                <p>Status: {item.status !== null ? (item.status === true ? 'Aprovado' : 'Reprovado') : 'Em espera'}</p>
-              </li>
+    <>
+      <WithSubnavigation />
+      <div className="py-2 text-2xl font-semibold flex">
+        <div className="mt-3 w-full flex justify-center pt-0">
+          <input
+            type="text"
+            value="Procurar"
+            className="px-4 py-1 mx-2 flex justify-center w-3/4 placeholder-slate-900 text-black  rounded text-lg border-2 outline-none text-left"
+          />
+          <SearchIcon m={5} />
+        </div>
+      </div>{" "}
+      <Container maxW="container.xl" py={8} px={10}>
+        <h2 className="text-xl text p-2 font-semibold">Propostas Recebidas</h2>
 
-          ))}
-        </ul>
+        {data.map((data) => (
 
-      ) : (
-        <p>Carregando dados adicionais...</p>
-      )}
-      <hr />
-    </div>
+              <ResidueCard            key={data.id}
+
+              isloading ={loading}
+              id={data.id}
+              description={data.description}
+              status={String(data.status)}
+              proposer_fk={String(data.proposer_fk)}
+              price={String(data.price)}
+              acepted={String(data.acepted)}
+    
+              />
+                       
+
+
+        ))}
+      </Container>
+    </>
   );
 };
 
-export default DetailAnounce;
+export default Received;
