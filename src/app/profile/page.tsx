@@ -83,7 +83,7 @@ function Profile() {
             </button>
           </div>
         </div>
-        <div className="bg-white shadow-lg p-10 mb-5 mx-20 rounded-md  bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <div className="bg-white p-10 mb-5 mx-20 rounded-md  border border-gray-200 shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             Retalhos de Tecido Variado{" "}
           </h5>
@@ -92,7 +92,7 @@ function Profile() {
             AV.Brito - 1009, setor 3 - Centro.
           </p>
         </div>
-        <div className="bg-blue-100 shadow-lg p-10 mb-5 mx-20 rounded-md border border-blue-200 rounded-lg shadow hover:bg-blue-200 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <div className="bg-blue-100 shadow-lg p-10 mb-5 mx-20 rounded-md border border-blue-200 hover:bg-blue-200 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-blue-900 dark:text-white">
             Oferta Especial: Tecidos Estampados
           </h5>

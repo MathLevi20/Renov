@@ -1,11 +1,36 @@
-"use client";
-import React, { useState } from "react";
+/* eslint-disable react-hooks/rules-of-hooks */
+"use client"
 import WithSubnavigation from "@/components/Navbar";
-import { BASE_URL } from "@/utils/API";
+import { API, BASE_URL } from "@/utils/API";
+import { Box } from "@chakra-ui/react";
 import axios from "axios";
+import { useSearchParams ,useParams, usePathname} from 'next/navigation'
+import React, { useEffect, useState } from "react";
+import AnounceCard from "./AnounceCard";
 
-const createproposal: React.FC = () => {
+interface AnounceData {
+  id: string;
+  title: string;
+  description: string;
+  unit: string;
+  quantity: string;
+  total: string;
+  anouncer_fk: string;
+  residue_fk: string;
+  created_at: string;
+}
 
+
+const createproposal = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  let params = new URLSearchParams(document.location.search.substring(1));
+  let id = params.get("id"); // retorna a string "Jonathan"
+  let anouncer_fk = params.get("anouncer_fk"); 
+  const searchParams = new URLSearchParams()
+  const [data, setData] = useState<any>({});
+ 
+  console.log(id)
+  console.log(anouncer_fk  )
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [message, setMessage] = useState("")
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -17,6 +42,23 @@ const createproposal: React.FC = () => {
     "anounce_fk": "a16e5a12-bc81-40f2-88c3-f91998967c81",
   });
 
+    const fetchAnnouncements = async () => {
+    try {
+      const response = await API.get(`/anounce/${id}`); // Rota da sua API
+            console.log(response)
+
+      setData(response.data);
+    } catch (error) {
+      // Lidar com erros de requisição, se necessário
+      console.error('Erro ao buscar dados do usuário:', error);
+    }
+  };
+
+    useEffect(() => {
+
+      fetchAnnouncements();
+      console.log(data)
+  }, [searchParams]); 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData({
@@ -55,10 +97,27 @@ const createproposal: React.FC = () => {
     <>
       <WithSubnavigation />
       <div
-        className=" h-screen inset-0 items-start grid grid-cols-1 justify-center pt-10
+        className=" h-full inset-0 items-start grid grid-cols-1 justify-center pt-10
       bg-gradient-to-tr from-sky-300 to-sky-500  "
       >
+     
+    
+        
         <div className="bg-white shadow-lg p-10 m-10 mx-20 rounded-md">
+        <div className="text-xl text p-2  text-center font-semibold">Anuncio</div>
+          <div className='pb-5'
+>
+          <AnounceCard
+                anouncer_fk = {data.anouncer_fk}
+                title={data.title}
+                description={data.description}
+                unit={data.unit}
+                quantity={data.quantity}
+                total={data.total}
+            />
+          </div>
+                  <h2 className="text-xl text py-2 text-center  font-semibold">Proposta</h2>
+
           <form>
             <div className="mb-4">
               <label

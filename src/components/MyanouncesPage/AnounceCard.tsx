@@ -57,6 +57,7 @@ const ResidueCard: React.FC<ResidueCardProps> = ({
             <ExternalLinkIcon mx={2} pb={2} />
             Fazer Proposta{" "}
           </button>{" "}
+          
         </AccordionPanel>
       </AccordionItem>
     </Accordion>

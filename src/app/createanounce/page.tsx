@@ -4,17 +4,27 @@ import WithSubnavigation from "@/components/Navbar";
 import { API, BASE_URL, getTokenFromLocalStorage } from "@/utils/API";
 import axios from "axios";
 
+
+interface Residue {
+  title: string;
+  description: string;
+  unit: string;
+  quantity: number;
+  total: number;
+  residue_fk: string;
+}
+
 function Formulario() {
 
   const [message, setMessage] = useState("")
   const [formData, setFormData] = useState({
-		"title": "retalhos  algodão",
-		"description": "Os rtalhos são de cores variadas, a distribuição é gratuíta e estamos disponíveis para entregar dentro da região de nossa cidade",
-		"unit": "kg",
-		"quantity": 643.0,
-		"total": 643.7,
-		"residue_fk": "fb05836f-cb9b-4b63-99aa-5849a6a4f67f"
-	});
+    title: '',
+    description: '',
+    unit: '',
+    quantity: 0,
+    total: 0,
+    residue_fk: '',
+  });
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -53,7 +63,7 @@ function Formulario() {
     <>
       <WithSubnavigation />
       <div
-        className=" h-screen inset-0 items-start grid grid-cols-1 justify-center pt-10
+        className=" h-full inset-0 items-start grid grid-cols-1 justify-center pt-10
       bg-gradient-to-tr from-sky-300 to-sky-500  "
       >
         <div className="bg-white shadow-lg p-10 m-10 mx-20 rounded-md">
@@ -66,6 +76,8 @@ function Formulario() {
                 Título:
               </label>
               <input
+                                placeholder="Digite o título"
+
                 type="text"
                 id="title"
                 name="title"
@@ -82,6 +94,8 @@ function Formulario() {
                 Descrição:
               </label>
               <textarea
+                                                placeholder="Digite a descrição"
+
                 id="description"
                 name="description"
                 className="border border-gray-300 p-2 rounded w-full"
@@ -97,6 +111,8 @@ function Formulario() {
                 Unidade:
               </label>
               <input
+                                                placeholder="Digite a unidade ,ex: Kg ou unit"
+
                 type="text"
                 id="unit"
                 name="unit"
@@ -114,6 +130,7 @@ function Formulario() {
                 Quantidade:
               </label>
               <input
+
                 type="text"
                 id="quantity"
                 name="quantity"

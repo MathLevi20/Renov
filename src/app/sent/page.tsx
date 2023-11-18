@@ -1,6 +1,5 @@
 // pages/AnouncePage.tsx
 "use client";
-import AnounceCard from "@/components/AnounceCard";
 import WithSubnavigation from "@/components/Navbar";
 import { SearchIcon } from "@chakra-ui/icons";
 import React, { useState, useEffect } from "react";
@@ -91,7 +90,7 @@ const Received: React.FC = () => {
 
       fetchAnnouncements();
       console.log(data)
-  }, [data]); 
+  }, []); 
   return (
     <>
       <WithSubnavigation />

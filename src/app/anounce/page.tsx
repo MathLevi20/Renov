@@ -112,7 +112,7 @@ const AnouncePage: React.FC = () => {
 
       fetchAnnouncements();
       console.log(data)
-  }, [data]); 
+  }, []); 
   return (
     <>
       <WithSubnavigation />
@@ -146,6 +146,8 @@ const AnouncePage: React.FC = () => {
               overflow="hidden"
             >
               <AnounceCard
+                id= {item.id}
+                anouncer_fk = {item.anouncer_fk}
                 title={item.title}
                 description={item.description}
                 unit={item.unit}
