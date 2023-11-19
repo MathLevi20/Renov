@@ -1,22 +1,26 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client"
 import WithSubnavigation from "@/components/Navbar";
-import { API, BASE_URL } from "@/utils/API";
 import { Box } from "@chakra-ui/react";
 import axios from "axios";
 import { useSearchParams ,useParams, usePathname} from 'next/navigation'
 import React, { useEffect, useState } from "react";
 import AnounceCard from "./AnounceCard";
+import Navbar from "@/components/Navbar";
+import { getTokenFromLocalStorage, API, getIdFromLocalStorage } from "@/utils/API";
+import { Progress, Stack } from "@chakra-ui/react";
+import Image from "next/image";
 
 interface AnounceData {
   id: string;
   title: string;
   description: string;
   unit: string;
-  quantity: string;
+  quantity: number;
+  price: number
   total: string;
-  anouncer_fk: string;
-  residue_fk: string;
+  anounce_fk?: string  | null;
+  residue_fk?: string | null;
   created_at: string;
 }
 
@@ -27,26 +31,34 @@ const createproposal = () => {
   let id = params.get("id"); // retorna a string "Jonathan"
   let anouncer_fk = params.get("anouncer_fk"); 
   const searchParams = new URLSearchParams()
-  const [data, setData] = useState<any>({});
+  const [data, setData] = useState<any>([]);
  
   console.log(id)
   console.log(anouncer_fk  )
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [message, setMessage] = useState("")
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState< any>({
     "description": '',
     "price": 0,
     "quantity": 0,
-    "proposer_fk": "fb05836f-cb9b-4b63-99aa-5849a6a4f67f",
-    "anounce_fk": "a16e5a12-bc81-40f2-88c3-f91998967c81",
+    "anounce_fk": "a16e5a12-bc81-40f2-88c3-f91998967c81"
   });
+    const token = getTokenFromLocalStorage()
 
     const fetchAnnouncements = async () => {
     try {
-      const response = await API.get(`/anounce/${id}`); // Rota da sua API
+      const response = await API.get(`/anounce/${id}`,{
+        headers: {
+          Authorization: `Bearer ${token}` // Adiciona o token JWT ao cabeçalho Authorization
+        }}); // Rota da sua API // Rota da sua API
             console.log(response)
-
+      setFormData({
+        description: '',
+        quantity: Number(''),
+        price: Number(''),
+        anounce_fk: response.data.anounce_fk
+      })
       setData(response.data);
     } catch (error) {
       // Lidar com erros de requisição, se necessário
@@ -71,19 +83,18 @@ const createproposal = () => {
     e.preventDefault();
 
     try {
-      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU3NTAyNWU4LWNmMzktNDRkOC05ODJhLTA5ZGFjNTU4NWRkMyIsInVzZXJuYW1lIjoidmVybWVsaGExIiwidHlwZSI6ImRlZmF1bHQiLCJ0b2tlbiI6ImFjZXRva2VuIiwiaWF0IjoxNjk4OTQ2MDAxLCJleHAiOjE2OTg5ODkyMDF9.fwEz1AVdKcORIeX9yt6XB3zcy0Tsc9-F7xzg4dhaHyg'
-      const headers: { [key: string]: string } = {};
-      headers['authorization'] = `Bearer ${token}`;
       // Fazer a solicitação POST com os dados do formulário
-      await axios.post(`${BASE_URL}/proposal/create`, formData, { headers});
+      const response = await API.post(`/proposal/create`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}` // Adiciona o token JWT ao cabeçalho Authorization
+        }}); // Rota da sua API // Rota da sua API);
 
       // Redefinir o formulário após o envio bem-sucedido
       setFormData({
         description: '',
         quantity: Number(''),
         price: Number(''),
-        proposer_fk: "random-data", //esse dado precisa ser passado mas não é usado para nada, futuras implementações prevêem sua retirada
-        anounce_fk: "63fdf1ee-6757-48fc-a6e8-01ce117ad17f"
+        anounce_fk: ""
       });
       setMessage("ENVIADO")
       console.log('Dados enviados com sucesso!');
@@ -92,6 +103,15 @@ const createproposal = () => {
       console.error('Erro ao enviar os dados:', error);
     }
   };
+  if (!data) {
+
+    return (<div className=" bg-gradient-to-r from-cyan-500 to-blue-500  ">
+      <Navbar />
+      <div className=" h-screen w-auto m-auto  pt-40 ">            <Image className="  animate-pulse m-auto" src="./LogoLow.svg" alt={"Logo"} width={100} height={100} />
+      </div>
+
+    </div>)
+  }
 
   return (
     <>
