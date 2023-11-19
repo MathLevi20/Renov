@@ -1,9 +1,61 @@
+"use client"
 import Navbar from "@/components/Navbar";
+import { getTokenFromLocalStorage, API, getIdFromLocalStorage } from "@/utils/API";
 import { Progress, Stack } from "@chakra-ui/react";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
+interface User {
+  id: string;
+  username: string;
+  name: string;
+  type: string;
+  uf: string;
+  city: string;
+  phone: string;
+  image_url: string | null;
+}
 
 function Profile() {
+
+  const [data, setData] = useState<any>(    );
+    const [loading, setLoading] = useState(false);
+    const token = getTokenFromLocalStorage()
+    const id = getIdFromLocalStorage()
+        const [search, setSearch] = useState('')
+
+    const fetchAnnouncements = async () => {
+    try {
+      const response = await API.get(`/profile/find/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}` // Adiciona o token JWT ao cabeçalho Authorization
+        }}); // Rota da sua API
+            console.log(response)
+
+      setData(response.data);
+      setLoading(true)
+    } catch (error) {
+      // Lidar com erros de requisição, se necessário
+      console.error('Erro ao buscar dados do usuário:', error);
+    }
+  };
+
+    useEffect(() => {
+
+      fetchAnnouncements();
+      console.log(data)
+  }, [data]); 
+
+
+
+  if (!data) {
+
+    return (   <div className=" bg-gradient-to-r from-cyan-500 to-blue-500  ">
+      <Navbar />
+      <div className=" h-screen w-auto m-auto  pt-40 ">            <Image className="  animate-pulse m-auto" src="./LogoLow.svg" alt={"Logo"} width={100} height={100} />
+</div>
+
+    </div>)
+  }
   return (
     <div className=" bg-gradient-to-r from-cyan-500 to-blue-500 h-full  ">
       <Navbar />
@@ -22,25 +74,17 @@ function Profile() {
               height={200}
             />
             <div className="my-auto">
-              <p className="text-gray-700 text-base">Nome: {"Matheus Levi"}</p>
-              <p className="text-gray-700 text-base">Empresa:{"Meta"}</p>
+              <p className="text-gray-700 text-base">Nome: {data.username}</p>
+              <p className="text-gray-700 text-base">Empresa:{data.name}</p>
               <p className="text-gray-700 text-base">
                 CNPJ: {"34.651.751/0001-90"}
               </p>
               <p className="text-gray-700 text-base">
-                Local:{"Praça do Fripisa"}
+                Local:{data.city}-{data.uf }
               </p>
-              <p className="text-gray-700 text-base">Telefone:{"4002-8922"}</p>
+              <p className="text-gray-700 text-base">Telefone:{data.phone}</p>
               <div className="pr-6 pt-4 pb-2 ">
-                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                  #Tecido
-                </span>
-                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                  Concreto
-                </span>
-                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                  Madeira
-                </span>
+
               </div>
             </div>
           </div>

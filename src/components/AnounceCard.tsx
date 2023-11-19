@@ -15,10 +15,12 @@ import {
   Text,
   Button,
   Link,
+  Skeleton,
 } from "@chakra-ui/react";
 import TagBox from "@/components/Tag";
 
 interface ResidueCardProps {
+    isloading: boolean;
   id: string;
   anouncer_fk: string;
   title: string;
@@ -29,6 +31,8 @@ interface ResidueCardProps {
 }
 
 const ResidueCard: React.FC<ResidueCardProps> = ({
+      isloading,
+
   id,
    anouncer_fk,
   title,
@@ -38,6 +42,7 @@ const ResidueCard: React.FC<ResidueCardProps> = ({
   total,
 }) => {
   return (
+
     <Accordion allowToggle>
       <AccordionItem>
         <h2>
@@ -64,6 +69,7 @@ const ResidueCard: React.FC<ResidueCardProps> = ({
 
       </AccordionItem>
     </Accordion>
+
   );
 };
 

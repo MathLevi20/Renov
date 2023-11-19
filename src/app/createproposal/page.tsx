@@ -97,7 +97,7 @@ const createproposal = () => {
     <>
       <WithSubnavigation />
       <div
-        className=" h-full inset-0 items-start grid grid-cols-1 justify-center pt-10
+        className=" h-screen  inset-0 items-start grid grid-cols-1 justify-center pt-10
       bg-gradient-to-tr from-sky-300 to-sky-500  "
       >
      
@@ -118,7 +118,7 @@ const createproposal = () => {
           </div>
                   <h2 className="text-xl text py-2 text-center  font-semibold">Proposta</h2>
 
-          <form>
+          <form className="border border-gray-200  bg-slate-200 rounded shadow-md p-4 mb-4 ">
             <div className="mb-4">
               <label
                 htmlFor="description"

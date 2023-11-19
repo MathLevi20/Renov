@@ -36,28 +36,18 @@ const ResidueCard: React.FC<ResidueCardProps> = ({
   total,
 }) => {
   return (
-    <Accordion allowToggle>
-      <AccordionItem>
-        <h2>
-          <Box flex="1" textAlign="left" className="">
-            <Text p={5} fontSize="lg" fontWeight="bold">
-              {title}
-            </Text>
-            <Text p={5}>{description}</Text>
-          </Box>
-        </h2>
-        <Text pl={5}>Unidade: {unit}</Text>
-        <Text pl={5}>Quantidade: {quantity}</Text>
-        <Text pb={3} pl={5}>
-          Total: {total}
-        </Text>
-        <TagBox text="Tecido" />
-        <TagBox text="Concreto" />
-        <TagBox text="Madeira" />
-
-
-      </AccordionItem>
-    </Accordion>
+<div className="border border-gray-200  bg-slate-200 rounded shadow-md p-4 mb-4">
+  <h2 className="font-bold text-lg">{title}</h2>
+  <p className="mt-2">{description}</p>
+  <p className="mt-2">Unidade: {unit}</p>
+  <p className="mt-2">Quantidade: {quantity}</p>
+  <p className="mt-2">Total: {total}</p>
+  {/* Tags (se necessário) */}
+  <div className="flex flex-wrap mt-4">
+ 
+    {/* Outras tags aqui */}
+  </div>
+</div>
   );
 };
 

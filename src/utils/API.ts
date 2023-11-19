@@ -38,7 +38,22 @@ export const getTokenFromLocalStorage = (): string | null => {
 
 // Interceptador para adicionar o token ao cabeçalho Authorization das requisições
 
+export const getIdFromLocalStorage = (): string | null => {
+    try {
+        const storedUserData = localStorage.getItem('@user');
+        if (storedUserData) {
+            const userData = JSON.parse(storedUserData);
+            if (userData) {
+                console.log(userData.user.id)
 
+                return String(userData.user.id);
+            }
+        }
+    } catch (error) {
+        console.error('Erro ao processar os dados do localStorage:', error);
+    }
+    return null;
+};
 
 async function fetchData<T>(endpoint: string, method = 'GET', body?: any): Promise<T> {
     const url = `${BASE_URL}/${endpoint}`;

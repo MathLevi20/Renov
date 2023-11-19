@@ -63,10 +63,12 @@ function Formulario() {
     <>
       <WithSubnavigation />
       <div
-        className=" h-full inset-0 items-start grid grid-cols-1 justify-center pt-10
+        className=" h-screen w-full inset-0 items-start grid grid-cols-1 justify-center pt-10
       bg-gradient-to-tr from-sky-300 to-sky-500  "
       >
         <div className="bg-white shadow-lg p-10 m-10 mx-20 rounded-md">
+                  <h2 className="text-xl text-center p-2 font-semibold">Adicionar resido</h2>
+
           <form>
             <div className="mb-4">
               <label

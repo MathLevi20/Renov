@@ -6,10 +6,13 @@ interface ResidueCardProps {
     isloading: boolean;
   id: string;
   description: string;
-  status: string;
-  proposer_fk: string;
   price: string;
-  acepted: string;
+  accepted: boolean | null;
+  status: boolean | null;
+  proposer_fk: string;
+  announce_fk?: string;
+  created_at: string;
+  quantity: string;
 }
 
 const ResidueCard: React.FC<ResidueCardProps> = ({
@@ -19,7 +22,7 @@ const ResidueCard: React.FC<ResidueCardProps> = ({
   status,
   proposer_fk,
   price,
-  acepted,
+  accepted,created_at,quantity
 }) => {
       const handleAccept = () => {
     // Fazer a requisição PATCH para aceitar o dado
@@ -53,17 +56,17 @@ const ResidueCard: React.FC<ResidueCardProps> = ({
 
           <div className="flex justify-between mb-2">
 
-        <p className="text-gray-600">ID: {id}</p>
-        <p className="text-gray-600">Status: {status}</p>
+    
               </div>
             
-      <p className="text-gray-700 mb-2">Description: {description}</p>
-      <div className="flex justify-between mb-2">
-        <p className="text-gray-600">Proposer FK: {proposer_fk}</p>
-        <p className="text-gray-600">Price: {price}</p>
+      <p className="text-gray-700 mb-2">Criado em {created_at}</p>
+      <p className="text-gray-700 mb-2">Descriçao: {description}</p>
+        <p className="text-gray-700 mb-2">Quantidade: {quantity}</p>
+        <div className="flex justify-between mb-2">
+           <p className="text-gray-600">Preço: R$ {price} </p>
+
               </div>
 
-          <p className="text-gray-600">Accepted: {acepted}</p>
                 <div className="flex justify-start gap-4 mt-4">
         <button
           onClick={handleAccept}
