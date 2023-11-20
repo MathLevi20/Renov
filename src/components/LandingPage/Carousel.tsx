@@ -1,7 +1,7 @@
-"use client";
-import React from "react";
-import Carousel from "react-bootstrap/esm/Carousel";
-import Image from "next/image";
+'use client';
+import React from 'react';
+import Carousel from 'react-bootstrap/esm/Carousel';
+import Image from 'next/image';
 function Carousel1() {
   return (
     <div className=" h-96 relative  px-100">
@@ -10,7 +10,7 @@ function Carousel1() {
           <Image
             className="flex m-auto object-fit items-center"
             src="/Cap0.png"
-            alt={"Logo"}
+            alt={'Logo'}
             width={500}
             height={500}
           />
@@ -19,7 +19,7 @@ function Carousel1() {
           <Image
             className="flex m-auto  object-fit items-center"
             src="/Cap1.png"
-            alt={"Logo"}
+            alt={'Logo'}
             width={500}
             height={500}
           />

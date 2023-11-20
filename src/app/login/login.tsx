@@ -1,43 +1,40 @@
-"use client";
+'use client';
 
-import { ChangeEvent, useContext, useState } from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
-import { useAuth } from "@/context/AuthContext";
-import { Button, CircularProgress, Spinner } from "@chakra-ui/react";
-import { AddIcon } from "@chakra-ui/icons";
-
+import { ChangeEvent, useContext, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useAuth } from '@/context/AuthContext';
+import { Button, CircularProgress, Spinner } from '@chakra-ui/react';
+import { AddIcon } from '@chakra-ui/icons';
 
 export default function Login() {
-const navigate = useRouter();
+  const navigate = useRouter();
   const { signIn } = useAuth();
 
   const [loading, setLoading] = useState(false);
-  const [username, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  
+  const [username, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const handleEmailInput = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
 
- const handlePasswordInput = (event:any) => {
+  const handlePasswordInput = (event: any) => {
     setPassword(event.target.value);
   };
-const handleSignIn = async () => {
-  try {
-    setLoading(true)
-    const signInResult = await signIn({ email: username, password });
-    console.log("finalizado");
-        setLoading(false)
+  const handleSignIn = async () => {
+    try {
+      setLoading(true);
+      const signInResult = await signIn({ email: username, password });
+      console.log('finalizado');
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
 
-
-  } catch (err) {
-            setLoading(false)
-
-    console.error(err);
-  } 
-};
+      console.error(err);
+    }
+  };
 
   return (
     <div className="grid grid-cols-1  md:grid-cols-2 h-screen">
@@ -48,7 +45,7 @@ const handleSignIn = async () => {
           height={1000}
           alt="Logo"
           sizes="100vw"
-          style={{ width: "100%", height: "100%" }}
+          style={{ width: '100%', height: '100%' }}
           className="  "
           priority={true}
         />
@@ -65,15 +62,14 @@ const handleSignIn = async () => {
             <div>
               <label htmlFor="email" className="block font-bold text-gray-700">
                 Email address
-             
-              <input
-                id="email"
-                type="email"
-                className="w-full px-4 py-3 mt-1 border-gray-300  border-2  rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200"
-                value={username}
-                onChange={handleEmailInput}
+                <input
+                  id="email"
+                  type="email"
+                  className="w-full px-4 py-3 mt-1 border-gray-300  border-2  rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                  value={username}
+                  onChange={handleEmailInput}
                 />
-                 </label>
+              </label>
             </div>
             <div>
               <label
@@ -81,46 +77,39 @@ const handleSignIn = async () => {
                 className="block font-bold text-gray-700"
               >
                 Password
-            
-              <input
-                id="password"
-                type="password"
-                className="w-full px-4 py-3 mt-1 border-gray-300  border-2  rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200"
-                 value={password}
-                onChange={handlePasswordInput}
-             
-                
+                <input
+                  id="password"
+                  type="password"
+                  className="w-full px-4 py-3 mt-1 border-gray-300  border-2  rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                  value={password}
+                  onChange={handlePasswordInput}
                 />
-                  </label>
+              </label>
             </div>
             <div className="grid grid-cols-2 gap-2">
               <div>
                 {loading ? (
-                  <div           className="flex px-4 py-3 font-bold text-slate-800 bg-indigo-100  rounded-md border-2  border-indigo-400 hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700"
->
-  <Button
-    isLoading={loading}
-    loadingText="Loading..."
-    leftIcon={<AddIcon />}
-  >    Add Item
-  </Button>
+                  <div className="flex px-4 py-3 font-bold text-slate-800 bg-indigo-100  rounded-md border-2  border-indigo-400 hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700">
+                    <Button
+                      isLoading={loading}
+                      loadingText="Loading..."
+                      leftIcon={<AddIcon />}
+                    >
+                      {' '}
+                      Add Item
+                    </Button>
                   </div>
-      ) : (
-        <button
-          className="w-full px-4 py-3 font-bold text-slate-800 bg-indigo-100  rounded-md border-2  border-indigo-400 hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700"
-          onClick={handleSignIn}
-        >
-          Sign In
-        </button>
-      )}
-
+                ) : (
+                  <button
+                    className="w-full px-4 py-3 font-bold text-slate-800 bg-indigo-100  rounded-md border-2  border-indigo-400 hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700"
+                    onClick={handleSignIn}
+                  >
+                    Sign In
+                  </button>
+                )}
               </div>
 
-
-              <button
-
-                              className="w-full px-4 py-3 font-bold text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700"
-              >
+              <button className="w-full px-4 py-3 font-bold text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700">
                 Sign Up
               </button>
             </div>

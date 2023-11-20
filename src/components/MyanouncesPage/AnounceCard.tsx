@@ -1,10 +1,10 @@
 // components/ResidueCard.tsx
-"use client";
+'use client';
 import {
   ExternalLinkIcon,
   HamburgerIcon,
   InfoOutlineIcon,
-} from "@chakra-ui/icons";
+} from '@chakra-ui/icons';
 import {
   Accordion,
   AccordionItem,
@@ -14,8 +14,8 @@ import {
   Box,
   Text,
   Button,
-} from "@chakra-ui/react";
-import TagBox from "@/components/Tag";
+} from '@chakra-ui/react';
+import TagBox from '@/components/Tag';
 
 interface ResidueCardProps {
   title: string;
@@ -55,9 +55,8 @@ const ResidueCard: React.FC<ResidueCardProps> = ({
           <TagBox text="Madeira" />
           <button className="bg-blue-500 mt-3 flex-row hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
             <ExternalLinkIcon mx={2} pb={2} />
-            Fazer Proposta{" "}
-          </button>{" "}
-          
+            Fazer Proposta{' '}
+          </button>{' '}
         </AccordionPanel>
       </AccordionItem>
     </Accordion>

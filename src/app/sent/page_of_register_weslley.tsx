@@ -1,14 +1,14 @@
-"use client";
-import React, { useState } from "react";
-import WithSubnavigation from "@/components/Navbar";
+'use client';
+import React, { useState } from 'react';
+import WithSubnavigation from '@/components/Navbar';
 
 function Formulario() {
   const [formData, setFormData] = useState({
-    nome: "",
-    empresa: "",
-    cnpj: "",
-    local: "",
-    telefone: "",
+    nome: '',
+    empresa: '',
+    cnpj: '',
+    local: '',
+    telefone: '',
   });
 
   const handleChange = (e: any) => {
@@ -33,7 +33,7 @@ function Formulario() {
         className=" h-screen inset-0 items-start grid grid-cols-1 justify-center pt-10
       bg-gradient-to-tr from-sky-300 to-sky-500  "
       >
-        {" "}
+        {' '}
         <div className="bg-white shadow-lg p-10 mx-20 gap rounded-md">
           <form onSubmit={handleSubmit}>
             <div className="mb-4">

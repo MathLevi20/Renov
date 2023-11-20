@@ -1,9 +1,13 @@
-"use client"
-import Navbar from "@/components/Navbar";
-import { getTokenFromLocalStorage, API, getIdFromLocalStorage } from "@/utils/API";
-import { Progress, Stack } from "@chakra-ui/react";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
+'use client';
+import Navbar from '@/components/Navbar';
+import {
+  getTokenFromLocalStorage,
+  API,
+  getIdFromLocalStorage,
+} from '@/utils/API';
+import { Progress, Stack } from '@chakra-ui/react';
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
 interface User {
   id: string;
   username: string;
@@ -16,45 +20,50 @@ interface User {
 }
 
 function Profile() {
+  const [data, setData] = useState<any>();
+  const [loading, setLoading] = useState(false);
+  const token = getTokenFromLocalStorage();
+  const id = getIdFromLocalStorage();
+  const [search, setSearch] = useState('');
 
-  const [data, setData] = useState<any>(    );
-    const [loading, setLoading] = useState(false);
-    const token = getTokenFromLocalStorage()
-    const id = getIdFromLocalStorage()
-        const [search, setSearch] = useState('')
-
-    const fetchAnnouncements = async () => {
+  const fetchAnnouncements = async () => {
     try {
       const response = await API.get(`/profile/find/${id}`, {
         headers: {
-          Authorization: `Bearer ${token}` // Adiciona o token JWT ao cabeçalho Authorization
-        }}); // Rota da sua API
-            console.log(response)
+          Authorization: `Bearer ${token}`, // Adiciona o token JWT ao cabeçalho Authorization
+        },
+      }); // Rota da sua API
+      console.log(response);
 
       setData(response.data);
-      setLoading(true)
+      setLoading(true);
     } catch (error) {
       // Lidar com erros de requisição, se necessário
       console.error('Erro ao buscar dados do usuário:', error);
     }
   };
 
-    useEffect(() => {
-
-      fetchAnnouncements();
-      console.log(data)
-  }, [data]); 
-
-
+  useEffect(() => {
+    fetchAnnouncements();
+    console.log(data);
+  }, [data]);
 
   if (!data) {
-
-    return (   <div className=" bg-gradient-to-r from-cyan-500 to-blue-500  ">
-      <Navbar />
-      <div className=" h-screen w-auto m-auto  pt-40 ">            <Image className="  animate-pulse m-auto" src="./LogoLow.svg" alt={"Logo"} width={100} height={100} />
-</div>
-
-    </div>)
+    return (
+      <div className=" bg-gradient-to-r from-cyan-500 to-blue-500  ">
+        <Navbar />
+        <div className=" h-screen w-auto m-auto  pt-40 ">
+          {' '}
+          <Image
+            className="  animate-pulse m-auto"
+            src="./LogoLow.svg"
+            alt={'Logo'}
+            width={100}
+            height={100}
+          />
+        </div>
+      </div>
+    );
   }
   return (
     <div className=" bg-gradient-to-r from-cyan-500 to-blue-500 h-full  ">
@@ -77,15 +86,13 @@ function Profile() {
               <p className="text-gray-700 text-base">Nome: {data.username}</p>
               <p className="text-gray-700 text-base">Empresa:{data.name}</p>
               <p className="text-gray-700 text-base">
-                CNPJ: {"34.651.751/0001-90"}
+                CNPJ: {'34.651.751/0001-90'}
               </p>
               <p className="text-gray-700 text-base">
-                Local:{data.city}-{data.uf }
+                Local:{data.city}-{data.uf}
               </p>
               <p className="text-gray-700 text-base">Telefone:{data.phone}</p>
-              <div className="pr-6 pt-4 pb-2 ">
-
-              </div>
+              <div className="pr-6 pt-4 pb-2 "></div>
             </div>
           </div>
           <div className="px-6 pt-4 pb-2 m-auto">
@@ -99,7 +106,7 @@ function Profile() {
               <div className="w-30 bg-gray-200 rounded-full h-2.5 mb-3">
                 <div
                   className="bg-blue-600 h-2.5 rounded-full"
-                  style={{ width: " 25%" }}
+                  style={{ width: ' 25%' }}
                 ></div>
               </div>
             </div>
@@ -113,7 +120,7 @@ function Profile() {
               <div className="w-30 bg-gray-200 rounded-full h-2.5">
                 <div
                   className="bg-blue-600 h-2.5 rounded-full"
-                  style={{ width: " 70%" }}
+                  style={{ width: ' 70%' }}
                 ></div>
               </div>
             </div>
@@ -129,7 +136,7 @@ function Profile() {
         </div>
         <div className="bg-white p-10 mb-5 mx-20 rounded-md  border border-gray-200 shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Retalhos de Tecido Variado{" "}
+            Retalhos de Tecido Variado{' '}
           </h5>
           <p className="font-normal text-gray-700 dark:text-gray-400">
             Olá, a distribuição é gratuíta basta vir buscar em nossa sede na

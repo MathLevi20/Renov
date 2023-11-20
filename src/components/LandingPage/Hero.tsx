@@ -1,7 +1,7 @@
-import React from "react";
-import Image from "next/image";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Link from "next/link";
+import React from 'react';
+import Image from 'next/image';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Link from 'next/link';
 
 function Hero() {
   return (
@@ -21,7 +21,7 @@ function Hero() {
               comunidade comprometida com um futuro mais verde!
             </p>
             <div className="flex justify-center items-center m-auto text-gray-300">
-              <Link href={"/register"}>
+              <Link href={'/register'}>
                 <button className="bg-gray-800 inline-flex py-3 px-5 rounded-lg items-center hover:bg-gray-700 hover:text-white focus:outline-none">
                   Comece agora
                 </button>
@@ -32,7 +32,7 @@ function Hero() {
             <Image
               className="p-4 flex  items-start"
               src="./images/team.svg"
-              alt={"Logo"}
+              alt={'Logo'}
               width={500}
               height={500}
             />
@@ -43,7 +43,7 @@ function Hero() {
       <Image
         className="object-cover w-full "
         src="./images/layered-waves.svg"
-        alt={"Logo"}
+        alt={'Logo'}
         width={200}
         height={200}
       />

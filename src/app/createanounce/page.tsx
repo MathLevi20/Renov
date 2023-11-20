@@ -1,9 +1,8 @@
-"use client";
-import React, { useState } from "react";
-import WithSubnavigation from "@/components/Navbar";
-import { API, BASE_URL, getTokenFromLocalStorage } from "@/utils/API";
-import axios from "axios";
-
+'use client';
+import React, { useState } from 'react';
+import WithSubnavigation from '@/components/Navbar';
+import { API, BASE_URL, getTokenFromLocalStorage } from '@/utils/API';
+import axios from 'axios';
 
 interface Residue {
   title: string;
@@ -15,8 +14,7 @@ interface Residue {
 }
 
 function Formulario() {
-
-  const [message, setMessage] = useState("")
+  const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -36,24 +34,23 @@ function Formulario() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const token = getTokenFromLocalStorage()
+    const token = getTokenFromLocalStorage();
     const jsonData = JSON.stringify(formData);
     const jsonDaa = JSON.parse(jsonData);
     try {
-
       // Fazer a solicitação POST com os dados do formulário
-      await API.post('/anounce/create', jsonDaa , {
+      await API.post('/anounce/create', jsonDaa, {
         headers: {
-          Authorization: `Bearer ${token}` // Adiciona o token JWT ao cabeçalho Authorization
-        }
+          Authorization: `Bearer ${token}`, // Adiciona o token JWT ao cabeçalho Authorization
+        },
       });
 
       // Redefinir o formulário após o envio bem-sucedido
-      setMessage("ENVIADO")
+      setMessage('ENVIADO');
       console.log('Dados enviados com sucesso!');
     } catch (error) {
-      setMessage("ERRO AO ENVIAR")
-                console.log((jsonDaa))
+      setMessage('ERRO AO ENVIAR');
+      console.log(jsonDaa);
 
       console.error('Erro ao enviar os dados:', error);
     }
@@ -67,7 +64,9 @@ function Formulario() {
       bg-gradient-to-tr from-sky-300 to-sky-500  "
       >
         <div className="bg-white shadow-lg p-10 m-10 mx-20 rounded-md">
-                  <h2 className="text-xl text-center p-2 font-semibold">Adicionar resido</h2>
+          <h2 className="text-xl text-center p-2 font-semibold">
+            Adicionar resido
+          </h2>
 
           <form>
             <div className="mb-4">
@@ -78,8 +77,7 @@ function Formulario() {
                 Título:
               </label>
               <input
-                                placeholder="Digite o título"
-
+                placeholder="Digite o título"
                 type="text"
                 id="title"
                 name="title"
@@ -96,8 +94,7 @@ function Formulario() {
                 Descrição:
               </label>
               <textarea
-                                                placeholder="Digite a descrição"
-
+                placeholder="Digite a descrição"
                 id="description"
                 name="description"
                 className="border border-gray-300 p-2 rounded w-full"
@@ -113,8 +110,7 @@ function Formulario() {
                 Unidade:
               </label>
               <input
-                                                placeholder="Digite a unidade ,ex: Kg ou unit"
-
+                placeholder="Digite a unidade ,ex: Kg ou unit"
                 type="text"
                 id="unit"
                 name="unit"
@@ -132,7 +128,6 @@ function Formulario() {
                 Quantidade:
               </label>
               <input
-
                 type="text"
                 id="quantity"
                 name="quantity"

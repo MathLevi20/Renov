@@ -1,16 +1,15 @@
-
-import Coments from "@/components/LandingPage/Coments";
-import Contact from "@/components/LandingPage/Contact";
-import Features from "@/components/LandingPage/Feature";
-import SmallCentered from "@/components/LandingPage/Footer";
-import LargeWithNewsletter from "@/components/LandingPage/Footer";
-import Footer from "@/components/LandingPage/Footer";
-import Header from "@/components/LandingPage/Header";
-import Hero from "@/components/LandingPage/Hero";
-import Navbar from "@/components/LandingPage/Navbar";
-import Carousel1 from "@/components/LandingPage/Carousel";
-import Head from "next/head";
-import React from "react";
+import Coments from '@/components/LandingPage/Coments';
+import Contact from '@/components/LandingPage/Contact';
+import Features from '@/components/LandingPage/Feature';
+import SmallCentered from '@/components/LandingPage/Footer';
+import LargeWithNewsletter from '@/components/LandingPage/Footer';
+import Footer from '@/components/LandingPage/Footer';
+import Header from '@/components/LandingPage/Header';
+import Hero from '@/components/LandingPage/Hero';
+import Navbar from '@/components/LandingPage/Navbar';
+import Carousel1 from '@/components/LandingPage/Carousel';
+import Head from 'next/head';
+import React from 'react';
 
 function LandingPage() {
   return (
@@ -18,7 +17,7 @@ function LandingPage() {
       <Navbar />
 
       <Hero />
-     { /*<Carousel1 /> */}
+      {/*<Carousel1 /> */}
       <Features />
       <Coments />
       <Contact />

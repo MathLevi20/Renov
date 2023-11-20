@@ -1,10 +1,10 @@
 // components/ResidueCard.tsx
-"use client";
+'use client';
 import {
   ExternalLinkIcon,
   HamburgerIcon,
   InfoOutlineIcon,
-} from "@chakra-ui/icons";
+} from '@chakra-ui/icons';
 import {
   Accordion,
   AccordionItem,
@@ -16,11 +16,11 @@ import {
   Button,
   Link,
   Skeleton,
-} from "@chakra-ui/react";
-import TagBox from "@/components/Tag";
+} from '@chakra-ui/react';
+import TagBox from '@/components/Tag';
 
 interface ResidueCardProps {
-    isloading: boolean;
+  isloading: boolean;
   id: string;
   anouncer_fk: string;
   title: string;
@@ -31,10 +31,10 @@ interface ResidueCardProps {
 }
 
 const ResidueCard: React.FC<ResidueCardProps> = ({
-      isloading,
+  isloading,
 
   id,
-   anouncer_fk,
+  anouncer_fk,
   title,
   description,
   unit,
@@ -42,7 +42,6 @@ const ResidueCard: React.FC<ResidueCardProps> = ({
   total,
 }) => {
   return (
-
     <Accordion allowToggle>
       <AccordionItem>
         <h2>
@@ -61,15 +60,13 @@ const ResidueCard: React.FC<ResidueCardProps> = ({
         <TagBox text="Tecido" />
         <TagBox text="Concreto" />
         <TagBox text="Madeira" />
-      <Link href={`/createproposal?anouncer_fk=${anouncer_fk}&id=${id}`}>
-        <button className="bg-blue-500  flex mt-5 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-            Fazer Proposta{" "}
-          </button>{" "}
-                </Link>
-
+        <Link href={`/createproposal?anouncer_fk=${anouncer_fk}&id=${id}`}>
+          <button className="bg-blue-500  flex mt-5 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+            Fazer Proposta{' '}
+          </button>{' '}
+        </Link>
       </AccordionItem>
     </Accordion>
-
   );
 };
 

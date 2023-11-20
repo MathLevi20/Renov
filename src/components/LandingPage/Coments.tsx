@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 function Coments() {
   return (
@@ -33,7 +33,7 @@ function Coments() {
                 />
                 <span className="flex-grow flex flex-col pl-4">
                   <span className="title-font font-medium text-gray-900">
-                    Joana{" "}
+                    Joana{' '}
                   </span>
                   <span className="text-gray-500 text-sm">
                     Arquiteta e Designer Sustentável

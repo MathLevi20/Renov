@@ -7,7 +7,7 @@ interface ProfileLinkProps {
 }
 
 const ProfileLink: React.FC<ProfileLinkProps> = ({ username, image }) => {
-  const defaultImage = "/images/image.png"; // Caminho para a imagem padrão
+  const defaultImage = '/images/image.png'; // Caminho para a imagem padrão
 
   return (
     <Link href="/perfil">
@@ -16,17 +16,17 @@ const ProfileLink: React.FC<ProfileLinkProps> = ({ username, image }) => {
           <Image
             src={image}
             alt={`Foto de perfil de ${username}`}
-                      className="w-10 h-10 rounded-full"
-                          width={200}
-              height={200}
+            className="w-10 h-10 rounded-full"
+            width={200}
+            height={200}
           />
         ) : (
           <Image
             src={defaultImage}
             alt={`Foto de perfil padrão de ${username}`}
-                          className="w-10 h-10 rounded-full"
-                              width={200}
-              height={200}
+            className="w-10 h-10 rounded-full"
+            width={200}
+            height={200}
           />
         )}
         <span className="text-xl">{username}</span>

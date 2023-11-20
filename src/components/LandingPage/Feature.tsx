@@ -1,12 +1,12 @@
-"use client";
-import Image from "next/image";
-import Carousel from "react-bootstrap/Carousel";
+'use client';
+import Image from 'next/image';
+import Carousel from 'react-bootstrap/Carousel';
 
 // components/Features.tsx
 const Features: React.FC = () => {
   return (
     <div className="">
-      {" "}
+      {' '}
       <section id="feature" className="pt-16 ">
         <section className=" text-black body-font  p-20   ">
           <div className="container grid grid-cols-1 md:grid-cols-2 mx-auto  flex-wrap">
@@ -28,7 +28,7 @@ const Features: React.FC = () => {
               <Image
                 className="p-4 flex  items-start"
                 src="./images/Park.svg"
-                alt={"Logo"}
+                alt={'Logo'}
                 width={500}
                 height={500}
               />
@@ -41,7 +41,7 @@ const Features: React.FC = () => {
               <Image
                 className="p-4 flex  items-start"
                 src="/images/Connected_World.svg"
-                alt={"Logo"}
+                alt={'Logo'}
                 width={500}
                 height={500}
               />

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { BASE_URL } from "@/utils/API";
+import { BASE_URL } from '@/utils/API';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -29,7 +29,7 @@ interface Proposal {
   quantity: string;
 }
 
-const anounceId = "373d7fda-e2a1-4248-91e3-21ae173c67b7"
+const anounceId = '373d7fda-e2a1-4248-91e3-21ae173c67b7';
 const DetailAnounce: React.FC = () => {
   const [Anounce, setAnounce] = useState<Anounce | null>(null);
   const [Proposal, setProposal] = useState<Proposal[]>([]);
@@ -46,7 +46,9 @@ const DetailAnounce: React.FC = () => {
       });
 
     axios
-      .get<Proposal[]>(`${BASE_URL}/proposal/proposalsbyanounceid?id=${anounceId}`)
+      .get<Proposal[]>(
+        `${BASE_URL}/proposal/proposalsbyanounceid?id=${anounceId}`
+      )
       .then((response) => {
         setProposal(response.data);
       })
@@ -62,12 +64,14 @@ const DetailAnounce: React.FC = () => {
         <div>
           <h2>Título: {Anounce.title}</h2>
           <p>Descrição: {Anounce.description}</p>
-          <p>Quantidade: {Anounce.quantity} {Anounce.unit}</p>
+          <p>
+            Quantidade: {Anounce.quantity} {Anounce.unit}
+          </p>
         </div>
       ) : (
         <p>Carregando dados...</p>
       )}
-<hr/>
+      <hr />
       <h2>Dados adicionais:</h2>
 
       {/* Exibindo os dados adicionais da segunda URL */}

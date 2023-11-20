@@ -1,7 +1,7 @@
 // components/Card.tsx
 
-import { Box, Heading, Text } from "@chakra-ui/react";
-import Image from "next/image";
+import { Box, Heading, Text } from '@chakra-ui/react';
+import Image from 'next/image';
 interface CardProps {
   imageUrl: string;
   title: string;
@@ -30,7 +30,7 @@ const Card: React.FC<ProfileProps> = ({ data }) => {
     <div className="max-w-sm rounded overflow-hidden shadow-lg">
       <Image
         className="w-full"
-        src={data.image_url || "./profile-default.svg"}
+        src={data.image_url || './profile-default.svg'}
         width="1000"
         height="1000"
         alt="Sunset in the mountains"

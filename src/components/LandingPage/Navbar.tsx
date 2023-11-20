@@ -1,8 +1,8 @@
 // components/Navbar.tsx
-"use client";
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
+'use client';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
 
 const Navbar: React.FC = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
       <div className="container mx-auto">
         <div className="flex justify-between m-auto items-center">
           <Link href="/">
-            <Image src="./LogoLow.svg" alt={"Logo"} width={50} height={50} />
+            <Image src="./LogoLow.svg" alt={'Logo'} width={50} height={50} />
           </Link>
           <div className="hidden md:flex  space-x-4">
             <Link href="#feature" className="m-auto px-3">

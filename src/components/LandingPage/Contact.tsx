@@ -1,7 +1,7 @@
 // components/Contact.tsx
 const Contact: React.FC = () => {
   return (
-    <section id="contacts"  className="bg-slate-400 ">
+    <section id="contacts" className="bg-slate-400 ">
       <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">
           Contact Us
