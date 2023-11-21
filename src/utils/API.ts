@@ -18,7 +18,7 @@ export const API = axios.create({
 // Função para obter o token do localStorage
 export const getTokenFromLocalStorage = (): string | null => {
   try {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && window.localStorage) {
       // Código que usa localStorage
       localStorage.setItem('chave', 'valor');
     }
@@ -42,6 +42,10 @@ export const getTokenFromLocalStorage = (): string | null => {
 
 export const getIdFromLocalStorage = (): string | null => {
   try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      // Código que usa localStorage
+      localStorage.setItem('chave', 'valor');
+    }
     const storedUserData = localStorage.getItem('@user');
     if (storedUserData) {
       const userData = JSON.parse(storedUserData);

@@ -188,7 +188,7 @@ const AnouncePage: React.FC = () => {
       <WithSubnavigation />
       <div
         className=" h-full items-start grid grid-cols-1 justify-center pt-10
-      bg-gradient-to-tr from-sky-300 to-sky-500  "
+      bg-gradient-to-tr from-[#009473] to-[#63ff8d]  "
       >
         <div className="py-2 text-2xl font-semibold flex">
           <div className="mt-3 w-full flex justify-center pt-0">
