@@ -157,6 +157,7 @@ const Received: React.FC = () => {
                   isLoaded={loading}
                 >
                   <ProfileLink
+                    id={data.anounce_fk}
                     image={data.profile.image_url}
                     username={data.profile.username}
                   />
