@@ -21,16 +21,20 @@ export const getTokenFromLocalStorage = (): string | null => {
     if (typeof window !== 'undefined' && window.localStorage) {
       // Código que usa localStorage
       localStorage.setItem('chave', 'valor');
-    }
-    const storedUserData = localStorage.getItem('@user');
-    if (storedUserData) {
-      const userData = JSON.parse(storedUserData);
-      if (userData) {
-        console.log(userData.token);
+      const storedUserData = localStorage.getItem('@user');
+      if (storedUserData) {
+        const userData = JSON.parse(storedUserData);
+        if (userData) {
+          console.log(userData.token);
 
-        return String(userData.token);
+          return String(userData.token);
+        }
       }
-    } else {
+    }
+
+    else {
+      console.log('O localStorage não está disponível neste ambiente.');
+
     }
   } catch (error) {
     console.error('Erro ao processar os dados do localStorage:', error);
@@ -45,16 +49,20 @@ export const getIdFromLocalStorage = (): string | null => {
     if (typeof window !== 'undefined' && window.localStorage) {
       // Código que usa localStorage
       localStorage.setItem('chave', 'valor');
-    }
-    const storedUserData = localStorage.getItem('@user');
-    if (storedUserData) {
-      const userData = JSON.parse(storedUserData);
-      if (userData) {
-        console.log(userData.user.id);
+      const storedUserData = localStorage.getItem('@user');
+      if (storedUserData) {
+        const userData = JSON.parse(storedUserData);
+        if (userData) {
+          console.log(userData.user.id);
 
-        return String(userData.user.id);
+          return String(userData.user.id);
+        }
       }
+    } else {
+      console.log('O localStorage não está disponível neste ambiente.');
+      // Lógica alternativa, se necessário, caso o localStorage não esteja disponível
     }
+
   } catch (error) {
     console.error('Erro ao processar os dados do localStorage:', error);
   }

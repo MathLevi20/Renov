@@ -50,9 +50,16 @@ function ProfileId() {
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
   const token = getTokenFromLocalStorage();
-  let params = new URLSearchParams(document.location.search.substring(1));
-  let id = params.get('id'); // retorna a string "Jonathan"
-  console.log(id);
+  let id = String;
+  if (typeof document !== 'undefined') {
+    let params = new URLSearchParams(document.location.search.substring(1));
+    let id = params.get('id');
+    console.log(id);
+    return id
+  } else {
+    console.log('O objeto document não está disponível neste ambiente.');
+  }
+
   const fetchProfile = async () => {
     try {
       const response = await API.get(`/profile/find/${id}`, {
@@ -88,6 +95,7 @@ function ProfileId() {
     }
   };
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     fetchProfile();
     fetchAnnouncements();

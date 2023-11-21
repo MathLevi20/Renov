@@ -30,10 +30,23 @@ interface AnounceData {
 
 const createproposal = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  let params = new URLSearchParams(document.location.search.substring(1));
-  let id = params.get('id'); // retorna a string "Jonathan"
-  let anouncer_fk = params.get('anouncer_fk');
-  const searchParams = new URLSearchParams();
+  // retorna a string "Jonathan"
+  let anouncer_fk = String;
+
+  let id = String;
+  if (typeof document !== 'undefined') {
+    let params = new URLSearchParams(document.location.search.substring(1));
+    let id = params.get('id');
+    let anouncer_fk = params.get('anouncer_fk');
+
+    return { id, anouncer_fk }
+  } else {
+    console.log('O objeto document não está disponível neste ambiente.');
+  }
+
+  console.log(id);
+
+
   const [data, setData] = useState<any>([]);
 
   console.log(id);
@@ -73,7 +86,7 @@ const createproposal = () => {
   useEffect(() => {
     fetchAnnouncements();
     console.log(data);
-  }, [searchParams]);
+  }, []);
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData({
