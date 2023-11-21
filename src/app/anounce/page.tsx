@@ -234,6 +234,7 @@ const AnouncePage: React.FC = () => {
                 >
                   {' '}
                   <ProfileLink
+                    id={item.anouncer_fk}
                     image={item.profile.image_url}
                     username={item.profile.username}
                   />

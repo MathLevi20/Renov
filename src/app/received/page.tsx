@@ -149,26 +149,33 @@ const Received: React.FC = () => {
                 className="bg-white shadow-lg p-10  m-10 mx-10 rounded-md"
                 key={data.id}
               >
-                <ProfileLink
-                  image={data.profile.image_url}
-                  username={data.profile.username}
-                />
+                <Skeleton
+                  startColor="pink.500"
+                  endColor="orange.500"
+                  isLoaded={loading}
+                >
+                  <ProfileLink
+                    id={data.anouncer_fk}
+                    image={data.profile.image_url}
+                    username={data.profile.username}
+                  />
 
-                <ResidueCard
-                  key={data.id}
-                  isloading={loading}
-                  id={data.id}
-                  description={data.description}
-                  status={data.status}
-                  proposer_fk={String(data.proposer_fk)}
-                  price={String(data.price)}
-                  accepted={data.acepted}
-                  created_at={format(
-                    new Date(data.created_at),
-                    'dd/MM/yyyy HH:mm:ss'
-                  )}
-                  quantity={data.quantity}
-                />
+                  <ResidueCard
+                    key={data.id}
+                    isloading={loading}
+                    id={data.id}
+                    description={data.description}
+                    status={data.status}
+                    proposer_fk={String(data.proposer_fk)}
+                    price={String(data.price)}
+                    accepted={data.acepted}
+                    created_at={format(
+                      new Date(data.created_at),
+                      'dd/MM/yyyy HH:mm:ss'
+                    )}
+                    quantity={data.quantity}
+                  />
+                </Skeleton>
               </div>
             ))}
         </Container>

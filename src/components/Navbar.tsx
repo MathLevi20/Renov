@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import Image from 'next/image';
 import { BsJournalText } from 'react-icons/bs';
+import { TbLogout } from 'react-icons/tb';
 
 const Navbar: React.FC = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -45,13 +46,14 @@ const Navbar: React.FC = () => {
               <ArrowDownIcon className="m-auto" />
               <p className="block m-auto px-2 text-gray-100">Recebidos</p>
             </Link>
-            <Link className="flex" href="/myanounces">
-              <InfoOutlineIcon className="m-auto" />{' '}
-              <p className="block m-auto px-2 text-gray-100">Meus resíduos</p>
-            </Link>
+
             <Link className="flex" href="/profile">
               <SettingsIcon className="m-auto" />{' '}
               <p className="block m-auto px-2 text-gray-100">Profile</p>
+            </Link>
+            <Link className="flex  m-auto" href="/profile">
+              <TbLogout className="m-auto" />{' '}
+              <p className="block m-auto px-2 text-gray-100">Sair</p>
             </Link>
           </div>
           <div className="lg:hidden">
@@ -90,8 +92,7 @@ const Navbar: React.FC = () => {
                   <p className="block text-gray-800">Meus resíduos</p>
                 </Link>
                 <Link href="/contact">
-                  <SettingsIcon />{' '}
-                  <p className="block text-gray-800">Profile</p>
+                  <TbLogout /> <p className="block text-gray-800">Sair</p>
                 </Link>
               </div>
             )}

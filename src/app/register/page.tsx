@@ -39,7 +39,6 @@ export default function Login() {
     });
   };
 
-
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const jsonData = JSON.stringify(formData);
@@ -123,7 +122,7 @@ export default function Login() {
                 <input
                   id="username"
                   type="username"
-                  name='username'
+                  name="username"
                   className="w-full px-4 py-3 mt-1 border-gray-300  border-2  rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200"
                   value={formData.username}
                   onChange={handleChange}
@@ -144,10 +143,7 @@ export default function Login() {
               </label>
             </div>
             <div>
-              <label
-                htmlFor="name"
-                className="block font-bold text-gray-700"
-              >
+              <label htmlFor="name" className="block font-bold text-gray-700">
                 Name
                 <input
                   id="name"
@@ -160,10 +156,7 @@ export default function Login() {
               </label>
             </div>
             <div>
-              <label
-                htmlFor="uf"
-                className="block font-bold text-gray-700"
-              >
+              <label htmlFor="uf" className="block font-bold text-gray-700">
                 Estado
                 <input
                   id="uf"
@@ -176,10 +169,7 @@ export default function Login() {
               </label>
             </div>
             <div>
-              <label
-                htmlFor="city"
-                className="block font-bold text-gray-700"
-              >
+              <label htmlFor="city" className="block font-bold text-gray-700">
                 Cidade
                 <input
                   id="city"
@@ -227,9 +217,8 @@ export default function Login() {
                   </button>
                 )}
               </div>
-              <Link href='/login'>
+              <Link href="/login">
                 <button className="w-full px-4 py-3 font-bold text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700">
-
                   Sign In
                 </button>
               </Link>

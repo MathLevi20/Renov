@@ -57,9 +57,7 @@ const ResidueCard: React.FC<ResidueCardProps> = ({
         <Text pb={3} pl={5}>
           Total: {total}
         </Text>
-        <TagBox text="Tecido" />
-        <TagBox text="Concreto" />
-        <TagBox text="Madeira" />
+
         <Link href={`/createproposal?anouncer_fk=${anouncer_fk}&id=${id}`}>
           <button className="bg-blue-500  flex mt-5 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
             Fazer Proposta{' '}

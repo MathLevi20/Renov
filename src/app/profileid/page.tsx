@@ -1,7 +1,6 @@
 'use client';
 import AnounceCard from '@/components/AnounceCard';
 import Navbar from '@/components/Navbar';
-import ProfileLink from '@/components/Profile/ProfileLink';
 import {
   getTokenFromLocalStorage,
   API,
@@ -44,14 +43,16 @@ interface Announcement {
     image_url: string | null;
   };
 }
-function Profile() {
+function ProfileId() {
   const [data, setData] = useState<any>([]);
   const [Announcements, setAnnouncements] = useState<any>([]);
   const [relatory, setReĺatory] = useState<any>([]);
   const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
   const token = getTokenFromLocalStorage();
-  const id = getIdFromLocalStorage();
-
+  let params = new URLSearchParams(document.location.search.substring(1));
+  let id = params.get('id'); // retorna a string "Jonathan"
+  console.log(id);
   const fetchProfile = async () => {
     try {
       const response = await API.get(`/profile/find/${id}`, {
@@ -80,46 +81,35 @@ function Profile() {
       console.log(response.data);
 
       setAnnouncements(response.data);
-      setLoading(true);
+      setLoading2(true);
     } catch (error) {
       // Lidar com erros de requisição, se necessário
       console.error('Erro ao buscar dados do usuário:', error);
     }
   };
-  const fetchRelatory = async () => {
-    try {
-      const response = await API.get(`/profile/generaterelatory`, {
-        headers: {
-          Authorization: `Bearer ${token}`, // Adiciona o token JWT ao cabeçalho Authorization
-        },
-      }); // Rota da sua API
-      setReĺatory(response.data);
-      setLoading(true);
-    } catch (error) {
-      // Lidar com erros de requisição, se necessário
-      console.error('Erro ao buscar dados do usuário:', error);
-    }
-  };
+
   useEffect(() => {
     fetchProfile();
     fetchAnnouncements();
-    fetchRelatory();
     console.log(data);
   }, []);
 
-  if (!data) {
+  if (Announcements.length === 0) {
     return (
       <div className=" bg-gradient-to-r from-cyan-500 to-blue-500  ">
         <Navbar />
-        <div className=" h-screen w-auto m-auto  pt-40 ">
+        <div className="h-screen flex flex-col items-center pt-40 ">
           {' '}
           <Image
-            className="  animate-pulse m-auto"
+            className="  animate-pulse"
             src="./LogoLow.svg"
             alt={'Logo'}
             width={100}
             height={100}
           />
+          <h2 className="mx-auto font-bold text-white mt-4 justify-start animate-pulse">
+            Aguarde só um pouquinho, estamos preparando tudo para você!
+          </h2>
         </div>
       </div>
     );
@@ -155,64 +145,11 @@ function Profile() {
               <div className="pr-6 pt-4 pb-2 "></div>
             </div>
           </div>
-          <div className="px-6 pt-4 pb-2 m-auto">
-            <div></div>
-            <div className="container mx-auto">
-              <h1 className="text-2xl font-bold mb-4">Residue Data</h1>
-              <div className="grid grid-cols-1 md:grid-cols-2  gap-4">
-                {relatory.map((residue: any, index: any) => (
-                  <div key={index} className="bg-gray-100 p-4 rounded-md">
-                    <h2 className="text-lg font-semibold mb-2">
-                      {residue.ResidueName}
-                    </h2>
-                    <p className="text-sm text-gray-600 mb-1">
-                      {residue.ResidueDescription}
-                    </p>
-                    <p className="text-sm mb-1">
-                      Anounce Unit: {residue.AnounceUnit}
-                    </p>
-                    <p className="text-sm mb-1">
-                      Total Sum: {residue.TotalSum}
-                    </p>
-                    <div className="bg-blue-200 h-2 rounded-md mb-2">
-                      <div
-                        className="bg-blue-500 h-full rounded-md"
-                        style={{
-                          width: `${
-                            (parseFloat(residue.TotalSum) / 10000) * 100
-                          }%`,
-                        }}
-                      ></div>
-                    </div>
-                    <p className="text-sm mb-1">
-                      Quantity Sum: {residue.QuantitySum}
-                    </p>
-                    <div className="bg-green-200 h-2 rounded-md">
-                      <div
-                        className="bg-green-500 h-full rounded-md"
-                        style={{
-                          width: `${
-                            (parseFloat(residue.QuantitySum) / 10000) * 100
-                          }%`,
-                        }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div></div>
-          </div>
-          <div className="mx-auto justify-center px-6 py-4 flex ">
-            <button
-              type="submit"
-              className=" px-4 py-3 mx-auto font-bold text-white bg-blue-600  rounded-md hover:bg-indigo-600 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700"
-            >
-              Baixar
-            </button>
-          </div>
         </div>
-        <div className=" p-10  rounded-md ">
+        <h2 className="text-xl text px-5 text-center font-semibold text-white">
+          Propostas Disponiveis
+        </h2>{' '}
+        <div className=" px-10  rounded-md ">
           {Announcements.map((item: any) => (
             <div
               className="bg-white shadow-lg p-10  m-10 mx-10 rounded-md"
@@ -237,4 +174,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default ProfileId;
