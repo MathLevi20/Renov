@@ -126,12 +126,12 @@ function Profile() {
   }
 
   return (
-    <div className="h-screen  min-h-screen bg-gradient-to-b from-[#009473] to-[#63ff8d]  ">
+    <div className="h-screen  min-h-screen bg-[#009473]   ">
       <Navbar />
 
       <div
-        className=" inset-0 min-h-screen items-start grid grid-cols-1 justify-center pt-10
-     h-screen bg-gradient-to-b "
+        className=" inset-0 min-h-screen  bg-[#009473]  items-start grid grid-cols-1 justify-center pt-10
+   l "
       >
         <div className=" bg-white shadow-lg p-10 m-10 mx-20 rounded-md ">
           <div className="px-6 py-4 text-left flex">
@@ -200,7 +200,7 @@ function Profile() {
         <h2 className="text-2xl text mx-auto font-semibold text-white">
           Anúncio do usuario
         </h2>
-        <div className=" p-10  min-h-screen  bg-[#63ff8d]  rounded-md ">
+        <div className=" p-10  min-h-screen   bg-gradient-to-b from-[#009473] to-[#63ff8d]  bg-[#63ff8d]  rounded-md ">
           {Announcements.map((item: any) => (
             <div
               className="bg-white shadow-lg p-10  m-10 mx-10 rounded-md"

@@ -66,12 +66,13 @@ const createproposal = () => {
           Authorization: `Bearer ${token}`, // Adiciona o token JWT ao cabeçalho Authorization
         },
       }); // Rota da sua API // Rota da sua API
-      console.log(response);
+      console.log(response.data.anounce_fk);
+      console.log(response.data);
       setFormData({
         description: '',
         quantity: Number(''),
         price: Number(''),
-        anounce_fk: response.data.anounce_fk,
+        anounce_fk: response.data.id,
       });
       setData(response.data);
     } catch (error) {
@@ -97,6 +98,7 @@ const createproposal = () => {
 
     try {
       // Fazer a solicitação POST com os dados do formulário
+      console.log(formData)
       const response = await API.post(`/proposal/create`, formData, {
         headers: {
           Authorization: `Bearer ${token}`, // Adiciona o token JWT ao cabeçalho Authorization
@@ -148,7 +150,7 @@ const createproposal = () => {
           </div>
           <div className="pb-5">
             <AnounceCard
-              anouncer_fk={data.anouncer_fk}
+              anounce_fk={data.anouncer_fk}
               title={data.title}
               description={data.description}
               unit={data.unit}
@@ -216,7 +218,9 @@ const createproposal = () => {
               Enviar
             </button>
           </form>
-          <h3>{message}</h3>
+          <div className="bg-gray-200 rounded-lg shadow-md">
+            <h3 className="text-xl">{message}</h3>
+          </div>
         </div>
       </div>
     </>

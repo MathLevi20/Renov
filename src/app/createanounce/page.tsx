@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import WithSubnavigation from '@/components/Navbar';
-import { API, BASE_URL, getTokenFromLocalStorage } from '@/utils/API';
+import { API, BASE_URL, getIdFromLocalStorage, getTokenFromLocalStorage } from '@/utils/API';
 import axios from 'axios';
 
 interface Residue {
@@ -12,16 +12,49 @@ interface Residue {
   total: number;
   residue_fk: string;
 }
+const brands = [
+  {
+    "id": "964b53ce-899a-4803-83ad-7b19127dd0c6",
+    "name": "borracha"
+  },
+  {
+    "id": "a2720909-f092-4c7d-8fa2-4db56660436a",
+    "name": "plástico"
+  },
+  {
+    "id": "a5213cd4-e2fe-453b-b4df-451415d86b5e",
+    "name": "vidro"
+  },
+  {
+    "id": "cef1844e-1874-4ad6-a860-11106fb0f30d",
+    "name": "madeira"
+  },
+  {
+    "id": "fa8dcfa3-67f8-49dd-83ed-7f31565d2d2c",
+    "name": "papel"
+  },
+  {
+    "id": "fb05836f-cb9b-4b63-99aa-5849a6a4f67f",
+    "name": "tecido"
+  }
+]
 
 function Formulario() {
   const [message, setMessage] = useState('');
+  const [data, setData] = useState('');
+  const id = getIdFromLocalStorage()
+  const [residue_fk, setResidue_fk] = useState('');
+
+  const handleBrandSelect = (e: any) => {
+    setResidue_fk(e.target.value);
+  };
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     unit: '',
     quantity: 0,
     total: 0,
-    residue_fk: '',
+    residue_fk: "",
   });
 
   const handleChange = (e: any) => {
@@ -31,15 +64,16 @@ function Formulario() {
       [name]: value,
     });
   };
-
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const token = getTokenFromLocalStorage();
     const jsonData = JSON.stringify(formData);
     const jsonDaa = JSON.parse(jsonData);
+    console.log(formData)
+
     try {
       // Fazer a solicitação POST com os dados do formulário
-      await API.post('/anounce/create', jsonDaa, {
+      const response = await API.post('/anounce/create', jsonDaa, {
         headers: {
           Authorization: `Bearer ${token}`, // Adiciona o token JWT ao cabeçalho Authorization
         },
@@ -47,14 +81,17 @@ function Formulario() {
 
       // Redefinir o formulário após o envio bem-sucedido
       setMessage('ENVIADO');
+      setData(response.data)
       console.log('Dados enviados com sucesso!');
     } catch (error) {
       setMessage('ERRO AO ENVIAR');
-      console.log(jsonDaa);
+      console.log(data);
 
       console.error('Erro ao enviar os dados:', error);
     }
   };
+
+
 
   return (
     <>
@@ -154,6 +191,17 @@ Horário de Funcionamento: Segunda a Sexta, das 8h às 18h / Sábados, das 9h à
                 onChange={handleChange}
               />
             </div>
+            <div className='py-2'>
+              <label htmlFor="residue_fk">Escolha uma resido:</label>
+              <select id="residue_fk" name="residue_fk" onChange={handleBrandSelect} value={residue_fk}>
+                <option value="">Selecione uma resido</option>
+                {brands.map((brand) => (
+                  <option key={brand.id} value={brand.id}>
+                    {brand.name}
+                  </option>
+                ))}
+              </select>
+            </div>
             <button
               type="submit"
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -162,7 +210,7 @@ Horário de Funcionamento: Segunda a Sexta, das 8h às 18h / Sábados, das 9h à
               Enviar
             </button>
           </form>
-          <h3>{message}</h3>
+          <h3 className='py-3 m-auto font-normal'>{message}</h3>
         </div>
       </div>
     </>

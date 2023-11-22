@@ -136,8 +136,8 @@ const Received: React.FC = () => {
       <>
         <WithSubnavigation />
         <div
-          className=" h-full inset-0 items-start grid grid-cols-1 justify-center pt-10
-         bg-gradient-to-b from-[#009473] to-[#63ff8d] "
+          className=" h-full items-start grid grid-cols-1 justify-center pt-10
+      bg-gradient-to-tr from-[#009473] to-[#63ff8d]   "
         >
           <div className="py-2 text-2xl font-semibold flex">
             <div className="mt-3 w-full flex justify-center pt-0">
@@ -175,75 +175,77 @@ const Received: React.FC = () => {
     <>
       <WithSubnavigation />
       <div
-        className=" h-full inset-0 items-start grid grid-cols-1 justify-center pt-10
-     bg-gradient-to-b from-[#009473] to-[#63ff8d] "
+        className=" h-full items-start grid grid-cols-1 justify-center pt-10
+      bg-gradient-to-tr from-[#009473] to-[#63ff8d] min-h-sceen pb-60  "
       >
-        <div className="py-2 text-2xl font-semibold flex">
-          <div className="mt-3 w-full flex justify-center pt-0">
-            <input
-              type="text"
-              placeholder={'Procurar'}
-              onChange={(e) => {
-                setSearch(e.target.value);
-              }}
-              className="px-4 py-1 mx-2 flex justify-center w-3/4 placeholder-slate-900 text-black  rounded text-lg border-2 outline-none text-left"
-            />
-            <SearchIcon m={5} />
-          </div>
-        </div>{' '}
-        <Container maxW="container.xl " py={8} px={10}>
-          <h2 className="text-2xl text px-9 font-semibold text-white">
-            Propostas Enviadas
-          </h2>
+        <div className='min-h-screen'>
+          <div className="py-2 text-2xl font-semibold flex first-letter:">
+            <div className="mt-3 w-full flex justify-center pt-0">
+              <input
+                type="text"
+                placeholder={'Procurar'}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
+                className="px-4 py-1 mx-2 flex justify-center w-3/4 placeholder-slate-900 text-black  rounded text-lg border-2 outline-none text-left"
+              />
+              <SearchIcon m={5} />
+            </div>
+          </div>{' '}
+          <Container maxW="container.xl " py={8} px={10}>
+            <h2 className="text-2xl text px-9 font-semibold text-white">
+              Propostas Enviadas
+            </h2>
 
-          {data
-            .filter((data: any) => {
-              console.log(data.description);
-              if (
-                data.description.toLowerCase().includes(search.toLowerCase())
-              ) {
-                return data;
-              }
-            })
-            .map((data) => (
-              <div
-                className="bg-white shadow-lg p-10  m-10 mx-10 rounded-md"
-                key={data.id}
-              >
-                <Skeleton
-                  startColor="pink.500"
-                  endColor="orange.500"
-                  isLoaded={loading}
+            {data
+              .filter((data: any) => {
+                console.log(data.description);
+                if (
+                  data.description.toLowerCase().includes(search.toLowerCase())
+                ) {
+                  return data;
+                }
+              })
+              .map((data) => (
+                <div
+                  className="bg-white shadow-lg p-10  m-10 mx-10 rounded-md"
+                  key={data.id}
                 >
-                  <ProfileLink
-                    id={data.anounce_fk}
-                    image={data.profile.image_url}
-                    username={data.profile.username}
-                    created_at={format(
-                      new Date(data.created_at),
-                      'dd/MM/yyyy HH:mm:ss'
-                    )}
-                  />
+                  <Skeleton
+                    startColor="pink.500"
+                    endColor="orange.500"
+                    isLoaded={loading}
+                  >
+                    <ProfileLink
+                      id={data.anounce_fk}
+                      image={data.profile.image_url}
+                      username={data.profile.username}
+                      created_at={format(
+                        new Date(data.created_at),
+                        'dd/MM/yyyy HH:mm:ss'
+                      )}
+                    />
 
-                  <ResidueCard
-                    key={data.id}
-                    isloading={loading}
-                    quantity={data.quantity}
-                    created_at={format(
-                      new Date(data.created_at),
-                      'dd/MM/yyyy HH:mm:ss'
-                    )}
-                    id={data.id}
-                    description={data.description}
-                    status={data.status}
-                    proposer_fk={String(data.proposer_fk)}
-                    price={String(data.price)}
-                    accepted={data.acepted}
-                  />
-                </Skeleton>
-              </div>
-            ))}
-        </Container>
+                    <ResidueCard
+                      key={data.id}
+                      isloading={loading}
+                      quantity={data.quantity}
+                      created_at={format(
+                        new Date(data.created_at),
+                        'dd/MM/yyyy HH:mm:ss'
+                      )}
+                      id={data.id}
+                      description={data.description}
+                      status={data.status}
+                      proposer_fk={String(data.proposer_fk)}
+                      price={String(data.price)}
+                      accepted={data.acepted}
+                    />
+                  </Skeleton>
+                </div>
+              ))}
+          </Container>
+        </div>
       </div>
     </>
   );

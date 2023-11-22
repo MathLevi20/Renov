@@ -152,7 +152,7 @@ const Received: React.FC = () => {
               <SearchIcon m={5} />
             </div>
           </div>
-          <div className='h-screen m-auto '>
+          <div className='h-screen  m-auto '>
             <div className="h-screen flex flex-col items-center pt-40 ">
               {' '}
               <Image
@@ -192,8 +192,8 @@ const Received: React.FC = () => {
             <SearchIcon m={5} />
           </div>
         </div>{' '}
-        <div className=''>
- 
+        <div className=' min-h-screen    '>
+
           <h2 className="text-2xl text px-9 font-semibold text-white">
             Propostas Recebidas
           </h2>
