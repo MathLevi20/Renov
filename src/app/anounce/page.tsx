@@ -5,7 +5,7 @@ import WithSubnavigation from '@/components/Navbar';
 import ProfileLink from '@/components/Profile/ProfileLink';
 import TagBox from '@/components/Tag';
 import TagsComponents from '@/components/Tags';
-import { API, BASE_URL } from '@/utils/API';
+import { API, BASE_URL, capitalizeFirstLetter } from '@/utils/API';
 import { SearchIcon } from '@chakra-ui/icons';
 import {
   Container,
@@ -18,7 +18,8 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-
+import Image from 'next/image';
+import format from 'date-fns/format';
 interface AnounceData {
   id: string;
   title: string;
@@ -46,98 +47,52 @@ interface Material {
 const materiaData: Material[] = [
   {
     id: '0',
-    name: 'all',
+    name: 'Todos',
   },
   {
     id: 'a2720909-f092-4c7d-8fa2-4db56660436a',
-    name: 'plástico',
+    name: 'Plástico',
     description: 'recipientes plásticos, embalagens',
     nature: 'solid',
     created_at: '2023-09-23T10:12:00.818Z',
   },
   {
     id: 'a5213cd4-e2fe-453b-b4df-451415d86b5e',
-    name: 'vidro',
+    name: 'Vidro',
     description: 'garrafas, vidro quebrado',
     nature: 'solid',
     created_at: '2023-09-23T10:12:00.818Z',
   },
   {
     id: 'cef1844e-1874-4ad6-a860-11106fb0f30d',
-    name: 'madeira',
+    name: 'Madeira',
     description: 'palets, ripas, serragem e afins',
     nature: 'solid',
     created_at: '2023-09-23T10:12:00.818Z',
   },
   {
     id: 'fa8dcfa3-67f8-49dd-83ed-7f31565d2d2c',
-    name: 'papel',
+    name: 'Papel',
     description: 'papelão, papel de escritório',
     nature: 'solid',
     created_at: '2023-09-23T10:12:00.818Z',
   },
   {
     id: 'fb05836f-cb9b-4b63-99aa-5849a6a4f67f',
-    name: 'tecido',
+    name: 'Tecido',
     description: 'tecidos de natureza diversa, retalhos, linhas e enchiimento',
     nature: 'solid',
     created_at: '2023-09-23T10:12:00.818Z',
   },
 ];
 const residueData: AnounceData[] = [
-  {
-    id: '906f1324-3019-4563-a066-8cb3cc31ca9e',
-    title: 'tecido de lona',
-    description:
-      'Olá, estamos renovando as lonas de nossos caminhões graneleiros e essa se rasgou',
-    unit: 'unit',
-    quantity: '2',
-    total: '2',
-    anouncer_fk: 'd5f319a0-f87d-4497-ba2e-86c6a6e5a04b',
-    residue_fk: 'fb05836f-cb9b-4b63-99aa-5849a6a4f67f',
-    created_at: '2023-09-23T18:49:55.385Z',
-    profile: {
-      username: 'empresaX',
-      image_url: null,
-    },
-  },
-  {
-    id: '9317f489-44dd-45f9-ad84-7e19e14858e9',
-    title: 'Container de Tecido JEANS',
-    description:
-      'Tecido jeans variando entre os tamanhos 30X30cm e 50x50cm, nossa venda é feita por quilo, R$ 10 reais por quilo. Nos localizamos na avenida gomes Ro - 230 - Sta. Adelaide',
-    unit: 'kg',
-    quantity: '1000',
-    total: '1000',
-    anouncer_fk: 'e75025e8-cf39-44d8-982a-09dac5585dd3',
-    residue_fk: 'fb05836f-cb9b-4b63-99aa-5849a6a4f67f',
-    created_at: '2023-09-23T10:39:45.551Z',
-    profile: {
-      username: 'empresaX',
-      image_url: null,
-    },
-  },
-  {
-    id: 'a16e5a12-bc81-40f2-88c3-f91998967c81',
-    title: 'Retalhos de tecido variado',
-    description:
-      'Olá, a distribuição é gratuíta basta vir buscar em nossa sede na AV.Brito - 1009, setor 3 - Centro.',
-    unit: 'kg',
-    quantity: '2800',
-    total: '2800',
-    anouncer_fk: 'd5f319a0-f87d-4497-ba2e-86c6a6e5a04b',
-    residue_fk: 'fb05836f-cb9b-4b63-99aa-5849a6a4f67f',
-    created_at: '2023-09-23T10:39:45.551Z',
-    profile: {
-      username: 'empresaX',
-      image_url: null,
-    },
-  },
+
 ];
 
 const AnouncePage: React.FC = () => {
   const [data, setData] = useState<any[]>(residueData);
   const [loading, setLoading] = useState(false);
+  const [isEmptyMessageVisible, setIsEmptyMessageVisible] = useState(false);
 
   const queryParams = {
     skip: 3,
@@ -158,14 +113,14 @@ const AnouncePage: React.FC = () => {
     }
   };
   const fetchAnnouncementsMaterial = async (material: string) => {
-    if (material == 'all') {
+    if (material == 'todos') {
       fetchAnnouncements();
     }
 
-    if (material != 'all') {
+    if (material != 'todos') {
       try {
         const response = await API.get(
-          `/anounce/listbyresiduename/?skip=1&take=5&name=${material}`
+          `/anounce/listbyresiduename/?skip=1&take=5&name=${material.toLowerCase()}`
         ); // Rota da sua API
         console.log(response);
 
@@ -181,8 +136,12 @@ const AnouncePage: React.FC = () => {
   useEffect(() => {
     fetchAnnouncements();
     console.log(data);
+
   }, []);
 
+  useEffect(() => {
+    setIsEmptyMessageVisible(data.length === 0);
+  }, [data]);
   return (
     <>
       <WithSubnavigation />
@@ -206,7 +165,7 @@ const AnouncePage: React.FC = () => {
         <Container maxW="container.xl" py={8} px={10}>
           <div className="top-0">
             <h2 className="text-2xl text px-9 font-semibold text-white">
-              Anounce
+              Anúncio
             </h2>
             <div className="px-6 pt-4 pb-2 flex justify-center top-0 ">
               {materiaData.map((material) => (
@@ -220,36 +179,57 @@ const AnouncePage: React.FC = () => {
                 </div>
               ))}
             </div>
-            {data
-              .filter((data: any) => {
-                console.log(data.title);
-                if (data.title.toLowerCase().includes(search.toLowerCase())) {
-                  return data;
-                }
-              })
-              .map((item: any) => (
-                <div
-                  className="bg-white shadow-lg p-10  m-10 mx-10 rounded-md"
-                  key={item.id}
-                >
-                  {' '}
-                  <ProfileLink
-                    id={item.anouncer_fk}
-                    image={item.profile.image_url}
-                    username={item.profile.username}
-                  />
-                  <AnounceCard
-                    isloading={loading}
-                    id={item.id}
-                    anouncer_fk={item.anouncer_fk}
-                    title={item.title}
-                    description={item.description}
-                    unit={item.unit}
-                    quantity={item.quantity}
-                    total={item.total}
-                  />
-                </div>
-              ))}
+            <div className='min-h-screen '>
+              {isEmptyMessageVisible && <div className="h-screen flex flex-col items-center pt-40 ">
+                {' '}
+                <Image
+                  className="  animate-pulse"
+                  src="./LogoLow.svg"
+                  alt={'Logo'}
+                  width={100}
+                  height={100}
+                />
+                <h2 className="mx-auto font-bold text-white mt-4 justify-start animate-pulse">
+                  Sem Anuncio
+                </h2>
+              </div>
+              }
+
+              {data
+                .filter((data: any) => {
+                  console.log(data.title);
+                  if (data.title.toLowerCase().includes(search.toLowerCase())) {
+                    return data;
+                  }
+                })
+                .map((item: any) => (
+                  <div
+                    className="bg-white shadow-lg p-10  m-10 mx-10 rounded-md"
+                    key={item.id}
+                  >
+                    {' '}
+                    <ProfileLink
+                      id={item.anouncer_fk}
+                      image={item.profile.image_url}
+                      username={item.profile.username}
+                      created_at={format(
+                        new Date(item.created_at),
+                        'dd/MM/yyyy HH:mm:ss'
+                      )}
+                    />
+                    <AnounceCard
+                      isloading={loading}
+                      id={String(item.id)}
+                      anouncer_fk={String(item.anouncer_fk)}
+                      title={capitalizeFirstLetter(item.title)}
+                      description={capitalizeFirstLetter(item.description)}
+                      unit={item.unit}
+                      quantity={item.quantity}
+                      total={item.total}
+                    />
+                  </div>
+                ))}
+            </div>
           </div>
         </Container>
       </div>

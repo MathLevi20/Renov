@@ -102,7 +102,7 @@ export default function Login() {
                   </div>
                 ) : (
                   <button
-                    className="w-full px-4 py-3 font-bold text-slate-800 bg-[#63FF8D] rounded-md border-2  border-[#63FF8D] hover:bg-[#63FF8D] focus:outline-none focus:shadow-outline-indigo focus:border-[#63FF8D]"
+                    className="w-full px-4 py-3 font-bold text-slate-800 bg-indigo-100 rounded-md border-2  border-[#63FF8D] hover:bg-[#63FF8D] focus:outline-none focus:shadow-outline-indigo focus:border-[#63FF8D]"
                     onClick={handleSignIn}
                   >
                     Entrar

@@ -61,7 +61,7 @@ function Formulario() {
       <WithSubnavigation />
       <div
         className=" h-screen w-full inset-0 items-start grid grid-cols-1 justify-center pt-10
-      bg-gradient-to-tr from-sky-300 to-sky-500  "
+      bg-gradient-to-b from-[#009473] to-[#63ff8d]   "
       >
         <div className="bg-white shadow-lg p-10 m-10 mx-20 rounded-md">
           <h2 className="text-xl text-center p-2 font-semibold">
@@ -91,10 +91,12 @@ function Formulario() {
                 htmlFor="description"
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Descrição:
+                Descrição e a Localização do Material:
               </label>
               <textarea
-                placeholder="Digite a descrição"
+                placeholder="Exemplo: Endereço: Av. das Árvores, 1234 - Bairro Verde, Cidade Sustentável
+Descrição: Ponto de coleta com estrutura para receber diversos materiais recicláveis, incluindo papel, plástico, vidro e metal. Aceita também eletrônicos e pilhas usadas.
+Horário de Funcionamento: Segunda a Sexta, das 8h às 18h / Sábados, das 9h às 13h."
                 id="description"
                 name="description"
                 className="border border-gray-300 p-2 rounded w-full"

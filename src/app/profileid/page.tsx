@@ -45,68 +45,66 @@ interface Announcement {
 }
 function ProfileId() {
   const [data, setData] = useState<any>([]);
-  const [Announcements, setAnnouncements] = useState<any>([]);
-  const [relatory, setReĺatory] = useState<any>([]);
+  const [announcements, setAnnouncements] = useState<any>([]);
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
-  const token = getTokenFromLocalStorage();
-  let id = String;
-  if (typeof document !== 'undefined') {
-    let params = new URLSearchParams(document.location.search.substring(1));
-    let id = params.get('id');
-    console.log(id);
-    return id
-  } else {
-    console.log('O objeto document não está disponível neste ambiente.');
-  }
+  const [id, setId] = useState('');
+  const [token, setToken] = useState('');
 
-  const fetchProfile = async () => {
+  const fetchProfile = async (userId: string, token: string) => {
     try {
-      const response = await API.get(`/profile/find/${id}`, {
+      const response = await API.get(`/profile/find/${userId}`, {
         headers: {
-          Authorization: `Bearer ${token}`, // Adiciona o token JWT ao cabeçalho Authorization
+          Authorization: `Bearer ${token}`,
         },
-      }); // Rota da sua API
-
+      });
       setData(response.data);
       setLoading(true);
     } catch (error) {
-      // Lidar com erros de requisição, se necessário
       console.error('Erro ao buscar dados do usuário:', error);
     }
   };
-  const fetchAnnouncements = async () => {
+
+  const fetchAnnouncements = async (userId: string, token: string) => {
     try {
       const response = await API.get(
-        `/anounce/listbyanouncerid/?skip=0&take=100&id=${id}`,
+        `/anounce/listbyanouncerid/?skip=0&take=100&id=${userId}`,
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Adiciona o token JWT ao cabeçalho Authorization
+            Authorization: `Bearer ${token}`,
           },
         }
-      ); // Rota da sua API
-      console.log(response.data);
-
+      );
       setAnnouncements(response.data);
       setLoading2(true);
     } catch (error) {
-      // Lidar com erros de requisição, se necessário
-      console.error('Erro ao buscar dados do usuário:', error);
+      console.error('Erro ao buscar anúncios:', error);
     }
   };
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    fetchProfile();
-    fetchAnnouncements();
-    console.log(data);
-  }, []);
+    const storedToken = getTokenFromLocalStorage();
+    setToken(storedToken || '');
 
-  if (Announcements.length === 0) {
+    if (typeof document !== 'undefined') {
+      const params = new URLSearchParams(document.location.search.substring(1));
+      const userId = params.get('id');
+      setId(userId || '');
+    } else {
+      console.log('O objeto document não está disponível neste ambiente.');
+    }
+
+    if (id && token) {
+      fetchProfile(id, token);
+      fetchAnnouncements(id, token);
+    }
+  }, [id, token]);
+
+  if (announcements.length === 0) {
     return (
-      <div className=" bg-gradient-to-r from-cyan-500 to-blue-500  ">
+      <div className="     bg-gradient-to-tr from-[#009473] to-[#63ff8d]  ">
         <Navbar />
-        <div className="h-screen flex flex-col items-center pt-40 ">
+        <div className="h-screen flex flex-col items-center pt-40     bg-gradient-to-tr from-[#009473] to-[#63ff8d] ">
           {' '}
           <Image
             className="  animate-pulse"
@@ -115,7 +113,7 @@ function ProfileId() {
             width={100}
             height={100}
           />
-          <h2 className="mx-auto font-bold text-white mt-4 justify-start animate-pulse">
+          <h2 className="mx-auto font-bold     bg-gradient-to-tr from-[#009473] to-[#63ff8d] text-white mt-4 justify-start animate-pulse">
             Aguarde só um pouquinho, estamos preparando tudo para você!
           </h2>
         </div>
@@ -124,12 +122,12 @@ function ProfileId() {
   }
 
   return (
-    <div className=" bg-gradient-to-r from-cyan-500 to-blue-500 h-full  ">
+    <div className=" bg-gradient-to-b from-[#009473] to-[#63ff8d]  h-full  ">
       <Navbar />
 
       <div
         className=" h-full inset-0 items-start grid grid-cols-1 justify-center pt-10
-      bg-gradient-to-tr from-sky-300 to-sky-500 "
+   bg-gradient-to-b from-[#009473] to-[#63ff8d]  "
       >
         <div className=" bg-white shadow-lg p-10 m-10 mx-20 rounded-md ">
           <div className="px-6 py-4 text-left flex">
@@ -158,7 +156,7 @@ function ProfileId() {
           Propostas Disponiveis
         </h2>{' '}
         <div className=" px-10  rounded-md ">
-          {Announcements.map((item: any) => (
+          {announcements.map((item: any) => (
             <div
               className="bg-white shadow-lg p-10  m-10 mx-10 rounded-md"
               key={item.id}

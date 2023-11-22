@@ -31,21 +31,18 @@ interface AnounceData {
 const createproposal = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   // retorna a string "Jonathan"
-  let anouncer_fk = String;
+  let anouncer_fk: string = '';
+  let id: string = '';
 
-  let id = String;
   if (typeof document !== 'undefined') {
-    let params = new URLSearchParams(document.location.search.substring(1));
-    let id = params.get('id');
-    let anouncer_fk = params.get('anouncer_fk');
-
-    return { id, anouncer_fk }
+    const params = new URLSearchParams(document.location.search.substring(1));
+    id = params.get('id') || '';
+    anouncer_fk = params.get('anouncer_fk') || '';
   } else {
     console.log('O objeto document não está disponível neste ambiente.');
   }
 
   console.log(id);
-
 
   const [data, setData] = useState<any>([]);
 
@@ -54,12 +51,12 @@ const createproposal = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [message, setMessage] = useState('');
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [formData, setFormData] = useState<any>({
+  const [formData, setFormData] = useState<any>([{
     description: '',
     price: 0,
     quantity: 0,
-    anounce_fk: 'a16e5a12-bc81-40f2-88c3-f91998967c81',
-  });
+    anounce_fk: '',
+  }]);
   const token = getTokenFromLocalStorage();
 
   const fetchAnnouncements = async () => {
@@ -122,7 +119,7 @@ const createproposal = () => {
   };
   if (!data) {
     return (
-      <div className=" bg-gradient-to-r from-cyan-500 to-blue-500  ">
+      <div className=" bg-gradient-to-b from-[#009473] to-[#63ff8d]   ">
         <Navbar />
         <div className=" h-screen w-auto m-auto  pt-40 ">
           {' '}
@@ -143,7 +140,7 @@ const createproposal = () => {
       <WithSubnavigation />
       <div
         className=" h-screen  inset-0 items-start grid grid-cols-1 justify-center pt-10
-      bg-gradient-to-tr from-sky-300 to-sky-500  "
+     bg-gradient-to-b from-[#009473] to-[#63ff8d]   "
       >
         <div className="bg-white shadow-lg p-10 m-10 mx-20 rounded-md">
           <div className="text-xl text p-2  text-center font-semibold">
@@ -191,7 +188,7 @@ const createproposal = () => {
                 id="price"
                 name="price"
                 className="border border-gray-300 p-2 rounded w-full"
-                value={formData.price.toString()}
+                value={formData.price !== undefined ? formData.price.toString() : ''}
                 onChange={handleChange}
               />
             </div>
@@ -207,7 +204,7 @@ const createproposal = () => {
                 id="quantity"
                 name="quantity"
                 className="border border-gray-300 p-2 rounded w-full"
-                value={formData.quantity.toString()}
+                value={formData.quantity !== undefined ? formData.quantity.toString() : ''}
                 onChange={handleChange}
               />
             </div>

@@ -1,10 +1,11 @@
+/* eslint-disable react/jsx-no-undef */
 // pages/AnouncePage.tsx
 'use client';
 import WithSubnavigation from '@/components/Navbar';
 import { SearchIcon } from '@chakra-ui/icons';
 import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
-
+import Image from 'next/image'
 import {
   Container,
   Box,
@@ -112,12 +113,70 @@ const Received: React.FC = () => {
     console.log(data);
   }, []);
 
+  if (!data) {
+    return (
+      <div className="bg-gradient-to-b from-[#009473] to-[#63ff8d]  ">
+        <WithSubnavigation />
+        <div className=" h-screen w-auto m-auto  pt-40 ">
+          {' '}
+          <Image
+            className="  animate-pulse m-auto"
+            src="./LogoLow.svg"
+            alt={'Logo'}
+            width={100}
+            height={100}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  if (data.length === 0) {
+    return (
+      <>
+        <WithSubnavigation />
+        <div
+          className=" h-full inset-0 items-start grid grid-cols-1 justify-center pt-10
+         bg-gradient-to-b from-[#009473] to-[#63ff8d] "
+        >
+          <div className="py-2 text-2xl font-semibold flex">
+            <div className="mt-3 w-full flex justify-center pt-0">
+              <input
+                type="text"
+                placeholder={'Procurar'}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
+                className="px-4 py-1 mx-2 flex justify-center w-3/4 placeholder-slate-900 text-black  rounded text-lg border-2 outline-none text-left"
+              />
+              <SearchIcon m={5} />
+            </div>
+          </div>
+          <div className='h-screen m-auto '>
+            <div className="h-screen flex flex-col items-center pt-40 ">
+              {' '}
+              <Image
+                className="  animate-pulse"
+                src="./LogoLow.svg"
+                alt={'Logo'}
+                width={100}
+                height={100}
+              />
+              <h2 className="mx-auto font-bold text-white mt-4 justify-start animate-pulse">
+                Sem Propostas Enviadas
+              </h2>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
   return (
     <>
       <WithSubnavigation />
       <div
         className=" h-full inset-0 items-start grid grid-cols-1 justify-center pt-10
-      bg-gradient-to-tr from-sky-300 to-sky-500  "
+     bg-gradient-to-b from-[#009473] to-[#63ff8d] "
       >
         <div className="py-2 text-2xl font-semibold flex">
           <div className="mt-3 w-full flex justify-center pt-0">
@@ -132,8 +191,8 @@ const Received: React.FC = () => {
             <SearchIcon m={5} />
           </div>
         </div>{' '}
-        <Container maxW="container.xl" py={8} px={10}>
-          <h2 className=" text text-slate-100  text-2xl text px-5 font-semibold">
+        <Container maxW="container.xl " py={8} px={10}>
+          <h2 className="text-2xl text px-9 font-semibold text-white">
             Propostas Enviadas
           </h2>
 
@@ -160,6 +219,10 @@ const Received: React.FC = () => {
                     id={data.anounce_fk}
                     image={data.profile.image_url}
                     username={data.profile.username}
+                    created_at={format(
+                      new Date(data.created_at),
+                      'dd/MM/yyyy HH:mm:ss'
+                    )}
                   />
 
                   <ResidueCard

@@ -56,13 +56,6 @@ const ResidueCard: React.FC<ResidueCardProps> = ({
           </Text>
         </Box>
 
-
-
-        <Link href={`/createproposal?anouncer_fk=${String(anouncer_fk)}&id=${String(id)}`}>
-          <button className="bg-blue-500  flex mt-5 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-            Fazer Proposta{' '}
-          </button>{' '}
-        </Link>
       </AccordionItem>
     </Accordion>
   );

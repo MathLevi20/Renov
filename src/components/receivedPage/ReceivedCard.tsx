@@ -26,6 +26,17 @@ const ResidueCard: React.FC<ResidueCardProps> = ({
   created_at,
   quantity,
 }) => {
+  let statusMessage = '';
+
+  if (accepted === null) {
+    statusMessage = 'Em espera';
+  } else if (accepted === true) {
+    statusMessage = 'Aceito';
+  } else if (accepted === false) {
+    statusMessage = 'Negado';
+  } else {
+    statusMessage = 'Estado desconhecido';
+  }
   const handleAccept = () => {
     // Fazer a requisição PATCH para aceitar o dado
     API.patch(`/proposal/updateacepted`, { id: id, acepted: true })
@@ -61,6 +72,7 @@ const ResidueCard: React.FC<ResidueCardProps> = ({
       <div className="flex justify-between mb-2">
         <p className="text-gray-600">Preço: R$ {price} </p>
       </div>
+      <p className="text-gray-600">Estado: {statusMessage} </p>
 
       <div className="flex justify-start gap-4 mt-4">
         <button

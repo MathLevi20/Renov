@@ -51,7 +51,7 @@ const Navbar: React.FC = () => {
               <SettingsIcon className="m-auto" />{' '}
               <p className="block m-auto px-2 text-gray-100">Profile</p>
             </Link>
-            <Link className="flex  m-auto" href="/profile">
+            <Link className="flex  m-auto" href="/">
               <TbLogout className="m-auto" />{' '}
               <p className="block m-auto px-2 text-gray-100">Sair</p>
             </Link>
@@ -91,7 +91,7 @@ const Navbar: React.FC = () => {
                   <InfoOutlineIcon />{' '}
                   <p className="block text-gray-800">Meus resíduos</p>
                 </Link>
-                <Link href="/contact">
+                <Link href="/" >
                   <TbLogout /> <p className="block text-gray-800">Sair</p>
                 </Link>
               </div>

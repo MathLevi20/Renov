@@ -68,6 +68,9 @@ export const getIdFromLocalStorage = (): string | null => {
   }
   return null;
 };
+export function capitalizeFirstLetter(str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
 async function fetchData<T>(
   endpoint: string,

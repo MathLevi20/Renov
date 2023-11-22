@@ -17,6 +17,8 @@ import ResidueCard from '@/components/receivedPage/ReceivedCard';
 import { API, getTokenFromLocalStorage } from '@/utils/API';
 import { format } from 'date-fns';
 import ProfileLink from '@/components/Profile/ProfileLink';
+import Image from "next/image"
+import Navbar from '@/components/LandingPage/Navbar';
 
 interface ProposalData {
   id: string;
@@ -110,12 +112,72 @@ const Received: React.FC = () => {
     fetchAnnouncements();
     console.log(data);
   }, [data]);
+
+  if (!data) {
+    return (
+      <div className=" bg-gradient-to-r from-cyan-500 to-blue-500  ">
+        <WithSubnavigation />
+        <div className=" h-screen w-auto m-auto  pt-40 ">
+          {' '}
+          <Image
+            className="  animate-pulse m-auto"
+            src="./LogoLow.svg"
+            alt={'Logo'}
+            width={100}
+            height={100}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  if (data.length === 0) {
+    return (
+      <>
+        <WithSubnavigation />
+        <div
+          className=" h-full inset-0 items-start grid grid-cols-1 justify-center pt-10
+         bg-gradient-to-b from-[#009473] to-[#63ff8d] "
+        >
+          <div className="py-2 text-2xl font-semibold flex">
+            <div className="mt-3 w-full flex justify-center pt-0">
+              <input
+                type="text"
+                placeholder={'Procurar'}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
+                className="px-4 py-1 mx-2 flex justify-center w-3/4 placeholder-slate-900 text-black  rounded text-lg border-2 outline-none text-left"
+              />
+              <SearchIcon m={5} />
+            </div>
+          </div>
+          <div className='h-screen m-auto '>
+            <div className="h-screen flex flex-col items-center pt-40 ">
+              {' '}
+              <Image
+                className="  animate-pulse"
+                src="./LogoLow.svg"
+                alt={'Logo'}
+                width={100}
+                height={100}
+              />
+              <h2 className="mx-auto font-bold text-white mt-4 justify-start animate-pulse">
+                Sem Propostas Enviadas
+              </h2>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <WithSubnavigation />
       <div
-        className=" h-full inset-0 items-start grid grid-cols-1 justify-center pt-10
-      bg-gradient-to-tr from-sky-300 to-sky-500  "
+        className=" inset-0 items-start justify-center pt-10
+      bg-gradient-to-b from-[#009473] to-[#63ff8d] min-h-screen p-10 "
       >
         <div className="py-2 text-2xl font-semibold flex">
           <div className="mt-3 w-full flex justify-center pt-0">
@@ -130,11 +192,11 @@ const Received: React.FC = () => {
             <SearchIcon m={5} />
           </div>
         </div>{' '}
-        <Container maxW="container.xl" py={8} px={10}>
-          <h2 className="text-xl text px-5 font-semibold text-white">
+        <div className=''>
+ 
+          <h2 className="text-2xl text px-9 font-semibold text-white">
             Propostas Recebidas
           </h2>
-
           {data
             .filter((data: any) => {
               console.log(data.description);
@@ -146,7 +208,7 @@ const Received: React.FC = () => {
             })
             .map((data) => (
               <div
-                className="bg-white shadow-lg p-10  m-10 mx-10 rounded-md"
+                className="bg-white shadow-lg p-10  m-10   mx-10 rounded-md"
                 key={data.id}
               >
                 <Skeleton
@@ -158,6 +220,10 @@ const Received: React.FC = () => {
                     id={data.anouncer_fk}
                     image={data.profile.image_url}
                     username={data.profile.username}
+                    created_at={format(
+                      new Date(data.created_at),
+                      'dd/MM/yyyy HH:mm:ss'
+                    )}
                   />
 
                   <ResidueCard
@@ -178,7 +244,7 @@ const Received: React.FC = () => {
                 </Skeleton>
               </div>
             ))}
-        </Container>
+        </div>
       </div>
     </>
   );

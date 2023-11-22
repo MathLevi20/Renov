@@ -1,5 +1,5 @@
 'use client';
-import AnounceCard from '@/components/AnounceCard';
+import AnounceCard from '@/components/ProfilePage/AnounceCard';
 import Navbar from '@/components/Navbar';
 import ProfileLink from '@/components/Profile/ProfileLink';
 import {
@@ -109,7 +109,7 @@ function Profile() {
 
   if (!data) {
     return (
-      <div className=" bg-gradient-to-r from-cyan-500 to-blue-500  ">
+      <div className="bg-gradient-to-b from-[#009473] to-[#63ff8d]   ">
         <Navbar />
         <div className=" h-screen w-auto m-auto  pt-40 ">
           {' '}
@@ -126,12 +126,12 @@ function Profile() {
   }
 
   return (
-    <div className=" bg-gradient-to-r from-cyan-500 to-blue-500 h-full  ">
+    <div className="h-screen  min-h-screen bg-gradient-to-b from-[#009473] to-[#63ff8d]  ">
       <Navbar />
 
       <div
-        className=" h-full inset-0 items-start grid grid-cols-1 justify-center pt-10
-      bg-gradient-to-tr from-sky-300 to-sky-500 "
+        className=" inset-0 min-h-screen items-start grid grid-cols-1 justify-center pt-10
+     h-screen bg-gradient-to-b "
       >
         <div className=" bg-white shadow-lg p-10 m-10 mx-20 rounded-md ">
           <div className="px-6 py-4 text-left flex">
@@ -142,6 +142,7 @@ function Profile() {
               width={200}
               height={200}
             />
+
             <div className="my-auto">
               <p className="text-gray-700 text-base">Nome: {data.username}</p>
               <p className="text-gray-700 text-base">Empresa:{data.name}</p>
@@ -158,7 +159,7 @@ function Profile() {
           <div className="px-6 pt-4 pb-2 m-auto">
             <div></div>
             <div className="container mx-auto">
-              <h1 className="text-2xl font-bold mb-4">Residue Data</h1>
+              <h1 className="text-2xl font-bold mb-4">Relatorio</h1>
               <div className="grid grid-cols-1 md:grid-cols-2  gap-4">
                 {relatory.map((residue: any, index: any) => (
                   <div key={index} className="bg-gray-100 p-4 rounded-md">
@@ -174,45 +175,32 @@ function Profile() {
                     <p className="text-sm mb-1">
                       Total Sum: {residue.TotalSum}
                     </p>
-                    <div className="bg-blue-200 h-2 rounded-md mb-2">
-                      <div
-                        className="bg-blue-500 h-full rounded-md"
-                        style={{
-                          width: `${
-                            (parseFloat(residue.TotalSum) / 10000) * 100
-                          }%`,
-                        }}
-                      ></div>
-                    </div>
+
                     <p className="text-sm mb-1">
                       Quantity Sum: {residue.QuantitySum}
                     </p>
-                    <div className="bg-green-200 h-2 rounded-md">
+                    <div className="bg-green-200 h-5 rounded-md">
                       <div
                         className="bg-green-500 h-full rounded-md"
                         style={{
-                          width: `${
-                            (parseFloat(residue.QuantitySum) / 10000) * 100
-                          }%`,
+                          width: `${((parseFloat(residue.QuantitySum) / parseFloat(residue.TotalSum)) * 100).toFixed(2)
+                            }%`,
                         }}
-                      ></div>
+                      >
+                        <div className='mx-2 font-bold text-white text-sm'>{((parseFloat(residue.QuantitySum) / parseFloat(residue.TotalSum)) * 100).toFixed(2)}%</div></div>
                     </div>
                   </div>
                 ))}
               </div>
+
             </div>
-            <div></div>
           </div>
-          <div className="mx-auto justify-center px-6 py-4 flex ">
-            <button
-              type="submit"
-              className=" px-4 py-3 mx-auto font-bold text-white bg-blue-600  rounded-md hover:bg-indigo-600 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700"
-            >
-              Baixar
-            </button>
-          </div>
+
         </div>
-        <div className=" p-10  rounded-md ">
+        <h2 className="text-2xl text mx-auto font-semibold text-white">
+          Anúncio do usuario
+        </h2>
+        <div className=" p-10  min-h-screen  bg-[#63ff8d]  rounded-md ">
           {Announcements.map((item: any) => (
             <div
               className="bg-white shadow-lg p-10  m-10 mx-10 rounded-md"
