@@ -89,7 +89,7 @@ export default function Login() {
             <div className="grid grid-cols-2 gap-2">
               <div>
                 {loading ? (
-                  <div className="flex px-4 py-3 font-bold text-slate-800 bg-indigo-100  rounded-md border-2  border-[#63FF8D] hover:bg-[#63FF8D] focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700">
+                  <div className="flex px-4 py-3 font-bold text-slate-800 bg-[#63FF8D] rounded-md border-2  border-[#63FF8D] hover:bg-[#63FF8D] focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700">
                     <Button
                       className="m-auto"
                       isLoading={loading}
@@ -102,7 +102,7 @@ export default function Login() {
                   </div>
                 ) : (
                   <button
-                    className="w-full px-4 py-3 font-bold text-slate-800 bg-indigo-100 rounded-md border-2  border-[#63FF8D] hover:bg-[#63FF8D] focus:outline-none focus:shadow-outline-indigo focus:border-[#63FF8D]"
+                    className="w-full px-4 py-3 font-bold text-slate-800 bg-[#63FF8D] rounded-md border-2  border-[#63FF8D] hover:bg-[#63FF8D] focus:outline-none focus:shadow-outline-indigo focus:border-[#63FF8D]"
                     onClick={handleSignIn}
                   >
                     Entrar
@@ -110,7 +110,7 @@ export default function Login() {
                 )}
               </div>
 
-              <button className="w-full px-4 py-3 font-bold text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700">
+              <button className="w-full px-4 py-3 font-bold text-white bg-slate-800 rounded-md hover:bg-indigo-600 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700">
                 Registrar
               </button>
             </div>
