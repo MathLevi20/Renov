@@ -80,7 +80,7 @@ export default function Login() {
                 <input
                   id="password"
                   type="password"
-                  className="w-full px-4 py-3 mt-1 border-gray-300  border-2  rounded-md focus:bg-[#63FF8D] focus:ring focus:ring-indigo-200"
+                  className="w-full px-4 py-3 mt-1 border-gray-300  border-2  rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200"
                   value={password}
                   onChange={handlePasswordInput}
                 />

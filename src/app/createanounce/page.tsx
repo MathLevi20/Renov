@@ -54,7 +54,7 @@ function Formulario() {
     unit: '',
     quantity: 0,
     total: 0,
-    residue_fk: "",
+    residue_fk: "cef1844e-1874-4ad6-a860-11106fb0f30d",
   });
 
   const handleChange = (e: any) => {
