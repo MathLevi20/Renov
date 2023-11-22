@@ -87,13 +87,17 @@ const Navbar: React.FC = () => {
                   <ArrowDownIcon />
                   <p className="block text-gray-800">Recebidos</p>
                 </Link>
-                <Link href="/contact">
-                  <InfoOutlineIcon />{' '}
-                  <p className="block text-gray-800">Meus resíduos</p>
+
+
+                <Link href="/profile">
+                  <SettingsIcon className="m-auto" />{' '}
+                  <p className="block text-gray-800">Profile</p>
                 </Link>
-                <Link href="/" >
-                  <TbLogout /> <p className="block text-gray-800">Sair</p>
+                <Link href="/">
+                  <TbLogout className="m-auto" />{' '}
+                  <p className="block text-gray-800">Sair</p>
                 </Link>
+
               </div>
             )}
           </div>
