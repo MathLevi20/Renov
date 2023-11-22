@@ -1,4 +1,4 @@
-import { API } from '@/utils/API';
+import { API, getTokenFromLocalStorage } from '@/utils/API';
 import { Skeleton } from '@chakra-ui/react';
 import React from 'react';
 
@@ -37,9 +37,15 @@ const ResidueCard: React.FC<ResidueCardProps> = ({
   } else {
     statusMessage = 'Estado desconhecido';
   }
+  const token = getTokenFromLocalStorage();
+
   const handleAccept = () => {
     // Fazer a requisição PATCH para aceitar o dado
-    API.patch(`/proposal/updateacepted`, { id: id, acepted: true })
+    API.patch(`/proposal/updateacepted`, { id: id, acepted: true }, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Adiciona o token JWT ao cabeçalho Authorization
+      },
+    })
       .then((response) => {
         // Lógica após aceitar o dado, se necessário
         console.log('Dado aceito:', response.data);
@@ -52,7 +58,12 @@ const ResidueCard: React.FC<ResidueCardProps> = ({
 
   const handleReject = () => {
     // Fazer a requisição PATCH para recusar o dado
-    API.patch(`/proposal/updateacepted`, { id: id, acepted: false })
+    API.patch(`/proposal/updateacepted`, { id: id, acepted: false }, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Adiciona o token JWT ao cabeçalho Authorization
+      },
+    }
+    )
       .then((response) => {
         // Lógica após recusar o dado, se necessário
         console.log('Dado recusado:', response.data);
