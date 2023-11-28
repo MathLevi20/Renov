@@ -159,7 +159,7 @@ function Profile() {
           <div className="px-6 pt-4 pb-2 m-auto">
             <div></div>
             <div className="container mx-auto">
-              <h1 className="text-2xl font-bold mb-4">Relatorio</h1>
+              <h1 className="text-2xl font-bold mb-4">Relatório</h1>
               <div className="grid grid-cols-1 md:grid-cols-2  gap-4">
                 {relatory.map((residue: any, index: any) => (
                   <div key={index} className="bg-gray-100 p-4 rounded-md">
@@ -170,14 +170,14 @@ function Profile() {
                       {residue.ResidueDescription}
                     </p>
                     <p className="text-sm mb-1">
-                      Anounce Unit: {residue.AnounceUnit}
+                      Tipo de Unidade: {residue.AnounceUnit}
                     </p>
                     <p className="text-sm mb-1">
-                      Total Sum: {residue.TotalSum}
+                      Total: {residue.TotalSum}
                     </p>
 
                     <p className="text-sm mb-1">
-                      Quantity Sum: {residue.QuantitySum}
+                      Quantidade: {residue.QuantitySum}
                     </p>
                     <div className="bg-green-200 h-5 rounded-md">
                       <div

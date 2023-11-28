@@ -15,27 +15,27 @@ interface Residue {
 const brands = [
   {
     "id": "964b53ce-899a-4803-83ad-7b19127dd0c6",
-    "name": "borracha"
+    "name": "Borracha"
   },
   {
     "id": "a2720909-f092-4c7d-8fa2-4db56660436a",
-    "name": "plástico"
+    "name": "Plástico"
   },
   {
     "id": "a5213cd4-e2fe-453b-b4df-451415d86b5e",
-    "name": "vidro"
+    "name": "Vidro"
   },
   {
     "id": "cef1844e-1874-4ad6-a860-11106fb0f30d",
-    "name": "madeira"
+    "name": "Madeira"
   },
   {
     "id": "fa8dcfa3-67f8-49dd-83ed-7f31565d2d2c",
-    "name": "papel"
+    "name": "Papel"
   },
   {
     "id": "fb05836f-cb9b-4b63-99aa-5849a6a4f67f",
-    "name": "tecido"
+    "name": "Tecido"
   }
 ]
 
@@ -45,20 +45,25 @@ function Formulario() {
   const id = getIdFromLocalStorage()
   const [residue_fk, setResidue_fk] = useState('');
 
-  const handleBrandSelect = (e: any) => {
-    setResidue_fk(e.target.value);
+  const handleBrandSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedValue = e.target.value;
+    console.log("Valor selecionado:", selectedValue); // Verifique o valor selecionado
+    setResidue_fk(selectedValue);
   };
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     unit: '',
     quantity: 0,
     total: 0,
-    residue_fk: "cef1844e-1874-4ad6-a860-11106fb0f30d",
+    residue_fk: residue_fk,
   });
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
+    console.log("Valor selecionado:", { name, value }); // Verifique o valor selecionado
+
     setFormData({
       ...formData,
       [name]: value,
@@ -142,22 +147,34 @@ Horário de Funcionamento: Segunda a Sexta, das 8h às 18h / Sábados, das 9h à
               />
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="unit"
-                className="block text-gray-700 text-sm font-bold mb-2"
-              >
-                Unidade:
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Selecione a unidade:
               </label>
-              <input
-                placeholder="Digite a unidade ,ex: Kg ou unit"
-                type="text"
-                id="unit"
-                name="unit"
-                className="border border-gray-300 p-2 rounded w-full"
-                value={formData.unit}
-                aria-placeholder="kg ou unit"
-                onChange={handleChange}
-              />
+              <div>
+                <label className="inline-flex items-center mr-4">
+                  <input
+                    type="checkbox"
+                    name="unit"
+                    value="kg"
+                    checked={formData.unit === 'kg'}
+                    onChange={handleChange}
+                    className="form-checkbox h-5 w-5 text-gray-600"
+                  />
+                  <span className="ml-2">Kg</span>
+                </label>
+
+                <label className="inline-flex items-center">
+                  <input
+                    type="checkbox"
+                    name="unit"
+                    value="unit"
+                    checked={formData.unit === 'unit'}
+                    onChange={handleChange}
+                    className="form-checkbox h-5 w-5 text-gray-600"
+                  />
+                  <span className="ml-2">Unit</span>
+                </label>
+              </div>
             </div>
             <div className="mb-4">
               <label
@@ -192,15 +209,21 @@ Horário de Funcionamento: Segunda a Sexta, das 8h às 18h / Sábados, das 9h à
               />
             </div>
             <div className='py-2'>
-              <label htmlFor="residue_fk">Escolha uma resido:</label>
-              <select id="residue_fk" name="residue_fk" onChange={handleBrandSelect} value={residue_fk}>
-                <option value="">Selecione uma resido</option>
+              <label htmlFor="residue_fk">Escolha um resíduo:</label>
+              <select
+                id="residue_fk"
+                name="residue_fk"
+                onChange={handleChange}
+                value={formData.residue_fk}
+              >
+                <option value="">Selecione um resíduo</option>
                 {brands.map((brand) => (
                   <option key={brand.id} value={brand.id}>
                     {brand.name}
                   </option>
                 ))}
               </select>
+              {/* Aqui você pode usar o formData, se necessário */}
             </div>
             <button
               type="submit"
