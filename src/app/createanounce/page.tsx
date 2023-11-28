@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import WithSubnavigation from '@/components/Navbar';
 import { API, BASE_URL, getIdFromLocalStorage, getTokenFromLocalStorage } from '@/utils/API';
 import axios from 'axios';
+import Popup from '@/components/Popup';
 
 interface Residue {
   title: string;
@@ -44,11 +45,14 @@ function Formulario() {
   const [data, setData] = useState('');
   const id = getIdFromLocalStorage()
   const [residue_fk, setResidue_fk] = useState('');
+  const [showPopup, setShowPopup] = useState(false);
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
 
   const handleBrandSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
     console.log("Valor selecionado:", selectedValue); // Verifique o valor selecionado
-    setResidue_fk(selectedValue);
   };
 
   const [formData, setFormData] = useState({
@@ -57,7 +61,7 @@ function Formulario() {
     unit: '',
     quantity: 0,
     total: 0,
-    residue_fk: residue_fk,
+    residue_fk: '',
   });
 
   const handleChange = (e: any) => {
@@ -85,11 +89,14 @@ function Formulario() {
       });
 
       // Redefinir o formulário após o envio bem-sucedido
-      setMessage('ENVIADO');
+      setMessage('Enviado');
+      setShowPopup(true)
       setData(response.data)
       console.log('Dados enviados com sucesso!');
     } catch (error) {
-      setMessage('ERRO AO ENVIAR');
+      setMessage('Erro ao enviar');
+      setShowPopup(true)
+
       console.log(data);
 
       console.error('Erro ao enviar os dados:', error);
@@ -233,7 +240,19 @@ Horário de Funcionamento: Segunda a Sexta, das 8h às 18h / Sábados, das 9h à
               Enviar
             </button>
           </form>
-          <h3 className='py-3 m-auto font-normal'>{message}</h3>
+          {showPopup && (
+            <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
+              <div className="bg-white   rounded-lg p-6">
+                <h3 className="py-3 text-center mx-auto font-normal">{message}</h3>
+                <button
+                  className="mt-4 px-4 py-2  mx-10  bg-blue-500 text-white rounded hover:bg-blue-600"
+                  onClick={togglePopup}
+                >
+                  Fechar
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>

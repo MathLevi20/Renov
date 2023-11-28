@@ -42,7 +42,6 @@ const ResidueCard: React.FC<ResidueCardProps> = ({
       <p className="mt-2">Unidade: {unit}</p>
       <p className="mt-2">Quantidade: {quantity}</p>
       <p className="mt-2">Total: {total}</p>
-      <p className="mt-2">Total: {anounce_fk}</p>
       {/* Tags (se necessário) */}
       <div className="flex flex-wrap mt-4">{/* Outras tags aqui */}</div>
     </div>

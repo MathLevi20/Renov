@@ -102,7 +102,7 @@ const AnouncePage: React.FC = () => {
 
   const fetchAnnouncements = async () => {
     try {
-      const response = await API.get('/anounce/list/?skip=1&take=5'); // Rota da sua API
+      const response = await API.get('/anounce/list/?skip=1&take=100'); // Rota da sua API
       console.log(response);
 
       setData(response.data);
@@ -120,7 +120,7 @@ const AnouncePage: React.FC = () => {
     if (material != 'todos') {
       try {
         const response = await API.get(
-          `/anounce/listbyresiduename/?skip=1&take=5&name=${material.toLowerCase()}`
+          `/anounce/listbyresiduename/?skip=1&take=100&name=${material.toLowerCase()}`
         ); // Rota da sua API
         console.log(response);
 

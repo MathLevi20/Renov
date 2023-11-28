@@ -44,7 +44,7 @@ const createproposal = () => {
 
   console.log(id);
 
-  const [data, setData] = useState<any>([]);
+  const [data, setData] = useState<any>(null);
 
   console.log(id);
   console.log(anouncer_fk);
@@ -141,10 +141,10 @@ const createproposal = () => {
     <>
       <WithSubnavigation />
       <div
-        className=" h-screen  inset-0 items-start grid grid-cols-1 justify-center pt-10
+        className=" h-full  inset-0 items-start grid grid-cols-1 justify-center pt-10
      bg-gradient-to-b from-[#009473] to-[#63ff8d]   "
       >
-        <div className="bg-white shadow-lg p-10 m-10 mx-20 rounded-md">
+        <div className="bg-white  min-h-screen shadow-lg p-10 m-10 mx-20 rounded-md">
           <div className="text-xl text p-2  text-center font-semibold">
             Anuncio
           </div>

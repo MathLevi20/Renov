@@ -130,14 +130,10 @@ function ProfileId() {
    bg-gradient-to-b from-[#009473] to-[#63ff8d]  "
       >
         <div className=" bg-white shadow-lg p-10 m-10 mx-20 rounded-md ">
-          <div className="px-6 py-4 text-left flex">
-            <Image
-              className=" rounded-full  mr-5"
-              src="/images/image.png"
-              alt="Sunset in the mountains"
-              width={200}
-              height={200}
-            />
+          <div className="flex space-x-2 gap-7 text-black text-whitepy-2 rounded-md">
+            <span className=" rounded-full h-24 my-auto w-24 flex items-center justify-center bg-gray-500 text-white uppercase">
+              {data.username.charAt(0).toUpperCase()}
+            </span>
             <div className="my-auto">
               <p className="text-gray-700 text-base">Nome: {data.username}</p>
               <p className="text-gray-700 text-base">Empresa:{data.name}</p>
@@ -148,7 +144,6 @@ function ProfileId() {
                 Local:{data.city}-{data.uf}
               </p>
               <p className="text-gray-700 text-base">Telefone:{data.phone}</p>
-              <div className="pr-6 pt-4 pb-2 "></div>
             </div>
           </div>
         </div>
