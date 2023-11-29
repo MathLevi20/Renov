@@ -59,7 +59,7 @@ const ResidueCard: React.FC<ResidueCardProps> = ({
 
 
         <Link href={`/createproposal?anouncer_fk=${String(anouncer_fk)}&id=${String(id)}`}>
-          <button className="bg-blue-500  flex mt-5 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+          <button className="bg-gray-800 hover:bg-gray-400 flex mt-5  text-white font-bold py-2 px-4 border-b-4 border-gray-600 hover:border-gray-500 rounded">
             Fazer Proposta{' '}
           </button>{' '}
         </Link>

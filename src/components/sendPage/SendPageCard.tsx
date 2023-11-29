@@ -55,7 +55,6 @@ const ResidueCard: React.FC<ResidueCardProps> = ({
     <div className="">
       <div className="flex justify-between mb-2"></div>
 
-      <p className="text-gray-700 mb-2">Criado em {created_at}</p>
       <p className="text-gray-700 mb-2">Descrição: {description}</p>
       <p className="text-gray-700 mb-2">Quantidade: {quantity}</p>
       <div className="flex justify-between mb-2">

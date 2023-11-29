@@ -47,39 +47,39 @@ interface Material {
 const materiaData: Material[] = [
   {
     id: '0',
-    name: 'Todos',
+    name: 'todos',
   },
   {
     id: 'a2720909-f092-4c7d-8fa2-4db56660436a',
-    name: 'Plástico',
+    name: 'plástico',
     description: 'recipientes plásticos, embalagens',
     nature: 'solid',
     created_at: '2023-09-23T10:12:00.818Z',
   },
   {
     id: 'a5213cd4-e2fe-453b-b4df-451415d86b5e',
-    name: 'Vidro',
+    name: 'vidro',
     description: 'garrafas, vidro quebrado',
     nature: 'solid',
     created_at: '2023-09-23T10:12:00.818Z',
   },
   {
     id: 'cef1844e-1874-4ad6-a860-11106fb0f30d',
-    name: 'Madeira',
+    name: 'madeira',
     description: 'palets, ripas, serragem e afins',
     nature: 'solid',
     created_at: '2023-09-23T10:12:00.818Z',
   },
   {
     id: 'fa8dcfa3-67f8-49dd-83ed-7f31565d2d2c',
-    name: 'Papel',
+    name: 'papel',
     description: 'papelão, papel de escritório',
     nature: 'solid',
     created_at: '2023-09-23T10:12:00.818Z',
   },
   {
     id: 'fb05836f-cb9b-4b63-99aa-5849a6a4f67f',
-    name: 'Tecido',
+    name: 'tecido',
     description: 'tecidos de natureza diversa, retalhos, linhas e enchiimento',
     nature: 'solid',
     created_at: '2023-09-23T10:12:00.818Z',
@@ -120,7 +120,7 @@ const AnouncePage: React.FC = () => {
     if (material != 'todos') {
       try {
         const response = await API.get(
-          `/anounce/listbyresiduename/?skip=1&take=100&name=${material.toLowerCase()}`
+          `/anounce/listbyresiduename/?skip=0&take=100&name=${material.toLowerCase()}`
         ); // Rota da sua API
         console.log(response);
 
@@ -146,9 +146,12 @@ const AnouncePage: React.FC = () => {
     <>
       <WithSubnavigation />
       <div
-        className=" h-full items-start grid grid-cols-1 justify-center pt-10
-      bg-gradient-to-tr from-[#009473] to-[#63ff8d]  "
+        className=" h-full inset-0 items-start grid grid-cols-1 justify-center pt-10
+         bg-gradient-to-b from-[#009473] to-[#63ff8d] "
       >
+        <h2 className="text-2xl text px-9 font-semibold text-white">
+          Anúncios
+        </h2>
         <div className="py-2 text-2xl font-semibold flex">
           <div className="mt-3 w-full flex justify-center pt-0">
             <input
@@ -164,17 +167,15 @@ const AnouncePage: React.FC = () => {
         </div>{' '}
         <Container maxW="container.xl" py={8} px={10}>
           <div className="top-0">
-            <h2 className="text-2xl text px-9 font-semibold text-white">
-              Anúncio
-            </h2>
+
             <div className="px-6 pt-4 pb-2 flex justify-center top-0 ">
               {materiaData.map((material) => (
                 <div key={material.id}>
                   <button
-                    className="bg-slate-100  text-slate-800 text-sm font-medium mx-2 px-2.5 py-1 rounded "
+                    className="bg-gray-800 hover:bg-gray-500  text-slate-100 text-sm font-medium mx-2 px-4  py-2.5 rounded "
                     onClick={() => fetchAnnouncementsMaterial(material.name)}
                   >
-                    {material.name}
+                    {capitalizeFirstLetter(material.name)}
                   </button>
                 </div>
               ))}
@@ -204,7 +205,7 @@ const AnouncePage: React.FC = () => {
                 })
                 .map((item: any) => (
                   <div
-                    className="bg-white shadow-lg p-10  m-10 mx-10 rounded-md"
+                    className="bg-gray-100 hover:bg-gray-200 shadow-lg p-10  m-10 mx-10 rounded-md"
                     key={item.id}
                   >
                     {' '}

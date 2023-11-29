@@ -175,9 +175,11 @@ const Received: React.FC = () => {
     <>
       <WithSubnavigation />
       <div
-        className=" h-full items-start grid grid-cols-1 justify-center pt-10
-      bg-gradient-to-tr from-[#009473] to-[#63ff8d] min-h-sceen pb-60  "
-      >
+        className=" inset-0 items-start justify-center pt-10
+     h-full  min-h-screen  bg-gradient-to-b from-[#009473] to-[#63ff8d]    p-10 "
+      >          <h2 className="text-2xl text px-9 font-semibold text-white">
+          Propostas Enviadas
+        </h2>
         <div className='min-h-screen'>
           <div className="py-2 text-2xl font-semibold flex first-letter:">
             <div className="mt-3 w-full flex justify-center pt-0">
@@ -192,10 +194,8 @@ const Received: React.FC = () => {
               <SearchIcon m={5} />
             </div>
           </div>{' '}
-          <Container maxW="container.xl " py={8} px={10}>
-            <h2 className="text-2xl text px-9 font-semibold text-white">
-              Propostas Enviadas
-            </h2>
+          <div className=' min-h-screen    '>
+
 
             {data
               .filter((data: any) => {
@@ -208,7 +208,7 @@ const Received: React.FC = () => {
               })
               .map((data) => (
                 <div
-                  className="bg-white shadow-lg p-10  m-10 mx-10 rounded-md"
+                  className="bg-gray-100 hover:bg-gray-200 shadow-lg p-10  m-10 mx-10 rounded-md"
                   key={data.id}
                 >
                   <Skeleton
@@ -244,7 +244,7 @@ const Received: React.FC = () => {
                   </Skeleton>
                 </div>
               ))}
-          </Container>
+          </div>
         </div>
       </div>
     </>

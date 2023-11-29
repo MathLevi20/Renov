@@ -109,12 +109,12 @@ function Formulario() {
     <>
       <WithSubnavigation />
       <div
-        className=" h-screen w-full inset-0 items-start grid grid-cols-1 justify-center pt-10
-      bg-gradient-to-b from-[#009473] to-[#63ff8d]   "
+        className=" inset-0 items-start justify-center pt-10
+     h-full  min-h-screen  bg-gradient-to-b from-[#009473] to-[#63ff8d]    p-10 "
       >
         <div className="bg-white shadow-lg p-10 m-10 mx-20 rounded-md">
           <h2 className="text-xl text-center p-2 font-semibold">
-            Adicionar resido
+            Adicionar Resíduo
           </h2>
 
           <form>
@@ -147,8 +147,9 @@ function Formulario() {
 Descrição: Ponto de coleta com estrutura para receber diversos materiais recicláveis, incluindo papel, plástico, vidro e metal. Aceita também eletrônicos e pilhas usadas.
 Horário de Funcionamento: Segunda a Sexta, das 8h às 18h / Sábados, das 9h às 13h."
                 id="description"
+                rows={5}
                 name="description"
-                className="border border-gray-300 p-2 rounded w-full"
+                className="border border-gray-300 p-2 h-30 rounded w-full"
                 value={formData.description}
                 onChange={handleChange}
               />
@@ -215,8 +216,8 @@ Horário de Funcionamento: Segunda a Sexta, das 8h às 18h / Sábados, das 9h à
                 onChange={handleChange}
               />
             </div>
-            <div className='py-2'>
-              <label htmlFor="residue_fk">Escolha um resíduo:</label>
+            <div className='py-2 flex'>
+              <label htmlFor="residue_fk" className='mr-3'>Escolha um resíduo:</label>
               <select
                 id="residue_fk"
                 name="residue_fk"
@@ -234,7 +235,7 @@ Horário de Funcionamento: Segunda a Sexta, das 8h às 18h / Sábados, das 9h à
             </div>
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className=" bg-gray-800 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded"
               onClick={handleSubmit}
             >
               Enviar
@@ -245,7 +246,7 @@ Horário de Funcionamento: Segunda a Sexta, das 8h às 18h / Sábados, das 9h à
               <div className="bg-white   rounded-lg p-6">
                 <h3 className="py-3 text-center mx-auto font-normal">{message}</h3>
                 <button
-                  className="mt-4 px-4 py-2  mx-10  bg-blue-500 text-white rounded hover:bg-blue-600"
+                  className="mt-4 px-4 py-2  mx-10  bg-gray-800  text-white rounded hover:bg-gray-400 "
                   onClick={togglePopup}
                 >
                   Fechar

@@ -58,6 +58,10 @@ const createproposal = () => {
     anounce_fk: '',
   }]);
   const token = getTokenFromLocalStorage();
+  const [showPopup, setShowPopup] = useState(false);
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
 
   const fetchAnnouncements = async () => {
     try {
@@ -141,14 +145,14 @@ const createproposal = () => {
     <>
       <WithSubnavigation />
       <div
-        className=" h-full  inset-0 items-start grid grid-cols-1 justify-center pt-10
-     bg-gradient-to-b from-[#009473] to-[#63ff8d]   "
+        className=" inset-0 items-start justify-center pt-10
+     h-full  min-h-screen  bg-gradient-to-b from-[#009473] to-[#63ff8d]    p-10 "
       >
         <div className="bg-white  min-h-screen shadow-lg p-10 m-10 mx-20 rounded-md">
           <div className="text-xl text p-2  text-center font-semibold">
             Anuncio
           </div>
-          <div className="pb-5">
+          <div className="pb-2">
             <AnounceCard
               anounce_fk={data.anouncer_fk}
               title={data.title}
@@ -212,15 +216,26 @@ const createproposal = () => {
             </div>
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="bg-gray-800 hover:bg-gray-400 flex mt-5  text-white font-bold py-2 px-4 border-b-4 border-gray-600 hover:border-gray-500 rounded"
+
               onClick={handleSubmit}
             >
               Enviar
             </button>
           </form>
-          <div className="bg-gray-200 rounded-lg shadow-md">
-            <h3 className="text-xl">{message}</h3>
-          </div>
+          {showPopup && (
+            <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
+              <div className="bg-white   rounded-lg p-6">
+                <h3 className="py-3 text-center mx-auto font-normal">{message}</h3>
+                <button
+                  className="mt-4 px-4 py-2  mx-10  bg-gray-800  text-white rounded hover:bg-gray-500 "
+                  onClick={togglePopup}
+                >
+                  Fechar
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>

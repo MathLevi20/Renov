@@ -32,7 +32,8 @@ const Navbar: React.FC = () => {
           <div className="hidden lg:flex space-x-4">
             <Link className="flex" href="/anounce">
               <BsJournalText className="m-auto" />{' '}
-              <p className="block m-auto px-2 text-gray-100">Anuncios</p>
+              <p className="block m-auto px-2 text-gray-100">          Anúncios
+              </p>
             </Link>
             <Link className="flex" href="/createanounce">
               <AddIcon className="m-auto" />{' '}
@@ -74,7 +75,11 @@ const Navbar: React.FC = () => {
               </svg>
             </button>
             {showMenu && (
-              <div className="absolute top-12 right-0 bg-white px-5 py-2 shadow rounded-md">
+              <div className="absolute top-12 right-0 bg-white px-5 py-2 pr-10 shadow rounded-md">
+                <Link href="/anounce">
+                  <AddIcon />{' '}
+                  <p className="block text-gray-800 ">Anuncios</p>
+                </Link>
                 <Link href="/createanounce">
                   <AddIcon />{' '}
                   <p className="block text-gray-800 ">Adicionar resíduo</p>

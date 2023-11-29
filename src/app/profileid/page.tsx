@@ -5,6 +5,7 @@ import {
   getTokenFromLocalStorage,
   API,
   getIdFromLocalStorage,
+  capitalizeFirstLetter,
 } from '@/utils/API';
 import { Progress, Stack } from '@chakra-ui/react';
 import Image from 'next/image';
@@ -102,9 +103,9 @@ function ProfileId() {
 
   if (announcements.length === 0) {
     return (
-      <div className="     bg-gradient-to-tr from-[#009473] to-[#63ff8d]  ">
+      <div className="    bg-gradient-to-b from-[#009473] to-[#63ff8d]  ">
         <Navbar />
-        <div className="h-screen flex flex-col items-center pt-40     bg-gradient-to-tr from-[#009473] to-[#63ff8d] ">
+        <div className="h-screen flex flex-col items-center pt-40     bg-gradient-to-b from-[#009473] to-[#63ff8d] ">
           {' '}
           <Image
             className="  animate-pulse"
@@ -113,7 +114,7 @@ function ProfileId() {
             width={100}
             height={100}
           />
-          <h2 className="mx-auto font-bold     bg-gradient-to-tr from-[#009473] to-[#63ff8d] text-white mt-4 justify-start animate-pulse">
+          <h2 className="mx-auto font-bold     text-white mt-4 justify-start animate-pulse">
             Aguarde só um pouquinho, estamos preparando tudo para você!
           </h2>
         </div>
@@ -136,14 +137,14 @@ function ProfileId() {
             </span>
             <div className="my-auto">
               <p className="text-gray-700 text-base">Nome: {data.username}</p>
-              <p className="text-gray-700 text-base">Empresa:{data.name}</p>
+              <p className="text-gray-700 text-base">Empresa: {data.name}</p>
               <p className="text-gray-700 text-base">
                 CNPJ: {'34.651.751/0001-90'}
               </p>
               <p className="text-gray-700 text-base">
-                Local:{data.city}-{data.uf}
+                Local: {data.city}-{data.uf}
               </p>
-              <p className="text-gray-700 text-base">Telefone:{data.phone}</p>
+              <p className="text-gray-700 text-base">Telefone: {data.phone}</p>
             </div>
           </div>
         </div>
@@ -161,8 +162,8 @@ function ProfileId() {
                 isloading={loading}
                 id={item.id}
                 anouncer_fk={item.anouncer_fk}
-                title={item.title}
-                description={item.description}
+                title={capitalizeFirstLetter(item.title)}
+                description={capitalizeFirstLetter(item.description)}
                 unit={item.unit}
                 quantity={item.quantity}
                 total={item.total}

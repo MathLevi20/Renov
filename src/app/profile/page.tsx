@@ -6,6 +6,7 @@ import {
   getTokenFromLocalStorage,
   API,
   getIdFromLocalStorage,
+  capitalizeFirstLetter,
 } from '@/utils/API';
 import { Progress, Stack } from '@chakra-ui/react';
 import Image from 'next/image';
@@ -120,17 +121,18 @@ function Profile() {
             width={100}
             height={100}
           />
+          <h1 className='text-center font-semibold animate-pulse text-white'>Carregando</h1>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="h-screen  min-h-screen bg-[#009473]   ">
+    <div className="h-full  min-h-screen  bg-gradient-to-b from-[#009473] to-[#63ff8d]    ">
       <Navbar />
 
       <div
-        className=" inset-0 min-h-screen  bg-[#009473]  items-start grid grid-cols-1 justify-center pt-10
+        className=" inset-0 min-h-screen   items-start grid grid-cols-1 justify-center pt-10
    l "
       >
         <div className=" bg-white shadow-lg gap-3 p-10 m-10 mx-20 rounded-md ">
@@ -153,15 +155,15 @@ function Profile() {
           <div className="px-6 pt-4 pb-2 m-auto">
             <div></div>
             <div className="container mx-auto">
-              <h1 className="text-2xl font-bold mb-4">Relatório</h1>
+              <h1 className="text-2xl font-bold text-center mb-4">Relatório</h1>
               <div className="grid grid-cols-1 md:grid-cols-2  gap-4">
                 {relatory.map((residue: any, index: any) => (
                   <div key={index} className="bg-gray-100 p-4 rounded-md">
                     <h2 className="text-lg font-semibold mb-2">
-                      {residue.ResidueName}
+                      {capitalizeFirstLetter(residue.ResidueName)}
                     </h2>
                     <p className="text-sm text-gray-600 mb-1">
-                      {residue.ResidueDescription}
+                      {capitalizeFirstLetter(residue.ResidueDescription)}
                     </p>
                     <p className="text-sm mb-1">
                       Tipo de Unidade: {residue.AnounceUnit}
@@ -191,13 +193,13 @@ function Profile() {
           </div>
 
         </div>
-        <h2 className="text-2xl text mx-auto font-semibold text-white">
+        <h2 className="text-2xl text my-3 mx-auto font-semibold text-white">
           Anúncio do usuario
         </h2>
-        <div className=" pb-10 px-10  min-h-screen   bg-gradient-to-b from-[#009473] to-[#63ff8d]  bg-[#63ff8d]  rounded-md ">
+        <div className=" pb-10 px-10 mx-8  min-h-screen  grid grid-cols-2     rounded-md ">
           {Announcements.map((item: any) => (
             <div
-              className="bg-white shadow-lg p-10  m-10 mx-10 rounded-md"
+              className="bg-white shadow-lg p-10  my-2 mx-2 hover:bg-slate-100  rounded-md"
               key={item.id}
             >
               {' '}
@@ -205,8 +207,8 @@ function Profile() {
                 isloading={loading}
                 id={item.id}
                 anouncer_fk={item.anouncer_fk}
-                title={item.title}
-                description={item.description}
+                title={capitalizeFirstLetter(item.title)}
+                description={capitalizeFirstLetter(item.description)}
                 unit={item.unit}
                 quantity={item.quantity}
                 total={item.total}
