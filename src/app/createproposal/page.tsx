@@ -11,6 +11,7 @@ import {
   getTokenFromLocalStorage,
   API,
   getIdFromLocalStorage,
+  capitalizeFirstLetter,
 } from '@/utils/API';
 import { Progress, Stack } from '@chakra-ui/react';
 import Image from 'next/image';
@@ -116,10 +117,16 @@ const createproposal = () => {
         price: Number(''),
         anounce_fk: '',
       });
-      setMessage('ENVIADO');
+      setMessage('Enviado');
+      setShowPopup(true)
+      setData(response.data)
       console.log('Dados enviados com sucesso!');
     } catch (error) {
-      setMessage('ERRO AO ENVIAR');
+      setMessage('Erro ao enviar');
+      setShowPopup(true)
+
+      console.log(data);
+
       console.error('Erro ao enviar os dados:', error);
     }
   };
