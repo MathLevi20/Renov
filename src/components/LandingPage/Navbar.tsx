@@ -20,20 +20,20 @@ const Navbar: React.FC = () => {
           </Link>
           <div className="hidden md:flex  space-x-4">
             <Link href="#feature" className="m-auto px-3">
-              <p className="text-white m-auto ">Feature</p>
+              <p className="text-white m-auto ">Sobre</p>
             </Link>
             <Link href="#coments" className="m-auto  px-3">
-              <p className="text-white m-auto ">Coments</p>
+              <p className="text-white m-auto ">Comentarios</p>
             </Link>
             <Link href="#contacts" className="m-auto px-3">
-              <p className="m-auto  text-white">Contact</p>
+              <p className="m-auto  text-white">Contato</p>
             </Link>
             <Link href="/register" className="">
               <button
                 type="submit"
                 className="w-full px-4 py-2 font-bold text-white  rounded-md border-2 hover:bg-indigo-600 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700"
               >
-                Register
+                Registrar
               </button>
             </Link>
             <Link href="/login">
@@ -66,16 +66,16 @@ const Navbar: React.FC = () => {
               <div className="absolute top-15 right-0 bg-white p-4 shadow rounded-md">
                 <Link href="#feature">
                   <p className=" px-4  justify-center block text-gray-800 mb-2">
-                    Feature
+                    Sobre
                   </p>
                 </Link>
                 <Link href="#coments">
                   <p className=" px-4  justify-center block text-gray-800 mb-2">
-                    Coments
+                    Comentarios
                   </p>
                 </Link>
                 <Link href="#contacts">
-                  <p className="px-4  text-gray-800">Contact</p>
+                  <p className="px-4  text-gray-800">Contato</p>
                 </Link>
 
                 <Link href="/register" className="">
@@ -83,7 +83,7 @@ const Navbar: React.FC = () => {
                     type="submit"
                     className="block text-gray-800  rounded-md border-2  border-[#63FF8D] px-4 py-2 font-bold	"
                   >
-                    Register
+                    Registrar
                   </button>
                 </Link>
                 <Link href="/login">

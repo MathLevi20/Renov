@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="bg-gray-800 py-4">
+    <nav className="bg-gray-800 py-4 px-2">
       <div className="container mx-auto">
         <div className="flex justify-between items-center">
           <Link href="/" className="flex">
@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
 
             <Link className="flex" href="/profile">
               <SettingsIcon className="m-auto" />{' '}
-              <p className="block m-auto px-2 text-gray-100">Profile</p>
+              <p className="block m-auto px-2 text-gray-100">Perfil</p>
             </Link>
             <Link className="flex  m-auto" href="/">
               <TbLogout className="m-auto" />{' '}
@@ -96,7 +96,7 @@ const Navbar: React.FC = () => {
 
                 <Link href="/profile">
                   <SettingsIcon className="m-auto" />{' '}
-                  <p className="block text-gray-800">Profile</p>
+                  <p className="block text-gray-800">Perfil</p>
                 </Link>
                 <Link href="/">
                   <TbLogout className="m-auto" />{' '}
